@@ -61,13 +61,17 @@ endfor
 
 " Manually copying __init__.py docstring
 " How do we do this automatically?
-edit! ../../../bild/__init__.py
-norm G/"""j"syn
+" edit! ../../../bild/__init__.py
+" norm G/"""j"syn
 
 edit! bild.rst
-call search("^==")
-norm o.. contents::   :local:k
-norm O"sP
+let s:found = search("^==")
+call append(s:found, ["",
+		     \".. contents::",
+		     \"   :local:",
+		     \"",
+		     \".. automodule:: bild",
+		     \])
 write!
 
 quit
