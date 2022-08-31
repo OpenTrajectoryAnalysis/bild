@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bild"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Simon Grosse-Holz", email="sgh256@mit.edu" }
 ]
@@ -17,7 +17,15 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "noctiluca >=0",
+    "rouse >=0",
+    "numpy >=1.20",
+    "scipy >=1.6",
+    "tqdm >=4",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/OpenTrajectoryAnalysis/bild"
+"Documentation" = "https://bild.readthedocs.org/en/latest"
 "Bug Tracker" = "https://github.com/OpenTrajectoryAnalysis/bild/issues"

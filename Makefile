@@ -1,21 +1,29 @@
 DOCDIR = doc
 SPHINXDIR = $(DOCDIR)/sphinx
-SPHINXBUILD = $(SPHINXDIR)/build
 SPHINXSOURCE = $(SPHINXDIR)/source
+SPHINXBUILD = $(SPHINXDIR)/source/_build
 TESTDIR = tests
 TESTFILE = test_bild.py
 COVERAGEREPFLAGS = --omit=*/noctiluca/*,*/rouse/*
 COVERAGEREPDIR = $(TESTDIR)/coverage
+DISTDIR = dist
 MODULE = bild
 
-.PHONY : docs tests all clean mydocs mytests myall myclean
+.PHONY : build pre-docs docs tests all clean mydocs mytests myall myclean
 
 all : docs tests
 
-docs :
+build :
+	-@cd $(DISTDIR) && rm *
+	python3 -m build
+
+pre-docs :
 	sphinx-apidoc -f -o $(SPHINXSOURCE) $(MODULE)
 	@rm $(SPHINXSOURCE)/modules.rst
 	@cd $(SPHINXSOURCE) && vim -n -S post-apidoc.vim
+	cd $(SPHINXDIR) && $(MAKE) clean
+
+docs : pre-docs
 	cd $(SPHINXDIR) && $(MAKE) html
 
 tests :
