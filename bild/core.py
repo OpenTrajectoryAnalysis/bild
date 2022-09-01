@@ -5,6 +5,8 @@ from tqdm.auto import tqdm
 
 import numpy as np
 
+from noctiluca import make_Trajectory
+
 from .amis import FixedkSampler
             
 """
@@ -34,12 +36,24 @@ def sample(traj, model,
 
     Parameters
     ----------
-    trajectory : Trajectory
-        the trajectory to sample for
-    model : MultiStateModel
+    traj : noctiluca.Trajectory, numpy.ndarray, pandas.DataFrame
+        the trajectory to sample for.
+        
+        This input is handled by the `userinput.make_Trajectoy()
+        <https://noctiluca.readthedocs.io/en/latest/noctiluca.util.html#noctiluca.util.userinput.make_Trajectory>`_
+        function of the `noctiluca` package and thus accepts a range of
+        formats. For a trajectory with ``N`` loci, ``T`` frames, and ``d``
+        spatial dimensions, numpy arrays can be of shape ``(N, T, d)``, ``(T,
+        d)``, ``(T,)``, while pandas dataframes should have columns ``(x1, y1,
+        z1, x2, y2, z2, ..., frame (optional))``. For precise specs see
+        `noctiluca.util.userinput
+        <https://noctiluca.readthedocs.io/en/latest/noctiluca.util.html#module-noctiluca.util.userinput>`_.
+    model : models.MultiStateModel
         the model defining the likelihood function
     dE : float, optional
-        the evidence margin ΔE to apply in finding the actual point estimate
+        the evidence margin ΔE to apply in finding the actual point estimate.
+        Note that this can also be set post-hoc when evaluating the results;
+        c.f. `SamplingResults.best_profile()`.
 
     Other Parameters
     ----------------
@@ -104,9 +118,10 @@ def sample(traj, model,
 
     See also
     --------
-    amis.FixedkSampler, postproc
+    amis.FixedkSampler, postproc, models
     """
     bar = tqdm(disable = not show_progress)
+    traj = make_Trajectory(traj)
 
     # Some conditions that come in handy
     def all_exhausted(samplers):
