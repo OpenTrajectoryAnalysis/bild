@@ -45,7 +45,7 @@ rounding to the nearest integer because it guarantees
 import numpy as np
 from scipy import stats
 
-from noctiluca.util import parallel
+from noctiluca import parallel
 from .util import Loopingprofile
 
 def st2profile(s, theta, traj):
