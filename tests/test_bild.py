@@ -177,77 +177,77 @@ class TestModels(myTestCase):
         traj = model.trajectory_from_loopingprofile(bild.Loopingprofile([0, 0, 0, 1, 1, 1]))
         self.assertEqual(len(traj), 6)
 
-class TestAMIS(myTestCase):
-    def setUp(self):
-        self.traj = nl.Trajectory([0.1, 1, 2, 3, 4, 5])
-        self.model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
-                                                  scipy.stats.maxwell(scale=1.0)])
-
-    def test_st2profile(self):
-        profile = bild.amis.st2profile([0.25, 0.5, 0.25], 0, self.traj)
-        self.assert_array_equal(profile[:], [0, 0, 1, 1, 0, 0])
-
-    def test_dirichlet_methodofmoments(self):
-        ss = np.array([[0.0, 1.0],
-                       [0.5, 0.5],
-                       [1.0, 0.0]])
-        a = bild.amis.dirichlet_methodofmoments(ss, np.ones(len(ss))/len(ss))
-        self.assert_array_equal(a, [0.25, 0.25])
-        a = bild.amis.dirichlet_methodofmoments(ss, np.array([0.5, 0.5, 0]))
-        self.assert_array_equal(a, [0.5, 1.5])
-
-    def test_logL(self):
-        s = np.array([0.5, 0.5])
-        theta = 1
-        logL = bild.amis.logL(((s, theta), (self.traj, self.model)))
-
-        ss = np.array([[0.1, 0.9],
-                       [0.5, 0.5],
-                       [0.9, 0.1]])
-        thetas = np.array([1, 1, 0])
-
-        logLs = bild.amis.calculate_logLs(ss, thetas, self.traj, self.model)
-        self.assertTrue(np.all(np.isfinite(logLs)))
-        self.assertEqual(logL, logLs[1])
-
-    def test_proposal(self):
-        a = np.array([0.5, 1, 4])
-        m = 0.7
-
-        ss, thetas = bild.amis.sample_proposal(a, m, 100)
-        dens = bild.amis.proposal(a, m, ss, thetas)
-        self.assertTrue(np.all(np.isfinite(dens)))
-
-        a_fit, m_fit = bild.amis.fit_proposal(ss, thetas,
-                                              np.ones(len(thetas))/len(thetas))
-        self.assertTrue(np.all(np.abs(np.log(a_fit/a)) < 1))
-        self.assertLess(np.abs(m_fit - m), 0.2)
-
-    def test_sampler(self):
-        sampler0 = bild.amis.FixedkSampler(self.traj, self.model, k=0)
-        self.assertFalse(sampler0.step())
-        self.assert_array_equal(sampler0.MAP_profile()[:], [1, 1, 1, 1, 1, 1])
-
-        sampler1 = bild.amis.FixedkSampler(self.traj, self.model, k=1)
-        self.assertFalse(sampler1.step())
-        self.assert_array_equal(sampler1.MAP_profile()[:], [0, 1, 1, 1, 1, 1])
-
-        sampler2 = bild.amis.FixedkSampler(self.traj, self.model, k=2,
-                                          N=100, max_fev=150)
-        self.assertTrue(sampler2.step())
-        self.assertFalse(sampler2.step())
-        # The trajectory is so blatantly state 1 (except for the first point)
-        # that the inference will reliably make vanishingly small 0-state
-        # intervals.
-        self.assert_array_equal(sampler2.MAP_profile()[:], [1, 1, 1, 1, 1, 1])
-        self.assertGreater(sampler0.t_stat(sampler2), 3)
-
-        self.model.distributions = self.model.distributions[::-1]
-        self.model.clear_memo()
-        sampler2i = bild.amis.FixedkSampler(self.traj, self.model, k=2)
-        self.assertTrue(sampler2i.step())
-        self.assertTrue(sampler2i.step())
-        self.assert_array_equal(sampler2i.MAP_profile()[:], [0, 0, 0, 0, 0, 0])
+# class TestAMIS(myTestCase):
+#     def setUp(self):
+#         self.traj = nl.Trajectory([0.1, 1, 2, 3, 4, 5])
+#         self.model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
+#                                                   scipy.stats.maxwell(scale=1.0)])
+# 
+#     def test_st2profile(self):
+#         profile = bild.amis.st2profile([0.25, 0.5, 0.25], 0, self.traj)
+#         self.assert_array_equal(profile[:], [0, 0, 1, 1, 0, 0])
+# 
+#     def test_dirichlet_methodofmoments(self):
+#         ss = np.array([[0.0, 1.0],
+#                        [0.5, 0.5],
+#                        [1.0, 0.0]])
+#         a = bild.amis.dirichlet_methodofmoments(ss, np.ones(len(ss))/len(ss))
+#         self.assert_array_equal(a, [0.25, 0.25])
+#         a = bild.amis.dirichlet_methodofmoments(ss, np.array([0.5, 0.5, 0]))
+#         self.assert_array_equal(a, [0.5, 1.5])
+# 
+#     def test_logL(self):
+#         s = np.array([0.5, 0.5])
+#         theta = 1
+#         logL = bild.amis.logL(((s, theta), (self.traj, self.model)))
+# 
+#         ss = np.array([[0.1, 0.9],
+#                        [0.5, 0.5],
+#                        [0.9, 0.1]])
+#         thetas = np.array([1, 1, 0])
+# 
+#         logLs = bild.amis.calculate_logLs(ss, thetas, self.traj, self.model)
+#         self.assertTrue(np.all(np.isfinite(logLs)))
+#         self.assertEqual(logL, logLs[1])
+# 
+#     def test_proposal(self):
+#         a = np.array([0.5, 1, 4])
+#         m = 0.7
+# 
+#         ss, thetas = bild.amis.sample_proposal(a, m, 100)
+#         dens = bild.amis.proposal(a, m, ss, thetas)
+#         self.assertTrue(np.all(np.isfinite(dens)))
+# 
+#         a_fit, m_fit = bild.amis.fit_proposal(ss, thetas,
+#                                               np.ones(len(thetas))/len(thetas))
+#         self.assertTrue(np.all(np.abs(np.log(a_fit/a)) < 1))
+#         self.assertLess(np.abs(m_fit - m), 0.2)
+# 
+#     def test_sampler(self):
+#         sampler0 = bild.amis.FixedkSampler(self.traj, self.model, k=0)
+#         self.assertFalse(sampler0.step())
+#         self.assert_array_equal(sampler0.MAP_profile()[:], [1, 1, 1, 1, 1, 1])
+# 
+#         sampler1 = bild.amis.FixedkSampler(self.traj, self.model, k=1)
+#         self.assertFalse(sampler1.step())
+#         self.assert_array_equal(sampler1.MAP_profile()[:], [0, 1, 1, 1, 1, 1])
+# 
+#         sampler2 = bild.amis.FixedkSampler(self.traj, self.model, k=2,
+#                                           N=100, max_fev=150)
+#         self.assertTrue(sampler2.step())
+#         self.assertFalse(sampler2.step())
+#         # The trajectory is so blatantly state 1 (except for the first point)
+#         # that the inference will reliably make vanishingly small 0-state
+#         # intervals.
+#         self.assert_array_equal(sampler2.MAP_profile()[:], [1, 1, 1, 1, 1, 1])
+#         self.assertGreater(sampler0.t_stat(sampler2), 3)
+# 
+#         self.model.distributions = self.model.distributions[::-1]
+#         self.model.clear_memo()
+#         sampler2i = bild.amis.FixedkSampler(self.traj, self.model, k=2)
+#         self.assertTrue(sampler2i.step())
+#         self.assertTrue(sampler2i.step())
+#         self.assert_array_equal(sampler2i.MAP_profile()[:], [0, 0, 0, 0, 0, 0])
 
 class TestCore(myTestCase):
     def setUp(self):
@@ -267,23 +267,23 @@ class TestCore(myTestCase):
             self.assertTrue(np.all(res.evidence_se > 0))
             self.assert_array_equal(res.best_profile()[:], res.best_profile(dE=2)[:])
 
-    def test_insignificance_resolution_after_main_loop(self):
-        model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
-                                             scipy.stats.maxwell(scale=1)],
-                                            d=1,
-                                           )
-        # the point of equal likelihood for two Maxwell's with scales a and b
-        # is x = ab * sqrt(6*log(b/a) / (b^2 - a^2))
-        x = 0.1*np.sqrt(6*np.log(0.1) / -0.99)
-        traj = nl.Trajectory(x*np.ones(5))
-        res = bild.sample(traj, model,
-                          init_runs=5,
-                          sampler_kw={'max_fev' : 1000}, # runtime
-                          k_max = 10, # will always be hit here
-                         )
-
-        self.assertTrue(np.allclose(res.evidence, [np.mean(res.evidence)],
-                                    atol = 0.1))
+#     def test_insignificance_resolution_after_main_loop(self):
+#         model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
+#                                              scipy.stats.maxwell(scale=1)],
+#                                             d=1,
+#                                            )
+#         # the point of equal likelihood for two Maxwell's with scales a and b
+#         # is x = ab * sqrt(6*log(b/a) / (b^2 - a^2))
+#         x = 0.1*np.sqrt(6*np.log(0.1) / -0.99)
+#         traj = nl.Trajectory(x*np.ones(5))
+#         res = bild.sample(traj, model,
+#                           init_runs=5,
+#                           sampler_kw={'max_fev' : 1000}, # runtime
+#                           k_max = 10, # will always be hit here
+#                          )
+# 
+#         self.assertTrue(np.allclose(res.evidence, [np.mean(res.evidence)],
+#                                     atol = 0.1))
 
 class TestPostproc(myTestCase):
     def setUp(self):
