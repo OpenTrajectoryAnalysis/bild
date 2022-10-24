@@ -1,4 +1,14 @@
 """
+XXXXXXXXXXX unfinished implementation with free choice of possible transitions XXXXXXXXXXXXX
+
+This was an attempt to implement blocked state transitions (e.g. prohibit 1-->2
+in a three state model). This turned out to be tricky, since there is no good
+way to identify the uniform proposal distribution (it's no longer the one with
+all weights equal to 1, nor the one with all uniform marginals). Beyond that
+it's also not quite clear that there will be a real use case for this anyways.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 Implementation of AMIS for posterior sampling at fixed k
 
 This module provides the implementation of the AMIS (`Cornuet et al. 2012
