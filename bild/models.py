@@ -33,13 +33,25 @@ class MultiStateModel(metaclass=abc.ABCMeta):
 
      + provide an initial guess for a good profile by `initial_loopingprofile`
      + sample from the likelihood by `trajectory_from_loopingprofile`
+
+    When implementing a ``MultiStateModel``, remember to  call
+    ``init_transitions`` at the end of your ``__init__()``.
+
+    Attributes
+    ----------
+    transitions : (n, n) np.ndarray, dtype=bool
+        ``transitions[i, j]`` indicates whether the transition from state ``i``
+        to state ``j`` is allowed or not.
     """
+    def init_transitions(self, n):
+        self.transitions = ~np.eye(n, dtype=bool)
+
     @property
     def nStates(self):
         """
         How many internal states does this model have?
         """
-        raise NotImplementedError # pragma: no cover
+        return self.transitions.shape[0]
 
     @property
     def d(self):
@@ -231,9 +243,7 @@ class MultiStateRouse(MultiStateModel):
             mod = rouse.Model(N, D, k, d, add_bonds=loop)
             self.models.append(mod)
 
-    @property
-    def nStates(self):
-        return len(self.models)
+        self.init_transitions(len(self.models))
 
     @property
     def d(self):
@@ -477,9 +487,7 @@ class FactorizedModel(MultiStateModel):
         self._d = d
         self._known_trajs = dict()
 
-    @property
-    def nStates(self):
-        return len(self.distributions)
+        self.init_transitions(len(self.distributions))
 
     @property
     def d(self):
