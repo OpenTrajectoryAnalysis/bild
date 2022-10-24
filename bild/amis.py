@@ -42,6 +42,7 @@ rounding to the nearest integer because it guarantees
    the main contribution to the evidence for this number of switches, we should
    (and do!) just choose the appropriate lower number of switches instead.
 """
+from abc import ABCMeta, abstractmethod
 import itertools
 
 import numpy as np
@@ -134,14 +135,56 @@ def calculate_logLs(ss, thetas, traj, model):
 
 ### Proposal distribution and its components ###
 
-class Dirichlet:
+class ProposalDistribution(metaclass=ABCMeta):
     """
-    Namespace for stuff associated with Dirichlet distribution
+    ABC defining the interface we require from proposal distributions
 
-    The Dirichlet is implemented in ``scipy.stats.dirichlet``; we just wrap it
-    here for consistency with `CFC` and `Proposal`.
+    ``initial_parameters()`` should return the parameters associated with the
+    "neutral" distribution, ideally the uniform over parameter space.
     """
-    def sample(a, N=1):
+    def sample(self, params, N=1):
+        raise NotImplementedError
+
+    def log_likelihood(self, params, points):
+        raise NotImplementedError
+
+    def estimate(self, points, log_weights):
+        raise NotImplementedError
+            
+class ProductDistribution(ProposalDistribution):
+    """
+    Combine ``n`` independent ``ProposalDistribution``.
+
+    Parameters
+    ----------
+    dists : list of ProposalDistribution
+        the independent components
+
+    Notes
+    -----
+    The functions from the ``ProposalDistribution`` interface will now take
+    tuples/lists of length ``n`` for each argument, which will be distributed
+    to the components; similarly, they return tuples of length ``n``.
+    """
+    def __init__(self, dists):
+        self.dists = dists
+
+    def sample(self, params, N=1):
+        return tuple(dist.sample(param, N) for dist, param in zip(self.dists, params))
+
+    def log_likelihood(self, params, points):
+        return np.sum([dist.log_likelihood(param, point) for dist, param, point in zip(self.dists, params, points)])
+
+    def estimate(points, log_weights):
+        return tuple(dist.estimate(point, log_weights) for dist, point in zip(self.dists, points))
+
+class Dirichlet(ProposalDistribution):
+    """
+    The Dirichlet is implemented in ``scipy.stats.dirichlet``; we wrap it here
+    for consistency with the ``ProposalDistribution`` interface, and add the
+    method of moments estimator
+    """
+    def sample(self, a, N=1):
         """
         Sample from the Dirichlet distribution
 
@@ -158,7 +201,7 @@ class Dirichlet:
         """
         return stats.dirichlet(a).rvs(N)
 
-    def log_likelihood(a, ss):
+    def log_likelihood(self, a, ss):
         """
         Evaluate Dirichlet distribution
 
@@ -185,7 +228,7 @@ class Dirichlet:
                     logLs.append(np.inf)
             return np.array(logLs)
     
-    def estimate(ss, log_weights):
+    def estimate(self, ss, log_weights):
         """
         Method of moments estimator for the Dirichlet distribution
 
@@ -228,24 +271,27 @@ class Dirichlet:
             s = np.mean(m*(1-m)/v) - 1
         return s*m
 
-class CFC:
+class CFC(ProposalDistribution):
     """
-    Namespace for the Conflict Free Categorical (CFC)
+    Conflict Free Categorical (CFC)
 
     The CFC is our proposal distribution for state traces θ. These are vectors
     of length ``k+1``, containing integers between 0 and ``n-1``—``k`` being
     the number of switches and ``n`` the number of states we consider. The
     fundamental twist is that neighboring entries cannot take the same value,
     which makes it difficult to define a reasonable proposal distribution over
-    this space of state traces.
+    this space of state traces. 
+
+    Generalizing the above constraint, ``CFC`` accepts the ``transitions``
+    argument, which specifies which state transitions are allowed or forbidden.
 
     The CFC is parametrized by weights ``p`` for each entry being in any of the
     available states (``p.shape = (n, k+1)``). The constraint is then enforced
     by a causal sampling scheme:
 
      + sample ``θ[0] ~ Categorical(p[:, 0])``
-     + remove the weight corresponding to ``θ[0]`` from ``p[:, 1]`` and
-       renormalize
+     + select the weights associated with all allowed states (given ``θ[0]``)
+       from ``p[:, 1]`` and renormalize
      + sample ``θ[1] ~ Categorical(p[:, 1])`` (with the adapted ``p[:, 1]``)
      + continue iteratively
 
@@ -255,17 +301,31 @@ class CFC:
     ``g_n`` denote the marginals at step ``i`` and ``i-1`` respectively, we
     have that ``p_n := p[:, i]`` is given by the solution of
     ```
-        p_n = f_n / sum_{m!=n}( g_m / (1-p_m) ) .
+        p_n = f_n / sum_{m in C_n}( g_m / ( sum_{k in C_m} 1-p_m ) ) ,
     ```
-    Solving this equation by fixed point iteration, we find approximate
-    parameters ``p`` for a given sample of state traces.
+    where the sums run over index sets ``C_n``, indicating which transitions
+    are allowed from state ``n``. Solving this equation by fixed point
+    iteration, we find approximate parameters ``p`` for a given sample of state
+    traces.
 
     Knowing how to sample, evaluate, and estimate the CFC is all we need in
-    order to use it as proposal in AMIS.
+    order to implement the ``ProposalDistribution`` interface.
 
     For numerical stability, we work with ``log(p)`` instead of ``p``.
+    
+    Parameters
+    ----------
+    k : int
+        number of switches
+    transitions : (n, n) np.ndarray, dtype=bool
+        ``transitions[i, j]`` indicates whether the transition from state ``i``
+        to state ``j`` is allowed or not.
     """
-    def sample(logp, N=1):
+    def __init__(self, transitions):
+        self.transitions = transitions
+        self.n = self.transitions.shape[0]
+
+    def sample(self, logp, N=1):
         """
         Sample from the Conflict Free Categorical
 
@@ -281,7 +341,6 @@ class CFC:
         thetas : (N, k+1) np.ndarray
             the sampled state traces
         """
-        n = logp.shape[0]
         k = logp.shape[1]-1
         assert k >= 0
 
@@ -290,29 +349,25 @@ class CFC:
             p = np.exp(logp)
 
         thetas = np.empty((N, k+1), dtype=int)
-        thetas[:, 0] = np.random.choice(n, size=N, p=p[:, 0])
+        thetas[:, 0] = np.random.choice(self.n, size=N, p=p[:, 0])
         for i in range(1, k+1):
-            p_cur = np.tile(p[:, i], (N, 1)) # (N, n)                  # current weight parameters
-            np.put_along_axis(p_cur, thetas[:, [i-1]], 0, axis=1)      # remove the one corresponding to last entry
+            p_cur = np.tile(p[:, i], (N, 1)) * self.transitions[thetas[:, i-1]] # (N, n)
+            P = np.cumsum(p_cur, axis=1)
+            P /= P[:, [-1]]
 
-            P = np.cumsum(p_cur, axis=1)                               # cumulative weights
-            P /= P[:, [-1]]                                            # normalize
-
-            # "vectorize np.random.choice" by hand                     # sample
+            # "vectorize np.random.choice" by hand
             thetas[:, i] = np.argmax(P > np.random.rand(N, 1), axis=1) # argmax gives first occurence
 
         return thetas
 
-    def log_likelihood(logp, thetas):
+    def log_likelihood(self, logp, thetas):
         """
         Evaluate the Conflict Free Categorical
 
         Parameters
         ----------
         logp : (n, k+1) np.ndarray
-            the weights defining the CFC. Should satisfy ``logsumexp(logp,
-            axis=0) == 0`` if you want the distribution to be properly
-            normalized; this is not checked internally.
+            the weights defining the CFC.
         thetas : (N, k+1) np.ndarray
             the ``N`` state traces for which to evaluate the distribution
 
@@ -321,25 +376,15 @@ class CFC:
         (N,) np.ndarray
             the logarithm of the CFC evaluated at the given state traces
         """
-        #                                  (1, n, k+1)     x    (N, 1, k+1)    -->    (N, 1, k+1)
-        logp_direct = np.take_along_axis(logp[None, :,  :], thetas[:, None, :  ], axis=1)[:, 0, :] # (N, k+1)
-        logp_shift  = np.take_along_axis(logp[None, :, 1:], thetas[:, None, :-1], axis=1)[:, 0, :] # (N, k)
+        #                                    (1, n, k+1)     x    (N, 1, k+1)    -->    (N, 1, k+1)
+        logp_theta = np.take_along_axis(logp[None, :,  :], thetas[:, None, :  ], axis=1)[:, 0, :] # (N, k+1)
+        with np.errstate(under='ignore'):
+            #                             (1, k, n)              (N, k, n)
+            log_norm = logsumexp(logp.T[None, 1:, :] * self.transitions[thetas[:, :-1]], axis=-1) # (N, k)
 
-        log_numerator = np.sum(logp_direct, axis=1)
-        with np.errstate(under='ignore', divide='ignore'):
-            log_denominator = np.sum(np.log(1-np.exp(logp_shift)), axis=1)
-        log_denominator[log_denominator == -np.inf] = np.inf
-        # re: divide = 'ignore' & switching -∞ --> +∞
-        # encountering log(0) in the above expression means that p has at least
-        # one slot that is a Kronecker δ, i.e. 1 somewhere, 0 elsewhere. When
-        # trying to evaluate this distribution on a trace that does not satisfy
-        # that constraint, we get 0/0 from the analytical expression; but of
-        # course the distribution should just evaluate to 0 here. So we switch
-        # the denominator to get 0/∞ instead of 0/0, which evaluates correctly.
+        return np.sum(logp_theta, axis=1) - np.sum(log_norm, axis=1)
 
-        return log_numerator - log_denominator
-
-    def estimate(thetas, log_weights, n=None):
+    def estimate(self, thetas, log_weights):
         """
         Method of "Moments" (Marginals) estimation for the CFC
 
@@ -349,10 +394,6 @@ class CFC:
             the sample of state traces
         log_weights : (N,) np.ndarray, dtype=float
             the associated weights for all samples (unnormalized)
-        n : int, optional
-            the total number of states. If omitted, use ``np.max(thetas)``;
-            however, this is not very safe, so usually one should give ``n``
-            explicitly.
 
         Returns
         -------
@@ -360,31 +401,30 @@ class CFC:
             the estimated weight parameters; normalized to satisfy
             ``logsumexp(logp, axis=0) == 0``.
         """
-        k = thetas.shape[1] - 1
-        assert k >= 0
-
-        if n is None:
-            n = np.max(thetas)
-
-        indicators = np.tile(thetas, (n, 1, 1)) == np.arange(n)[:, None, None]
+        indicators = np.tile(thetas, (self.n, 1, 1)) == np.arange(self.n)[:, None, None] # (n, N, k+1)
         with np.errstate(under='ignore'):
             log_marginals = logsumexp(log_weights[None, :, None], b=indicators, axis=1) # (n, k+1)
             log_marginals -= logsumexp(log_marginals, axis=0, keepdims=True)
 
-        logp = np.empty((n, k+1), dtype=float)
+        return self.solve_marginals(log_marginals)
+
+    def solve_marginals(self, log_marginals, **kwargs):
+        k = log_marginals.shape[1]-1
+        assert k >= 0
+
+        logp = np.empty(log_marginals.shape, dtype=float)
         logp[:, 0] = log_marginals[:, 0]
         for i in range(1, k+1):
-            logp[:, i] = CFC.log_solve_marginals(log_marginals[:, i], log_marginals[:, i-1])
-            
+            logp[:, i] = self.solve_marginals_single(log_marginals[:, i], log_marginals[:, i-1], **kwargs)
+
         with np.errstate(under='ignore'):
             return logp - logsumexp(logp, axis=0)
 
-    def log_solve_marginals(logf, logg, max_iter=1000):
+    def solve_marginals_single(self, logf, logg, max_iter=1000, precision=1e-2):
         """
         Convert marginals to weight parameters
 
-        This is a helper function that runs the iteration needed in
-        `CFC.estimate`.
+        This is a helper function that runs the iteration needed in `estimate`.
 
         Parameters
         ----------
@@ -415,88 +455,16 @@ class CFC:
         logp_old = logf
         for _ in range(max_iter):
             with np.errstate(under='ignore'):
-                gkpk = np.tile(logg - np.log(1-np.exp(logp_old)), (len(logg), 1))
-                np.put_along_axis(gkpk, np.arange(len(logg))[:, None], -np.inf, axis=1)
-                logp = logf - logsumexp(gkpk, axis=1)
+                log_norm = logsumexp(logp_old[None, :], b=self.transitions, axis=1) # sum over j --> ?
+                logg_norm = logg - log_norm
+                logp = logf - logsumexp(logg_norm[:, None], b=self.transitions, axis=0) # sum over ? --> i
 
-            if np.max(np.abs(logp-logp_old)) < 1e-2:
+            if np.max(np.abs(logp-logp_old)) < precision:
                 return logp
             else:
                 logp_old = logp
         else:
             raise RuntimeError("Iteration did not converge")
-            
-class Proposal:
-    """
-    Namespace for the full proposal distribution (Dirichlet x CFC)
-    """
-    def sample(a, logp, N=1):
-        """
-        Sample from the proposal distribution
-
-        Parameters
-        ----------
-        a : (k+1,) np.ndarray, dtype=float
-            the concentration parameters for the Dirichlet
-        logp : (n, k+1) np.ndarray, dtype=float
-            the weight parameters for the CFC
-        N : int, optional
-            size of the sample
-
-        Returns
-        -------
-        ss : (N, k+1) np.ndarray, dtype=float
-            switch positions
-        thetas : (N, k+1) np.ndarray, dtype=int
-            state traces
-        """
-        return Dirichlet.sample(a, N), CFC.sample(logp, N)
-
-    def log_likelihood(a, logp, ss, thetas):
-        """
-        Evaluate the proposal distribution at a given point
-
-        Parameters
-        ----------
-        a : (k+1,) np.ndarray, dtype=float
-            the concentration parameters for the Dirichlet
-        logp : (n, k+1) np.ndarray, dtype=float
-            the weight parameters for the CFC
-        ss : (N, k+1) np.ndarray, dtype=float
-            sample of switch positions
-        thetas : (N,) np.ndarray, dtype=int
-            associated sample of state traces
-
-        Returns
-        -------
-        (N,) np.ndarray, dtype=float
-        """
-        return Dirichlet.log_likelihood(a, ss) + CFC.log_likelihood(logp, thetas)
-
-    def estimate(ss, thetas, log_weights, n=None):
-        """
-        Fit the proposal distribution to a weighted sample
-
-        Parameters
-        ----------
-        ss : (N, k+1) np.ndarray, dtype=float
-            sample of switch positions
-        thetas : (N,) np.ndarray, dtype=int
-            associated sample of state traces
-        log_weights : (N,) np.ndarray, dtype=float
-            the weights associated with the sample ``(ss, thetas)``
-        n : int, optional
-            the number of states we consider. This should be specified, since
-            the state traces in `!thetas` might not cover all possible states.
-
-        Returns
-        -------
-        a : (k+1,) np.ndarray, dtype=float
-            the concentration parameters for the Dirichlet
-        logp : (n, k+1) np.ndarray, dtype=float
-            the weight parameters for the CFC
-        """
-        return Dirichlet.estimate(ss, log_weights), CFC.estimate(thetas, log_weights, n)
 
 ### Sampling ###
 
@@ -592,7 +560,9 @@ class FixedkSampler:
             self.exhausted = True
             return
         
+        self.proposal = ProductDistribution([Dirichlet(), CFC(model.transitions)])
         self.parameters = [(np.ones(self.k+1), -np.log(self.n)*np.ones((self.n, self.k+1)))]
+
         self.samples = [] # each sample is a dict with keys ['ss', 'thetas', 'logLs', 'logδs', 'log_weights']
         self.evidences = [] # each entry: (logev, dlogev, KL)
 
