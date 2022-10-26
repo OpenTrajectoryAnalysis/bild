@@ -1,43 +1,32 @@
 """
-XXXXXXXXXXX unfinished implementation with free choice of possible transitions XXXXXXXXXXXXX
-
-This was an attempt to implement blocked state transitions (e.g. prohibit 1-->2
-in a three state model). This turned out to be tricky, since there is no good
-way to identify the uniform proposal distribution (it's no longer the one with
-all weights equal to 1, nor the one with all uniform marginals). Beyond that
-it's also not quite clear that there will be a real use case for this anyways.
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
 Implementation of AMIS for posterior sampling at fixed k
 
 This module provides the implementation of the AMIS (`Cornuet et al. 2012
 <https://doi.org/10.1111/j.1467-9469.2011.00756.x>`_) sampling scheme for BILD,
-at a fixed number of switches ``k`` in the profile. The `FixedkSampler` class
-provides the full interface, while the other functions in the module define the
-sampling scheme.
+at a fixed number of switches ``k`` in the profile; the interface is the
+`FixedkSampler`.
 
 We parametrize the binary profiles as ``(s, theta)`` where
- + s is a vector of interval lengths, as fraction of the whole trajectory. It
-   thus has dimension ``k+1`` and satisfies ``sum(s) = 1``, as well as ``s_i >
-   0 forall i``.
- + theta is the looping state of the first interval. Since the profiles are
-   binary, this determines the state of all subsequent intervals. Clearly ``θ
-   in {0, 1}``.
+ + ``s`` is a vector of interval lengths, as fraction of the whole trajectory.
+   It thus has dimension ``k+1`` and satisfies ``sum(s) = 1``, as well as ``s_i
+   > 0 forall i``.
+ + ``theta`` is the vector of states associated with each interval, i.e. an
+   integer valued vector of length ``k+1``. It satisfies the constraints given
+   by the `!transitions` matrix in the `MultiStateModel` you are using;
+   specifically, subsequent states can never be the same.
 
-The conversion from the parametrization ``(s, θ)`` to discretely sampled
-profiles is according to the following scheme:
+The conversion of switch intervals ``s`` to discretely sampled profiles is
+according to the following scheme:
 
 .. code-block:: text
 
-    profile:            θ     p     p     p     p     p
     trajectory:       -----x-----x-----x-----x-----x-----x
     position:             0.0   0.2   0.4   0.6   0.8   1.0
 
     example (s):           ==0.25==|=====0.5=====|==0.25==
     switch positions:              |(0.25)       |(0.75)
     conversion:            |<<<<<|<<<<<|<<<<<|<<<<<|<<<<<
-    result (θ=0):       0     0  '  1     1  '  0     0
+    θ=(0, 1, 2):        0     0  '  1     1  '  2     2
 
 Note that the conversion step amounts to a simple ``floor()`` operation on the
 switch positions. We chose this conversion over the maybe more "natural" one of
@@ -46,128 +35,33 @@ rounding to the nearest integer because it guarantees
  + that a uniformly distributed continuous switch position will still be
    uniformly distributed over its possible discrete positions.
  + conservation of switches: a switch at .99 would disappear from the profile
-   with the rounding scheme. Importantly, note that in either case an interval
-   shorter than the framerate will likely not be represented in the profile,
-   and thus switches are not always conserved. However, if such profiles are
-   the main contribution to the evidence for this number of switches, we should
-   (and do!) just choose the appropriate lower number of switches instead.
+   with the rounding scheme.
+   
+Importantly, note that in either case an interval shorter than the framerate
+will likely not be represented in the profile, and thus switches are not always
+conserved. However, if such profiles are the main contribution to the evidence
+for this number of switches, we should (and do!) just choose the appropriate
+lower number of switches instead.
 """
-from abc import ABCMeta, abstractmethod
 import itertools
-
 import math
+
 import numpy as np
+from numpy import logaddexp
+from numpy.linalg import matrix_power
 from scipy import stats
 from scipy.special import logsumexp
-from numpy         import logaddexp
-from numpy.linalg  import matrix_power
 
-from noctiluca import parallel
 from .util import Loopingprofile
 
-def st2profile(s, theta, traj):
+### Distributions (used as proposal below) ###
+
+class Dirichlet:
     """
-    Convert AMIS parameters (s, θ) to Loopingprofile for given trajectory
+    Dirichlet distribution
 
-    Parameters
-    ----------
-    s, theta : see module doc.
-    traj : Trajectory
-        needed to determine discretization. In fact, only ``len(traj)`` is
-        evaluated.
-
-    Returns
-    -------
-    Loopingprofile
-    """
-    states = theta[0]*np.ones(len(traj))
-    if len(s) > 1:
-        switchpos = np.cumsum(s)[:-1]
-        
-        switches = np.floor(switchpos*(len(traj)-1)).astype(int) + 1 # floor(0.0) + 1 = 1 != ceil(0.0)
-        for i in range(1, len(switches)):
-            states[switches[i-1]:switches[i]] = theta[i]
-            
-        states[switches[-1]:] = theta[-1]
-    
-    return Loopingprofile(states)
-
-### Likelihood, i.e. target distribution ###
-
-def logL(s, theta, traj, model):
-    """
-    Evaluate the model likelihood for a given profile
-
-    Parameters
-    ----------
-    s, theta : see module doc
-    traj : Trajectory
-    model : MultiStateModel
-
-    Returns
-    -------
-    float
-
-    See also
-    --------
-    calculate_logLs
-    """
-    profile = st2profile(s, theta, traj)
-    return model.logL(profile, traj)
-
-def _logL_for_parallelization(params):
-    # Helper function, unpacking arguments
-    ((s, theta), (traj, model)) = params
-    return logL(s, theta, traj, model)
-
-def calculate_logLs(ss, thetas, traj, model):
-    """
-    Evaluate the likelihood on an ensemble of profiles
-
-    Parameters
-    ----------
-    ss : (N, k+1) np.ndarray, dtype=float
-    thetas : (N,) np.ndarray, dtype=int
-    traj : Trajectory
-    model : MultiStateModel
-
-    Returns
-    -------
-    (N,) np.ndarray, dtype=float
-        the likelihoods associated with each profile
-
-    Notes
-    -----
-    This function is parallel-aware (ordered) (c.f. `noctiluca.util.parallel`).
-    But overhead might be large.
-    """
-    todo = itertools.product(zip(ss, thetas), [(traj, model)])
-    imap = parallel._map(_logL_for_parallelization, todo)
-    return np.array(list(imap))
-
-### Proposal distribution and its components ###
-
-class ProposalDistribution(metaclass=ABCMeta):
-    """
-    ABC defining the interface we require from proposal distributions
-    """
-    @abstractmethod
-    def sample(self, params, N=1):
-        raise NotImplementedError
-
-    @abstractmethod
-    def log_likelihood(self, params, points):
-        raise NotImplementedError
-
-    @abstractmethod
-    def estimate(self, points, log_weights):
-        raise NotImplementedError
-            
-class Dirichlet(ProposalDistribution):
-    """
     The Dirichlet is implemented in ``scipy.stats.dirichlet``; we wrap it here
-    for consistency with the ``ProposalDistribution`` interface, and add the
-    method of moments estimator
+    for consistency with the `CFC`, and add the method of moments estimator
     """
     def sample(self, a, N=1):
         """
@@ -186,7 +80,7 @@ class Dirichlet(ProposalDistribution):
         """
         return stats.dirichlet(a).rvs(N)
 
-    def log_likelihood(self, a, ss):
+    def logpdf(self, a, ss):
         """
         Evaluate Dirichlet distribution
 
@@ -256,7 +150,7 @@ class Dirichlet(ProposalDistribution):
             s = np.mean(m*(1-m)/v) - 1
         return s*m
 
-class CFC(ProposalDistribution):
+class CFC:
     """
     Conflict Free Categorical (CFC)
 
@@ -271,8 +165,8 @@ class CFC(ProposalDistribution):
     argument, which specifies which state transitions are allowed or forbidden.
 
     The CFC is parametrized by weights ``p`` for each entry being in any of the
-    available states (``p.shape = (n, k+1)``). The constraint is then enforced
-    by a causal sampling scheme:
+    available states (``p.shape = (n, k+1)``). The constraints are then
+    enforced by a causal sampling scheme:
 
      + sample ``θ[0] ~ Categorical(p[:, 0])``
      + select the weights associated with all allowed states (given ``θ[0]``)
@@ -286,28 +180,39 @@ class CFC(ProposalDistribution):
     ``g_n`` denote the marginals at step ``i`` and ``i-1`` respectively, we
     have that ``p_n := p[:, i]`` is given by the solution of
     ```
-        p_n = f_n / sum_{m in C_n}( g_m / ( sum_{k in C_m} 1-p_m ) ) ,
+        p_n = f_n / sum_{m in D_n}( g_m / ( sum_{k in C_m} 1-p_m ) ) ,
     ```
-    where the sums run over index sets ``C_n``, indicating which transitions
-    are allowed from state ``n``. Solving this equation by fixed point
-    iteration, we find approximate parameters ``p`` for a given sample of state
-    traces.
-
-    Knowing how to sample, evaluate, and estimate the CFC is all we need in
-    order to implement the ``ProposalDistribution`` interface.
-
-    For numerical stability, we work with ``log(p)`` instead of ``p``.
+    where the index sets are ``C_n = {k | n --> k is allowed}`` and ``D_n = {k
+    | k --> n is allowed}``. Solving this equation by fixed point iteration,
+    we find approximate parameters ``p`` for given marginals over the states.
     
     Parameters
     ----------
-    k : int
-        number of switches
     transitions : (n, n) np.ndarray, dtype=bool
         ``transitions[i, j]`` indicates whether the transition from state ``i``
         to state ``j`` is allowed or not.
+
+    Attributes
+    ----------
+    transitions : (n, n) np.ndarray, dtype=bool
+        see Parameters
+    MOM_maxiter, MOM_precision : int, float
+        stopping criteria when solving for weight parameters from marginals.
+        See `solve_marginals_single`.
+
+    Notes
+    -----
+    For numerical stability we always work with ``log(p)`` instead of ``p``.
+
+    To uniquely identify the weight parameters ``p`` for a given distribution,
+    we apply the normalization condition ``sum(p, axis=0) == 1`` (or,
+    equivalently: ``logsumexp(logp, axis=0) == 0``).
     """
     def __init__(self, transitions):
-        self.transitions = transitions
+        self.transitions = transitions.astype(bool)
+
+        self.MOM_maxiter = 1000
+        self.MOM_precision = 1e-2
 
     @property
     def n(self):
@@ -348,33 +253,33 @@ class CFC(ProposalDistribution):
 
         return thetas
 
-    def log_likelihood(self, logp, thetas):
+    def logpmf(self, logp, thetas):
         """
         Evaluate the Conflict Free Categorical
 
         Parameters
         ----------
-        logp : (n, k+1) np.ndarray
+        logp : (n, k+1) np.ndarray, dtype=float
             the weights defining the CFC.
-        thetas : (N, k+1) np.ndarray
+        thetas : (N, k+1) np.ndarray, dtype=int
             the ``N`` state traces for which to evaluate the distribution
 
         Returns
         -------
-        (N,) np.ndarray
+        (N,) np.ndarray, dtype=float
             the logarithm of the CFC evaluated at the given state traces
         """
         #                                    (1, n, k+1)     x    (N, 1, k+1)    -->    (N, 1, k+1)
         logp_theta = np.take_along_axis(logp[None, :,  :], thetas[:, None, :  ], axis=1)[:, 0, :] # (N, k+1)
         with np.errstate(under='ignore'):
-            #                             (1, k, n)              (N, k, n)
+            #                             (1, k, n)                              (N, k, n)
             log_norm = logsumexp(logp.T[None, 1:, :] , b=self.transitions[thetas[:, :-1]], axis=-1) # (N, k)
 
         return np.sum(logp_theta, axis=1) - np.sum(log_norm, axis=1)
 
     def estimate(self, thetas, log_weights):
         """
-        Method of "Moments" (Marginals) estimation for the CFC
+        "Method of Marginals" estimation for the CFC
 
         Parameters
         ----------
@@ -396,7 +301,7 @@ class CFC(ProposalDistribution):
 
         return self.logp_from_marginals(log_marginals)
 
-    def logp_from_marginals(self, log_marginals, **kwargs):
+    def logp_from_marginals(self, log_marginals):
         """
         Calculate weight parameters from marginals
 
@@ -405,8 +310,6 @@ class CFC(ProposalDistribution):
         log_marginals : (n, k+1) np.ndarray, dtype=float
             the marginals for each of the ``k+1`` slots; should be normalized:
             ``logsumexp(log_marginals, axis=0) == 0``
-        kwargs : keywords
-            forwarded to `solve_marginals_single`
 
         Returns
         -------
@@ -423,32 +326,30 @@ class CFC(ProposalDistribution):
         logp = np.empty(log_marginals.shape, dtype=float)
         logp[:, 0] = log_marginals[:, 0]
         for i in range(1, k+1):
-            logp[:, i] = self.solve_marginals_single(log_marginals[:, i], log_marginals[:, i-1], **kwargs)
+            logp[:, i] = self.solve_marginals_single(log_marginals[:, i], log_marginals[:, i-1])
 
-        with np.errstate(under='ignore'):
-            return logp - logsumexp(logp, axis=0)
+        return logp
 
-    def solve_marginals_single(self, logf, logg, max_iter=1000, precision=1e-2):
+    def solve_marginals_single(self, logf, logg):
         """
         Convert marginals to weight parameters
 
         This is a helper function that runs the iteration needed in `estimate`.
 
+        The iteration stops when the absolute difference between successive
+        ``logp`` iterates is less than ``self.MOM_precision``; if this does not
+        happen in ``self.MOM_maxiter`` steps or less, a ``RuntimeError`` is
+        raised.
+
         Parameters
         ----------
         logf, logg : (n,) np.ndarray
-            marginals for current and previous step, respectively; should be
-            normalized (``logsumexp(logf) == 0``).
-        precision : float
-            the iteration stops when the absolute difference between successive
-            ``logp`` iterates is less than this value.
-        max_iter : int, optional
-            upper limit on iterations
+            marginals for current and previous step, respectively
 
         Raises
         ------
         RuntimeError
-            if running out of iterations (c.f. `!max_iter`)
+            ran out of iterations
 
         Returns
         -------
@@ -464,13 +365,15 @@ class CFC(ProposalDistribution):
             return logf.copy()
         
         logp_old = logf
-        for _ in range(max_iter):
+        for _ in range(self.MOM_maxiter):
             with np.errstate(under='ignore'):
                 log_norm = logsumexp(logp_old[None, :], b=self.transitions, axis=1) # sum over j --> ?
                 logg_norm = logg - log_norm
                 logp = logf - logsumexp(logg_norm[:, None], b=self.transitions, axis=0) # sum over ? --> i
+                logp -= logsumexp(logp) # ensure normalization, otherwise
+                                        # iteration might run off
 
-            if np.max(np.abs(logp-logp_old)) < precision:
+            if np.max(np.abs(logp-logp_old)) < self.MOM_precision:
                 return logp
             else:
                 logp_old = logp
@@ -480,9 +383,6 @@ class CFC(ProposalDistribution):
     def uniform_marginals(self, k):
         """
         Compute the state marginals for the uniform distribution
-
-        This allows estimating the corresponding weight parameters through
-        `solve_marginals()`.
 
         Parameters
         ----------
@@ -495,34 +395,34 @@ class CFC(ProposalDistribution):
             the marginals under the uniform distribution (normalized such that
             ``logsumexp(log_marginals, axis=0) == 0``)
 
+        See also
+        --------
+        logp_from_marginals, logp_uniform
+
         Notes
         -----
-        The uniform CFC is a bit tricky, because its marginals are not uniform.
-        Furthermore, if any non-trivial transitions are blocked (i.e. anything
-        beyond prohibiting self-transitions), then the weight parameters for
-        the uniform distribution are also not all equal. So getting the
-        parameters for the uniform CFC with general transition matrix is
-        non-trivial.
+        If ``self.transitions`` blocks anything beyond self-transitions, the
+        uniform CFC has neither uniform weight parameters, nor uniform
+        marginals.
 
         This function estimates the marginals under the uniform CFC by counting
         trajectories passing through a given state slot, which can be done by
         taking powers of the transition matrix. For long trajectories, this
-        might result in an overflow of the ``np.integer`` types, which is why
-        this function uses python's built-in ``int``, which has arbitrary
-        precision. The return value is normalized and cast to regular floats.
+        might result in an overflow of the ``np.integer`` types; thus this
+        function uses python's built-in ``int``, which has arbitrary precision.
+        The return value is normalized and cast to regular floats.
         """
         # Implementation Notes
         # --------------------
         # + casting an integer numpy array to dtype=object makes numpy use
         #   python's built-in int—which has arbitrary precision—instead of the
-        #   64-bit np.integer
+        #   64-bit np.integer (which is faster)
         # + math.log (as opposed to np.log) can deal with large integers
         #   correctly, if applied to single variables (not numpy arrays)
         T = self.transitions.astype(int).astype(object)
         p = np.empty((self.n, k+1), dtype=object)
         for i in range(k+1):
-            p[:, i] = (  ( np.ones(self.n, dtype=int) @ matrix_power(T, i)    )
-                       * ( matrix_power(T, k-i)  @ np.ones(self.n, dtype=int) ) )
+            p[:, i] = matrix_power(T, i).sum(axis=0) * matrix_power(T, k-i).sum(axis=1)
 
         mathlog = np.vectorize(math.log)
         return (mathlog(p) - mathlog(np.sum(p, axis=0))).astype(float)
@@ -538,6 +438,10 @@ class CFC(ProposalDistribution):
         Returns
         -------
         logp : (n, k+1) np.ndarray, dtype=float
+
+        See also
+        --------
+        logp_from_marginals, uniform_marginals
 
         Notes
         -----
@@ -561,7 +465,8 @@ class CFC(ProposalDistribution):
         -------
         int
         """
-        N = np.sum(matrix_power(self.transitions.astype(object), k))
+        T = self.transitions.astype(int).astype(object)
+        N = np.sum(matrix_power(T, k))
         if log:
             return math.log(N)
         else:
@@ -588,26 +493,29 @@ class CFC(ProposalDistribution):
         """
         N = self.N_total(k)
         if N > Nmax:
-            raise ValueError(f"full sample would be {N} > Nmax = {Nmax} traces")
+            raise ValueError(f"Full sample would be {N} > Nmax = {Nmax} traces")
 
         T = self.transitions.astype(int).astype(object)
-        to_list = [np.nonzero(T[i])[0].tolist() for i in range(len(T))]     # possible states from i
-        ns = [matrix_power(T, i).sum(axis=1) for i in reversed(range(k+1))] # #ways to continue from state i@t
+        to_list = [np.nonzero(T[i])[0].tolist() for i in range(len(T))] # accessible states from state i
+        ns = [matrix_power(T, k-t).sum(axis=1) for t in range(k+1)]     # #ways to continue from state i@t
 
+        # We trace the full decision tree for state traces.
+        # `vals` keeps the values in one layer of the tree; note how at each
+        # step we replace each entry with the "children" it spawns.
+        # `ns[t][i]` tell us the multiplicity with which we should insert each
+        # value in the output array, which is just the possible number of ways
+        # to continue from state i@t
         vals = np.arange(len(T)).tolist()
         thetas = np.empty((N, k+1), dtype=int)
-        thetas[:, 0] = sum((ns[0][val]*[val] for val in vals), [])
-        for i in range(1, k+1):
+        thetas[:, 0] = sum((ns[0][i]*[i] for i in vals), [])
+        for t in range(1, k+1):
             vals = sum((to_list[i] for i in vals), [])
-            thetas[:, i] = sum((ns[i][val]*[val] for val in vals), [])
+            thetas[:, t] = sum((ns[t][i]*[i] for i in vals), [])
 
         return thetas
 
 ### Sampling ###
 
-class ExhaustionImpractical(ValueError):
-    pass
-            
 class FixedkSampler:
     """
     Running the AMIS scheme for a fixed number of switches k
@@ -621,7 +529,7 @@ class FixedkSampler:
     traj : Trajectory
         the trajectory we are sampling for
     model : MultiStateModel
-        the model to use (defines the likelihood)
+        the model to use (defines the likelihood and allowed state transitions)
     k : int
         the number of switches for this run
     N : int, optional
@@ -631,8 +539,8 @@ class FixedkSampler:
         constraining ``|log(new_concentration/old_concentration)| <=
         N*concentration_brake``, where ``concentration = sum(α)``.
     polarization_brake : float, optional
-        limits changes in the polarization (Bernoulli part of the proposal) by
-        constraining ``|m_new - m_old| <= N*polarization_brake``.
+        limits changes in the CFC proposal by constraining ``|p_new - p_old| <=
+        N*polarization_brake``.
     max_fev : int, optional
         limit on likelihood evaluations. If this limit is reached, the sampler
         will go to an "exhausted" state, where it does not allow further
@@ -658,8 +566,8 @@ class FixedkSampler:
     cfc : CFC
         the proposal distribution over state traces
     parameters : [((k+1,) np.ndarray, (n, k+1) np.ndarray)]
-        proposal parameters for the samples in `!samples`, as tuple ``(a,
-        logp)``.
+        list of proposal parameters for the samples in `!samples`, as tuples
+        ``(a, logp)``.
     evidences : [(logE, dlogE, KL)]
         estimated evidence at each step. Similar to `!samples` and
         `!parameters`, this is a list with an entry for each `step`. The
@@ -667,16 +575,26 @@ class FixedkSampler:
         and Kullback-Leibler divergence ``D_KL( posterior || proposal )`` of
         posterior on proposal. The latter can come in handy in interpreting
         convergence.
-    max_logL : float
-        maximum value of the likelihood. Used internally to prevent overflows.
     logprior : float
-        value of the uniform prior over profiles. Used internally.
+        value of the uniform prior over profiles.
     """
     # Potential further improvements:
-    #  + make each proposal a mixture of Dirichlet's to catch multimodal behavior
+    #  + make each proposal a mixture of Dirichlet's/CFC's to catch multimodal
+    #    behavior
     #  + use MAP instead of MOM estimation, which would replace the brake
     #    parameters with proper priors; this turns out to be technically quite
     #    involved and numerically unstable, so stick with MOM + brakes for now.
+    #
+    # Internal notes
+    #  + adding the value of the constant prior is important, since it depends
+    #    on `k` and thus contributes to the penalization.
+    #  + the normalization of the prior should be the same as that of the
+    #    proposal. Thus use the 1/k! associated with continuous switch
+    #    positions, instead of (T-1)!/(T-1-k)! associated with discrete switch
+    #    positions.
+    class ExhaustionImpractical(ValueError):
+        pass
+            
     def __init__(self, traj, model, k,
                  N=100,
                  concentration_brake=1e-2,
@@ -713,13 +631,13 @@ class FixedkSampler:
         # Note that for k = 0, ``sum([]) == 0 == log(0!)`` still works
         self.logprior = np.sum(np.log(np.arange(self.k)+1)) - self.cfc.N_total(self.k, log=True)
 
-        self.samples = [] # each sample is a dict with keys ['ss', 'thetas', 'logLs', 'logδs', 'log_weights']
+        self.samples = [] # each sample is a dict with keys 'ss', 'thetas', 'logLs' [, 'logδs', 'log_weights']
         self.evidences = [] # each entry: (logev, dlogev, KL)
         
         # Sample exhaustively, if possible
         try:
             self.fix_exhaustive()
-        except ExhaustionImpractical:
+        except FixedkSampler.ExhaustionImpractical:
             pass
 
     @property
@@ -729,9 +647,72 @@ class FixedkSampler:
         """
         return self.model.nStates
 
+    def st2profile(self, s, theta):
+        """
+        Convert parameters (s, θ) to Loopingprofile
+
+        Parameters
+        ----------
+        s : (k+1,) np.ndarray, dtype=float
+            switch intervals. Should satisfy ``np.sum(s) == 1``.
+        theta : (k+1,) np.ndarray, dtype=int
+            states associated with each interval in `!s`.
+
+        Returns
+        -------
+        Loopingprofile
+        """
+        states = theta[0]*np.ones(len(self.traj))
+        if len(s) > 1:
+            switchpos = np.cumsum(s)[:-1] # in [0, 1)
+            switches = np.floor(switchpos*(len(self.traj)-1)).astype(int) + 1 # floor(0.0) + 1 = 1 != ceil(0.0)
+
+            for i in range(1, len(switches)):
+                states[switches[i-1]:switches[i]] = theta[i]
+                
+            states[switches[-1]:] = theta[-1]
+    
+        return Loopingprofile(states)
+
     def log_proposal(self, parameters, ss, thetas):
-        return ( self.dirichlet.log_likelihood(parameters[0], ss)
-                     + self.cfc.log_likelihood(parameters[1], thetas) )
+        """
+        Evaluate the proposal distribution
+
+        Parameters
+        ----------
+        parameters : (a, logp)
+            tuple of parameters for Dirichlet and CFC, respectively
+        ss : (N, k+1) np.ndarray, dtype=float
+            switch intervals
+        thetas : (N, k+1) np.ndarray, dtype=int
+            state traces
+
+        Returns
+        -------
+        (N,) np.ndarray, dtype=float
+        """
+        return ( self.dirichlet.logpdf(parameters[0], ss)
+                     + self.cfc.logpmf(parameters[1], thetas) )
+
+    def logL(self, ss, thetas):
+        """
+        Evaluate model likelihood
+
+        Parameters
+        ----------
+        ss : (N, k+1) np.ndarray, dtype=float
+            switch intervals
+        thetas : (N, k+1) np.ndarray, dtype=int
+            state traces
+
+        Returns
+        -------
+        (N,) np.ndarray, dtype=float
+        """
+        # Note: don't parallelize likelihood here, it's not worth the overhead
+        # (need to copy at least self.traj and self.model to workers)
+        return np.array([self.model.logL(self.st2profile(s, theta), self.traj)
+                         for s, theta in zip(ss, thetas)])
 
     def fix_exhaustive(self, Nmax=1000):
         """
@@ -744,7 +725,7 @@ class FixedkSampler:
 
         Raises
         ------
-        ExhaustionImpractical
+        FixedkSampler.ExhaustionImpractical
             if parameter space is too big to warrant exhaustive sampling; i.e.
             there would be more than `!Nmax` profiles to evaluate.
 
@@ -757,7 +738,7 @@ class FixedkSampler:
         for i in range(self.k):
             Nsamples *= len(self.traj) - i - 1
             if Nsamples > Nmax:
-                raise ExhaustionImpractical(f"Parameter space too large for exhaustive sampling (number of profiles = {Nsamples} > Nmax = {Nmax})")
+                raise self.ExhaustionImpractical(f"Parameter space too large for exhaustive sampling (number of profiles = {Nsamples} > Nmax = {Nmax})")
 
         # Assemble full sample
         # 1. switches
@@ -774,18 +755,16 @@ class FixedkSampler:
         ss = np.tile(ss, (len(thetas), 1))
         thetas = np.tile(thetas[:, None, :], (1, len(ss), 1)).reshape(-1, thetas.shape[-1])
 
-        # For exhaustive sampling, the proposal is uniform over the profiles,
-        # i.e. equal to the prior, which thus drops out.
-        # The expressions here are thus slightly different from the ones used
-        # in `step()` below.
+        # Assemble sample
         sample = {'ss' : ss, 'thetas' : thetas}
-        sample['logLs'] = calculate_logLs(sample['ss'], sample['thetas'],
-                                          self.traj, self.model,
-                                          )
+        sample['logLs'] = self.logL(sample['ss'], sample['thetas'])
         self.samples.append(sample)
         
         # Evidence & KL
-        # do logsumexp manually, which allows calculating KL
+        # When sampling exhaustively, we can evaluate the evidence integral
+        # ``int dθ L(θ)π(θ) = ⟨L(θ)⟩`` exactly, where the mean is taken over
+        # the prior ensemble (which is uniform, thus can just use ``np.mean``)
+        # Do logsumexp manually, which allows calculating KL
         max_logL = np.max(sample['logLs'])
         with np.errstate(under='ignore'):
             weights_o = np.exp(sample['logLs'] - max_logL)
@@ -809,6 +788,10 @@ class FixedkSampler:
         bool
             whether the sample was performed. ``False`` if sampler is
             exhausted, ``True`` otherwise.
+
+        See also
+        --------
+        FixedkSampler
         """
         if self.exhausted:
             return False
@@ -825,7 +808,7 @@ class FixedkSampler:
             'ss'     : self.dirichlet.sample(self.parameters[-1][0], self.N),
             'thetas' :       self.cfc.sample(self.parameters[-1][1], self.N),
         }
-        sample['logLs'] = calculate_logLs(sample['ss'], sample['thetas'], self.traj, self.model)
+        sample['logLs'] = self.logL(sample['ss'], sample['thetas'])
         sample['cur_log_proposal'] = self.log_proposal(self.parameters[-1], sample['ss'], sample['thetas'])
         with np.errstate(under='ignore'):
             sample['logδs'] = logsumexp([self.log_proposal(params, sample['ss'], sample['thetas'])
@@ -840,8 +823,7 @@ class FixedkSampler:
 
         # Assemble full ensemble
         full_ensemble = {key : np.concatenate([sample[key] for sample in self.samples], axis=0)
-                         for key in self.samples[-1]
-                         }
+                         for key in self.samples[-1]}
 
         # Update proposal
         old_a, old_logp = self.parameters[-1]
@@ -854,7 +836,7 @@ class FixedkSampler:
             new_a *= np.exp(np.sign(log_concentration_ratio)*self.N*self.brakes[0] - log_concentration_ratio)
 
         # Keep polarizations from exploding (each i individually)
-        # the interpolation for this works naturally only in linear space, so
+        # The interpolation for this works naturally only in linear space, so
         # let's work there
         with np.errstate(under='ignore'):
             old_p = np.exp(old_logp)
@@ -873,7 +855,7 @@ class FixedkSampler:
         max_log_weight = np.max(full_ensemble['log_weights'])
         with np.errstate(under='ignore'):
             weights_o = np.exp(full_ensemble['log_weights'] - max_log_weight)
-        ev_o = np.mean(weights_o)
+        ev_o = np.mean(weights_o) # "_o" = missing log-offset and prior
 
         logev = np.log(ev_o) + max_log_weight + self.logprior
         dlogev = stats.sem(weights_o) / ev_o # offset and prior cancel
@@ -897,6 +879,7 @@ class FixedkSampler:
         # Check whether we can still sample more in the future
         if len(self.samples)*self.N >= self.max_fev:
             self.exhausted = True
+
         return True
         
     def t_stat(self, other):
@@ -925,12 +908,10 @@ class FixedkSampler:
         -------
         Loopingprofile
         """
-        best_logL = -np.inf
-        for sample in self.samples:
-            i = np.argmax(sample['logLs'])
-            if sample['logLs'][i] > best_logL:
-                best_logL = sample['logLs'][i]
-                s = sample['ss'][i]
-                t = sample['thetas'][i]
-                
-        return st2profile(s, t, self.traj)
+        in_sample_ind = np.array([np.argmax(sample['logLs']) for sample in self.samples])
+        logLs = np.array([sample['logLs'][i] for sample, i in zip(self.samples, in_sample_ind)])
+        i = np.argmax(logLs)
+
+        s = self.samples[i]['ss'    ][in_sample_ind[i]]
+        t = self.samples[i]['thetas'][in_sample_ind[i]]
+        return self.st2profile(s, t)
