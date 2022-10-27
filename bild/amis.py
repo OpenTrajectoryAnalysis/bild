@@ -179,9 +179,11 @@ class CFC:
     marginals in a sample back to the weights ``p``. Letting ``f_n`` and
     ``g_n`` denote the marginals at step ``i`` and ``i-1`` respectively, we
     have that ``p_n := p[:, i]`` is given by the solution of
-    ```
+
+    .. code-block:: text
+
         p_n = f_n / sum_{m in D_n}( g_m / ( sum_{k in C_m} 1-p_m ) ) ,
-    ```
+
     where the index sets are ``C_n = {k | n --> k is allowed}`` and ``D_n = {k
     | k --> n is allowed}``. Solving this equation by fixed point iteration,
     we find approximate parameters ``p`` for given marginals over the states.
@@ -209,7 +211,7 @@ class CFC:
     equivalently: ``logsumexp(logp, axis=0) == 0``).
     """
     def __init__(self, transitions):
-        self.transitions = transitions.astype(bool)
+        self.transitions = np.array(transitions, dtype=bool, copy=True)
 
         self.MOM_maxiter = 1000
         self.MOM_precision = 1e-2
@@ -239,7 +241,7 @@ class CFC:
 
         # For sampling we actually need p, not log(p)
         with np.errstate(under='ignore'):
-            p = np.exp(logp)
+            p = np.exp(logp - logsumexp(logp, axis=0))
 
         thetas = np.empty((N, k+1), dtype=int)
         thetas[:, 0] = np.random.choice(self.n, size=N, p=p[:, 0])
@@ -274,8 +276,9 @@ class CFC:
         with np.errstate(under='ignore'):
             #                             (1, k, n)                              (N, k, n)
             log_norm = logsumexp(logp.T[None, 1:, :] , b=self.transitions[thetas[:, :-1]], axis=-1) # (N, k)
+            log_norm0 = logsumexp(logp[:, 0])
 
-        return np.sum(logp_theta, axis=1) - np.sum(log_norm, axis=1)
+        return np.sum(logp_theta, axis=1) - np.sum(log_norm, axis=1) - log_norm0
 
     def estimate(self, thetas, log_weights):
         """
@@ -363,17 +366,25 @@ class CFC:
         if np.any(logg == 0):
             assert np.all(logf[logg == 0] == -np.inf)
             return logf.copy()
+
+        i_f0 = logf == -np.inf
+        i_g0 = logg == -np.inf
         
         logp_old = logf
         for _ in range(self.MOM_maxiter):
             with np.errstate(under='ignore'):
                 log_norm = logsumexp(logp_old[None, :], b=self.transitions, axis=1) # sum over j --> ?
+                log_norm[i_g0] = 0 # avoid -inf + inf
                 logg_norm = logg - log_norm
-                logp = logf - logsumexp(logg_norm[:, None], b=self.transitions, axis=0) # sum over ? --> i
+
+                log_Sgp = logsumexp(logg_norm[:, None], b=self.transitions, axis=0) # sum over ? --> i
+                log_Sgp[i_f0] = 0
+                logp = logf - log_Sgp
+
                 logp -= logsumexp(logp) # ensure normalization, otherwise
                                         # iteration might run off
 
-            if np.max(np.abs(logp-logp_old)) < self.MOM_precision:
+            if np.max(np.abs(logp[~i_f0]-logp_old[~i_f0])) < self.MOM_precision:
                 return logp
             else:
                 logp_old = logp
@@ -418,14 +429,24 @@ class CFC:
         #   python's built-in int—which has arbitrary precision—instead of the
         #   64-bit np.integer (which is faster)
         # + math.log (as opposed to np.log) can deal with large integers
-        #   correctly, if applied to single variables (not numpy arrays)
+        #   correctly, if applied to single variables (not numpy arrays);
+        #   therefore it raises ValueError on log(0), instead of returning
+        #   -inf.
         T = self.transitions.astype(int).astype(object)
         p = np.empty((self.n, k+1), dtype=object)
         for i in range(k+1):
             p[:, i] = matrix_power(T, i).sum(axis=0) * matrix_power(T, k-i).sum(axis=1)
 
-        mathlog = np.vectorize(math.log)
-        return (mathlog(p) - mathlog(np.sum(p, axis=0))).astype(float)
+        @np.vectorize
+        def safe_log(x):
+            try:
+                return math.log(x)
+            except ValueError:
+                if x == 0:
+                    return -np.inf
+                raise # pragma: no cover
+
+        return (safe_log(p) - safe_log(np.sum(p, axis=0))).astype(float)
 
     def logp_uniform(self, k):
         """
@@ -542,9 +563,9 @@ class FixedkSampler:
         limits changes in the CFC proposal by constraining ``|p_new - p_old| <=
         N*polarization_brake``.
     max_fev : int, optional
-        limit on likelihood evaluations. If this limit is reached, the sampler
-        will go to an "exhausted" state, where it does not allow further
-        evaluations. Will be rounded down to integer multiple of `!N`.
+        upper limit on likelihood evaluations. If this limit is reached, the
+        sampler will go to an "exhausted" state, where it does not allow
+        further evaluations.
 
     Attributes
     ----------
@@ -605,7 +626,7 @@ class FixedkSampler:
         self.N = N
         self.brakes = (concentration_brake, polarization_brake)
         
-        self.max_fev = max_fev - (max_fev % self.N)
+        self.max_fev = max_fev
         self.exhausted = False
         
         self.traj = traj
@@ -639,13 +660,6 @@ class FixedkSampler:
             self.fix_exhaustive()
         except FixedkSampler.ExhaustionImpractical:
             pass
-
-    @property
-    def n(self):
-        """
-        Alias for ``self.model.nStates``
-        """
-        return self.model.nStates
 
     def st2profile(self, s, theta):
         """
@@ -734,6 +748,8 @@ class FixedkSampler:
         Since in this case the evidence is exact, its standard error should be
         zero. To avoid numerical issues, we set ``dlogev = 1e-10``.
         """
+        Nmax = min(Nmax, self.max_fev)
+
         Nsamples = self.cfc.N_total(self.k)
         for i in range(self.k):
             Nsamples *= len(self.traj) - i - 1
@@ -752,8 +768,9 @@ class FixedkSampler:
         thetas = self.cfc.full_sample(self.k, Nmax=Nmax) # (note: different Nmax; but fine)
         
         # 3. multiply
+        N_ss = len(ss)
         ss = np.tile(ss, (len(thetas), 1))
-        thetas = np.tile(thetas[:, None, :], (1, len(ss), 1)).reshape(-1, thetas.shape[-1])
+        thetas = np.tile(thetas[:, None, :], (1, N_ss, 1)).reshape(-1, thetas.shape[-1])
 
         # Assemble sample
         sample = {'ss' : ss, 'thetas' : thetas}
@@ -772,7 +789,8 @@ class FixedkSampler:
 
         logev = np.log(ev_o) + max_logL
         dlogev = 1e-10
-        KL = np.mean(sample['logLs'] * weights_o) / ev_o - logev
+        with np.errstate(under='ignore'):
+            KL = np.mean(sample['logLs'] * weights_o) / ev_o - logev
         
         self.evidences.append((logev, dlogev, KL))
 
@@ -877,12 +895,12 @@ class FixedkSampler:
         self.evidences.append((logev, dlogev, KL))
         
         # Check whether we can still sample more in the future
-        if len(self.samples)*self.N >= self.max_fev:
+        if (len(self.samples)+1)*self.N >= self.max_fev:
             self.exhausted = True
 
         return True
         
-    def t_stat(self, other):
+    def tstat(self, other):
         """
         Calculate separation (by evidence) from another sampler
 

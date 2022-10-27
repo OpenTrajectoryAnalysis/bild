@@ -6,6 +6,8 @@ Brandão, Grosse-Holz, et al. <https://doi.org/10.1126/science.abn6583>`_. Since
 the ideas behind this scheme are explained in the paper (and its supplementary
 information), in the code we only provide technical documentation, assuming
 knowledge of the reference text.
+
+For the main entry point see `bild.sample <core.sample>`.
 """
 from . import util
 from .util import Loopingprofile

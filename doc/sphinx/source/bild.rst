@@ -1,10 +1,11 @@
-bild
-====
+API reference
+=============
 
 .. contents::
    :local:
 
 .. automodule:: bild
+   :members:
 
 
 bild.amis

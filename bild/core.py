@@ -19,7 +19,6 @@ __all__ = [
 
 def sample(traj, model,
            dE = 0,
-           samples_per_step = 100,
            init_runs = 20,
            significant_separation_sem_fold = 5,
            k_lookahead = 2,
@@ -32,7 +31,7 @@ def sample(traj, model,
 
     This function executes the whole BILD scheme, i.e. it takes a trajectory
     and returns a best-fit looping profile (plus some of the internally stored
-    variables that might be of interest for downstream analysis.
+    variables that might be of interest for downstream analysis).
 
     Parameters
     ----------
@@ -57,13 +56,10 @@ def sample(traj, model,
 
     Other Parameters
     ----------------
-    samples_per_step : int
-        how many profiles are contained in each AMIS step. See
-        'FixedkSampler.step`
     init_runs : int
         minimum number of AMIS runs for a new value of ``k``.
     significant_separation_sem_fold : float
-        `FixedkSampler.t_stat`
+        `FixedkSampler.tstat`
     k_lookahead : int
         how far we look ahead for global maxima. As long as there is a current
         candidate for global optimum at ``k >= k_max - k_lookahead`` (where
@@ -74,51 +70,27 @@ def sample(traj, model,
     k_max : int
         the maximum number of switches to sample to
     sampler_kw : dict
-        further keyword arguments when setting up the `amis.FixedkSampler`
-        instances for each ``k``.
+        keyword arguments for the `amis.FixedkSampler`.
     show_progress : bool
         whether to show a progress bar
 
     Returns
     -------
-    dict
-         + ``'samplers'`` is a list of the ``amis.FixedkSampler`` instances,
-           including the full samples
-         + ``'k_updates'`` is a record of which sampler was stepped in order.
-           Can be useful for diagnostics / to look a bit under the hood what
-           happens when
-         + ``'ks'`` is ``np.array([sampler.k for sampler in samplers])``. For
-           convenience.
-         + ``'evidence'`` is an array with the final evidence values for each
-           ``k``.
-         + ``'evidence_se'`` are the associated standard errors
-         + ``'dE'`` the evidence margin applied in finding the point estimate
-           (see next two points)
-         + ``'best_k'`` optimal number of switches identified using evidence
-           margin ``dE``
-         + ``'profile'`` point estimate with that optimal number of switches
+    SamplingResults
 
     Notes
     -----
-    This function takes a value for the evidence margin ΔE, such that we can
-    immediately give a point estimate. However, one should always make sure to
-    study the behavior of the results under changing ΔE. To that end, you can
-    always find the ``best_k`` and ``profile`` from the list of samplers by a
-    construction like this:
-
-    >>> out = sample(...) # run sampling
-    ... dE = 5 # set dE
-    ... # Find associated profile
-    ... ks_plausible = out['ks'][out['evidence'] >= np.max(out['evidence']) - dE]
-    ... best_k = np.min(ks_plausible)
-    ... profile = samplers[out['best_k']].MLE_profile()
+    This function takes a value for the evidence margin ΔE; in practice it is
+    often more useful to set ΔE = 0 when running the sampling, and then
+    studying the results under changing ΔE afterwards, using
+    ``SamplingResults.best_profile(dE=...)``.
 
     Post-processing functionality is provided in the `postproc` module, but
     usually the profile found by sampling alone is already pretty good.
 
     See also
     --------
-    amis.FixedkSampler, postproc, models
+    SamplingResults, amis.FixedkSampler, postproc, models
     """
     bar = tqdm(disable = not show_progress)
     traj = make_Trajectory(traj)
@@ -129,7 +101,7 @@ def sample(traj, model,
     def within_lookahead(k, candidates, k_lookahead=k_lookahead):
         return k - np.max([sampler.k for sampler in candidates]) <= k_lookahead
     def is_significant(sampler, against, t_thres=significant_separation_sem_fold):
-        return np.abs(sampler.t_stat(against)) > t_thres
+        return np.abs(sampler.tstat(against)) > t_thres
     
     # Initialize
     samplers = []
@@ -166,10 +138,7 @@ def sample(traj, model,
     
     # Run
     for k in range(k_max+1):
-        samplers.append(FixedkSampler(traj, model,
-                                      k=k, N=samples_per_step,
-                                      **sampler_kw,
-                                     ))
+        samplers.append(FixedkSampler(traj, model, k=k, **sampler_kw))
         assert len(samplers) == k+1 # Paranoia (samplers[k] vs. sampler.k)
         
         # Initial sampling
