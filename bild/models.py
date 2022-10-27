@@ -274,6 +274,36 @@ class MultiStateRouse(MultiStateModel):
         """
         return self.toFactorized().initial_loopingprofile(traj)
 
+    def Kalman_update(self, x, M, C, s2, Cind):
+        """
+        x : (d,) np.ndarray
+        M : (N, d) np.ndarray
+        C : (d*, N, N) np.ndarray
+        s2 : (d*,) np.ndarray
+        Cind : (d,) np.ndarray, dtype=int
+        """
+        # Implementation Notes
+        #  + minimal benchmarking hints at in-place addition/subtraction
+        #    actually being slower than just creating new arrays for M, C at
+        #    each step
+
+        # Innovation
+        w = self.measurement # (N,)
+        m = w @ M            # (d,)
+        xmm = x - m          # (d,)
+
+        # Updates of covariances
+        Cw = C @ w                           # (d*, N)
+        S = Cw @ w + s2                      # (d*,)      # due to squeezing: (C @ w) @ w :=: (w @ C) @ w
+        K = Cw / S[:, None]                  # (d*, N)
+        C = C - K[:, :, None]*Cw[:, None, :] # (d*, N, N)
+
+        # Mean and likelihoods
+        M = M + K[Cind].T * xmm # (N, d)
+        logL = -0.5 * ( xmm*xmm / S[Cind] + np.log(S)[Cind] ) - LOG_SQRT_2_PI # (d,)
+
+        return M, C, logL
+
     def logL(self, profile, traj):
         """
         Rouse likelihood, evaluated by Kalman filter
@@ -303,34 +333,24 @@ class MultiStateRouse(MultiStateModel):
 
         model = self.models[profile[0]]
         M, C_single = model.steady_state()
-        C = len(unique_errors) * [C_single]
+        C = np.tile(C_single, (len(unique_errors), 1, 1))
 
         valid_times = np.nonzero(~np.any(np.isnan(traj[:]), axis=1))[0]
         L_log = np.empty((len(valid_times), self.d), dtype=float)
 
-        def Kalman_update(t, M, C, L_log, i_write):
-            # Innovation
-            w = self.measurement
-            m = w @ M
-            xmm = traj[t] - m
-
-            # Updates of covariances
-            Cw = [c @ w for c in C]
-            S = [w @ Cw[i] + s2[i]                   for i in range(len(C))]
-            K = [Cw[i] / S[i]                        for i in range(len(C))]
-            C = [C[i] - K[i][:, None]*Cw[i][None, :] for i in range(len(C))]
-
-            # Mean and likelihoods
-            M              = M + np.stack( [K[Cind[d]]*xmm[d]                             for d in range(self.d)], axis=-1)
-            L_log[i_write] = -0.5*np.array([xmm[d]*xmm[d]/S[Cind[d]] + np.log(S[Cind[d]]) for d in range(self.d)]) - LOG_SQRT_2_PI
-
-            return M, C
+        def get_vt(i):
+            try:
+                return valid_times[i]
+            except IndexError:
+                return np.nan
 
         # First update
         i_write = 0
-        if 0 in valid_times:
-            M, C = Kalman_update(0, M, C, L_log, i_write)
+        next_vt = get_vt(i_write)
+        if 0 == next_vt:
+            M, C, L_log[i_write] = self.Kalman_update(np.zeros(traj.d), M, C, s2, Cind)
             i_write += 1
+            next_vt = get_vt(i_write)
 
         # Propagate, then update
         for t, state in enumerate(profile[1:], start=1):
@@ -338,12 +358,13 @@ class MultiStateRouse(MultiStateModel):
 
             # Propagate
             M = model.propagate_M(M, check_dynamics=False)
-            C = [model.propagate_C(myC, check_dynamics=False) for myC in C]
+            C = model.propagate_C(C, check_dynamics=False)
 
             # Update
-            if t in valid_times:
-                M, C = Kalman_update(t, M, C, L_log, i_write)
+            if t == next_vt:
+                M, C, L_log[i_write] = self.Kalman_update(traj[t], M, C, s2, Cind)
                 i_write += 1
+                next_vt = get_vt(i_write)
 
         if i_write != len(L_log):
             raise RuntimeError("Internal inconsistency (i.e. bug)") # pragma: no cover
