@@ -276,11 +276,30 @@ class MultiStateRouse(MultiStateModel):
 
     def Kalman_update(self, x, M, C, s2, Cind):
         """
+        Kalman update step for the likelihood computation
+
+        Parameters
+        ----------
         x : (d,) np.ndarray
+            current trajectory point
         M : (N, d) np.ndarray
+            prior value of mean
         C : (d*, N, N) np.ndarray
+            prior value of covariance
         s2 : (d*,) np.ndarray
+            unique localization errors
         Cind : (d,) np.ndarray, dtype=int
+            conversion ``d* --> d``; i.e. for each dimension, contains the
+            index into ``d*`` arrays to use
+
+        Returns
+        -------
+        M : (N, d) np.ndarray
+            posterior mean
+        C : (d*, N, N) np.ndarray
+            posterior covariance
+        logL : (d,) np.ndarray
+            likelihood of the current observation `!x`
         """
         # Implementation Notes
         #  + minimal benchmarking hints at in-place addition/subtraction

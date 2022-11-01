@@ -4,6 +4,7 @@ Core implementation of the `bild` module
 from tqdm.auto import tqdm
 
 import numpy as np
+from scipy.special import logsumexp
 
 from noctiluca import make_Trajectory
 
@@ -221,6 +222,26 @@ class SamplingResults():
     def evidence_se(self):
         return np.array([sampler.evidences[-1][1] for sampler in self.samplers])
 
+    def best_k(self, dE=0):
+        """
+        Find the best k at given ΔE
+
+        Parameters
+        ----------
+        dE : float >= 0
+            the evidence margin to apply
+
+        Returns
+        -------
+        int
+
+        See also
+        --------
+        best_profile
+        """
+        ks_plausible = self.k[self.evidence >= np.max(self.evidence) - dE]
+        return np.min(ks_plausible)
+
     def best_profile(self, dE=0):
         """
         Find the best profile at given ΔE
@@ -233,7 +254,33 @@ class SamplingResults():
         Returns
         -------
         Loopingprofile
+
+        See also
+        --------
+        best_k
         """
-        ks_plausible = self.k[self.evidence >= np.max(self.evidence) - dE]
-        best_k = np.min(ks_plausible)
-        return self.samplers[best_k].MAP_profile()
+        return self.samplers[self.best_k(dE)].MAP_profile()
+
+    def log_marginal_posterior(self, dE=None):
+        """
+        Calculate posterior marginals
+
+        Parameters
+        ----------
+        dE : float >= 0 or None
+            the evidence margin to apply. If ``None`` (default): instead of
+            picking the best ``k``, average over ``k``, weighted by evidence.
+
+        Returns
+        -------
+        (n, T) np.ndarray, dtype=float
+        """
+        if dE is None:
+            with np.errstate(under='ignore'):
+                logpost = logsumexp([sampler.log_marginal_posterior() + logev
+                                     for sampler, logev in zip(self.samplers, self.evidence)],
+                                    axis=0,
+                                    )
+                return logpost - logsumexp(logpost, axis=0)
+        else:
+            return self.samplers[self.best_k(dE)].log_marginal_posterior()

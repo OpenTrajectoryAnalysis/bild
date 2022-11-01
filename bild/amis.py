@@ -933,3 +933,35 @@ class FixedkSampler:
         s = self.samples[i]['ss'    ][in_sample_ind[i]]
         t = self.samples[i]['thetas'][in_sample_ind[i]]
         return self.st2profile(s, t)
+
+    def log_marginal_posterior(self):
+        """
+        Calculate posterior marginals
+
+        Returns
+        -------
+        (n, T) np.ndarray, dtype=float
+            log marginal posterior over ``n`` states for each time point ``t``
+            in the trajectory; normed.
+        """
+        full_ensemble = {key : np.concatenate([sample[key] for sample in self.samples])
+                         for key in self.samples[-1]}
+        try: # (N,)
+            log_weights = full_ensemble['log_weights']
+        except KeyError: # if sampling was by exhaustion
+            log_weights = full_ensemble['logLs']
+
+        # (N, T)
+        all_states = np.stack([self.st2profile(s, t)
+                               for s, t in zip(full_ensemble['ss'],
+                                               full_ensemble['thetas'],
+                                               )])
+
+        # (n, T)
+        n = self.model.nStates
+        with np.errstate(under='ignore'):
+            logpost = logsumexp(log_weights[:, None, None],
+                                b = all_states[:, None, :] == np.arange(n)[None, :, None],
+                                axis=0,
+                                )
+            return logpost - logsumexp(logpost, axis=0)

@@ -38,6 +38,15 @@ class myTestCase(unittest.TestCase):
             print(err)
         self.assertTrue(res)
 
+    def assert_array_almost_equal(self, array1, array2, decimal=10):
+        try:
+            np.testing.assert_array_almost_equal(array1, array2, decimal=decimal)
+            res = True
+        except AssertionError as err: # pragma: no cover
+            res = False
+            print(err)
+        self.assertTrue(res)
+
 class TestDirichlet(myTestCase):
     def test_logpdf(self):
         lp = amis.Dirichlet().logpdf(np.array([0.5, 4]),
@@ -224,6 +233,13 @@ class TestFixedkSampler(myTestCase):
 
         samplerK = amis.FixedkSampler(self.traj, self.model, k=10)
         self.assertFalse(samplerK.step())
+
+        # Also check posterior, since we need a sample for that
+        with np.errstate(under='ignore'):
+            logpost = sampler1.log_marginal_posterior()
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+            logpost = sampler2.log_marginal_posterior()
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main(module=__file__[:-3])

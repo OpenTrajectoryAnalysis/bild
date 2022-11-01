@@ -9,6 +9,7 @@ import numpy as np
 np.random.seed(685441950)
 np.seterr(all='raise')
 import scipy.stats
+from scipy.special import logsumexp
 
 import unittest
 from unittest.mock import patch
@@ -203,6 +204,12 @@ class TestCore(myTestCase):
             self.assertGreaterEqual(np.argmax(res.evidence), 3) # See profile comparison below
             self.assertTrue(np.all(res.evidence_se > 0))
             self.assert_array_equal(res.best_profile()[:], res.best_profile(dE=2)[:])
+
+        with np.errstate(under='ignore'):
+            logpost = res.log_marginal_posterior()
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+            logpost = res.log_marginal_posterior(dE=2)
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
 
     def test_insignificance_resolution_after_main_loop(self):
         model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
