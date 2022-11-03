@@ -30,6 +30,24 @@ if CYTHONIZE:
                     compiler_directives = {'language_level' : '3'},
                 )
 
+    # Remove hash strings from comments in the .c to prevent the file from
+    # changing on every build
+    import re
+    for ext in extensions:
+        for cfile in ext.sources:
+            with open(cfile, 'r') as f:
+                lines = f.readlines()
+            with open(cfile, 'w') as f:
+                for line in lines:
+                    m = re.search('(pip-build-env-)[^/]*/', line)
+                    if m:
+                        line = ( line[:m.start()]
+                                  + m[1]
+                                  + '<hash_removed>'
+                                  + line[m.end()-1:]
+                                )
+                    f.write(line)
+
 setup(
     ext_modules  = extensions,
     include_dirs = [numpy.get_include()],
