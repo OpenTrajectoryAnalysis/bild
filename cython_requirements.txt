@@ -1,0 +1,5 @@
+# This file lists requirements specific to the cython build (.pyx --> .c); it
+# is read explicitly by setup.py. All install requirements are listed in
+# pyproject.toml [project.dependencies].
+Cython >=0.25
+scipy >=1.6

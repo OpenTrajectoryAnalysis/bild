@@ -10,12 +10,12 @@
             ]
         ],
         "depends": [],
-        "name": "bild.cython.MSRouse_logL",
+        "name": "bild.bin.MSRouse_logL",
         "sources": [
-            "bild/cython/MSRouse_logL.pyx"
+            "bild/src/MSRouse_logL.pyx"
         ]
     },
-    "module_name": "bild.cython.MSRouse_logL"
+    "module_name": "bild.bin.MSRouse_logL"
 }
 END: Cython Metadata */
 
@@ -757,8 +757,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__bild__cython__MSRouse_logL
-#define __PYX_HAVE_API__bild__cython__MSRouse_logL
+#define __PYX_HAVE__bild__bin__MSRouse_logL
+#define __PYX_HAVE_API__bild__bin__MSRouse_logL
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -1005,8 +1005,8 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "bild/cython/MSRouse_logL.pyx",
-  ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd",
+  "bild/src/MSRouse_logL.pyx",
+  "__init__.pxd",
   "stringsource",
   ".eggs/Cython-0.29.32-py3.7-linux-x86_64.egg/Cython/Includes/cpython/type.pxd",
 };
@@ -1115,7 +1115,7 @@ typedef struct {
 } __Pyx_BufFmt_Context;
 
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":690
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":690
  * # in Cython to enable them only on the right systems.
  * 
  * ctypedef npy_int8       int8_t             # <<<<<<<<<<<<<<
@@ -1124,7 +1124,7 @@ typedef struct {
  */
 typedef npy_int8 __pyx_t_5numpy_int8_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":691
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":691
  * 
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t             # <<<<<<<<<<<<<<
@@ -1133,7 +1133,7 @@ typedef npy_int8 __pyx_t_5numpy_int8_t;
  */
 typedef npy_int16 __pyx_t_5numpy_int16_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":692
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":692
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t             # <<<<<<<<<<<<<<
@@ -1142,7 +1142,7 @@ typedef npy_int16 __pyx_t_5numpy_int16_t;
  */
 typedef npy_int32 __pyx_t_5numpy_int32_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":693
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":693
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t
  * ctypedef npy_int64      int64_t             # <<<<<<<<<<<<<<
@@ -1151,7 +1151,7 @@ typedef npy_int32 __pyx_t_5numpy_int32_t;
  */
 typedef npy_int64 __pyx_t_5numpy_int64_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":697
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":697
  * #ctypedef npy_int128     int128_t
  * 
  * ctypedef npy_uint8      uint8_t             # <<<<<<<<<<<<<<
@@ -1160,7 +1160,7 @@ typedef npy_int64 __pyx_t_5numpy_int64_t;
  */
 typedef npy_uint8 __pyx_t_5numpy_uint8_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":698
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":698
  * 
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t             # <<<<<<<<<<<<<<
@@ -1169,7 +1169,7 @@ typedef npy_uint8 __pyx_t_5numpy_uint8_t;
  */
 typedef npy_uint16 __pyx_t_5numpy_uint16_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":699
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":699
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t             # <<<<<<<<<<<<<<
@@ -1178,7 +1178,7 @@ typedef npy_uint16 __pyx_t_5numpy_uint16_t;
  */
 typedef npy_uint32 __pyx_t_5numpy_uint32_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":700
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":700
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t
  * ctypedef npy_uint64     uint64_t             # <<<<<<<<<<<<<<
@@ -1187,7 +1187,7 @@ typedef npy_uint32 __pyx_t_5numpy_uint32_t;
  */
 typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":704
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":704
  * #ctypedef npy_uint128    uint128_t
  * 
  * ctypedef npy_float32    float32_t             # <<<<<<<<<<<<<<
@@ -1196,7 +1196,7 @@ typedef npy_uint64 __pyx_t_5numpy_uint64_t;
  */
 typedef npy_float32 __pyx_t_5numpy_float32_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":705
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":705
  * 
  * ctypedef npy_float32    float32_t
  * ctypedef npy_float64    float64_t             # <<<<<<<<<<<<<<
@@ -1205,7 +1205,7 @@ typedef npy_float32 __pyx_t_5numpy_float32_t;
  */
 typedef npy_float64 __pyx_t_5numpy_float64_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":714
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":714
  * # The int types are mapped a bit surprising --
  * # numpy.int corresponds to 'l' and numpy.long to 'q'
  * ctypedef npy_long       int_t             # <<<<<<<<<<<<<<
@@ -1214,7 +1214,7 @@ typedef npy_float64 __pyx_t_5numpy_float64_t;
  */
 typedef npy_long __pyx_t_5numpy_int_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":715
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":715
  * # numpy.int corresponds to 'l' and numpy.long to 'q'
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t             # <<<<<<<<<<<<<<
@@ -1223,7 +1223,7 @@ typedef npy_long __pyx_t_5numpy_int_t;
  */
 typedef npy_longlong __pyx_t_5numpy_long_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":716
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":716
  * ctypedef npy_long       int_t
  * ctypedef npy_longlong   long_t
  * ctypedef npy_longlong   longlong_t             # <<<<<<<<<<<<<<
@@ -1232,7 +1232,7 @@ typedef npy_longlong __pyx_t_5numpy_long_t;
  */
 typedef npy_longlong __pyx_t_5numpy_longlong_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":718
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":718
  * ctypedef npy_longlong   longlong_t
  * 
  * ctypedef npy_ulong      uint_t             # <<<<<<<<<<<<<<
@@ -1241,7 +1241,7 @@ typedef npy_longlong __pyx_t_5numpy_longlong_t;
  */
 typedef npy_ulong __pyx_t_5numpy_uint_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":719
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":719
  * 
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t             # <<<<<<<<<<<<<<
@@ -1250,7 +1250,7 @@ typedef npy_ulong __pyx_t_5numpy_uint_t;
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":720
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":720
  * ctypedef npy_ulong      uint_t
  * ctypedef npy_ulonglong  ulong_t
  * ctypedef npy_ulonglong  ulonglong_t             # <<<<<<<<<<<<<<
@@ -1259,7 +1259,7 @@ typedef npy_ulonglong __pyx_t_5numpy_ulong_t;
  */
 typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":722
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":722
  * ctypedef npy_ulonglong  ulonglong_t
  * 
  * ctypedef npy_intp       intp_t             # <<<<<<<<<<<<<<
@@ -1268,7 +1268,7 @@ typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
  */
 typedef npy_intp __pyx_t_5numpy_intp_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":723
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":723
  * 
  * ctypedef npy_intp       intp_t
  * ctypedef npy_uintp      uintp_t             # <<<<<<<<<<<<<<
@@ -1277,7 +1277,7 @@ typedef npy_intp __pyx_t_5numpy_intp_t;
  */
 typedef npy_uintp __pyx_t_5numpy_uintp_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":725
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":725
  * ctypedef npy_uintp      uintp_t
  * 
  * ctypedef npy_double     float_t             # <<<<<<<<<<<<<<
@@ -1286,7 +1286,7 @@ typedef npy_uintp __pyx_t_5numpy_uintp_t;
  */
 typedef npy_double __pyx_t_5numpy_float_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":726
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":726
  * 
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t             # <<<<<<<<<<<<<<
@@ -1295,7 +1295,7 @@ typedef npy_double __pyx_t_5numpy_float_t;
  */
 typedef npy_double __pyx_t_5numpy_double_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":727
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":727
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t
  * ctypedef npy_longdouble longdouble_t             # <<<<<<<<<<<<<<
@@ -1322,23 +1322,23 @@ typedef float __pyx_t_5scipy_6linalg_11cython_blas_s;
  */
 typedef double __pyx_t_5scipy_6linalg_11cython_blas_d;
 
-/* "bild/cython/MSRouse_logL.pyx":11
+/* "bild/src/MSRouse_logL.pyx":11
  *                                         dger, dscal, dsymv )
  * 
  * ctypedef double FLOAT_t             # <<<<<<<<<<<<<<
  * ctypedef unsigned long SIZE_t
  * 
  */
-typedef double __pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t;
+typedef double __pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t;
 
-/* "bild/cython/MSRouse_logL.pyx":12
+/* "bild/src/MSRouse_logL.pyx":12
  * 
  * ctypedef double FLOAT_t
  * ctypedef unsigned long SIZE_t             # <<<<<<<<<<<<<<
  * 
  * cdef FLOAT_t LOG_2PI = np.log(2*np.pi)
  */
-typedef unsigned long __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t;
+typedef unsigned long __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t;
 /* Declarations.proto */
 #if CYTHON_CCOMPLEX
   #ifdef __cplusplus
@@ -1370,7 +1370,7 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":729
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":729
  * ctypedef npy_longdouble longdouble_t
  * 
  * ctypedef npy_cfloat      cfloat_t             # <<<<<<<<<<<<<<
@@ -1379,7 +1379,7 @@ struct __pyx_memoryviewslice_obj;
  */
 typedef npy_cfloat __pyx_t_5numpy_cfloat_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":730
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":730
  * 
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t             # <<<<<<<<<<<<<<
@@ -1388,7 +1388,7 @@ typedef npy_cfloat __pyx_t_5numpy_cfloat_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":731
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":731
  * ctypedef npy_cfloat      cfloat_t
  * ctypedef npy_cdouble     cdouble_t
  * ctypedef npy_clongdouble clongdouble_t             # <<<<<<<<<<<<<<
@@ -1397,7 +1397,7 @@ typedef npy_cdouble __pyx_t_5numpy_cdouble_t;
  */
 typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":733
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":733
  * ctypedef npy_clongdouble clongdouble_t
  * 
  * ctypedef npy_cdouble     complex_t             # <<<<<<<<<<<<<<
@@ -2166,16 +2166,16 @@ static int __Pyx_ValidateAndInit_memviewslice(
                 PyObject *original_obj);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t(PyObject *, int writable_flag);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *, int writable_flag);
 
 /* RealImag.proto */
 #if CYTHON_CCOMPLEX
@@ -2292,21 +2292,21 @@ static CYTHON_INLINE unsigned long __Pyx_PyInt_As_unsigned_long(PyObject *);
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CopyContentsUtility.proto */
-#define __pyx_memoryview_copy_slice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t_c(slice)\
+#define __pyx_memoryview_copy_slice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t_c(slice)\
         __pyx_memoryview_copy_new_contig(&slice, "c", 2,\
-                                         sizeof(__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t), (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT),\
+                                         sizeof(__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t), (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT),\
                                          0)
 
 /* CopyContentsUtility.proto */
-#define __pyx_memoryview_copy_slice_dcd__nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t_f(slice)\
+#define __pyx_memoryview_copy_slice_dcd__nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t_f(slice)\
         __pyx_memoryview_copy_new_contig(&slice, "fortran", 2,\
-                                         sizeof(__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t), (PyBUF_F_CONTIGUOUS | PyBUF_FORMAT),\
+                                         sizeof(__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t), (PyBUF_F_CONTIGUOUS | PyBUF_FORMAT),\
                                          0)
 
 /* CopyContentsUtility.proto */
-#define __pyx_memoryview_copy_slice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t_c(slice)\
+#define __pyx_memoryview_copy_slice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t_c(slice)\
         __pyx_memoryview_copy_new_contig(&slice, "c", 1,\
-                                         sizeof(__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t), (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT),\
+                                         sizeof(__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t), (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT),\
                                          0)
 
 /* CIntFromPy.proto */
@@ -2396,12 +2396,12 @@ static void (*__pyx_f_5scipy_6linalg_11cython_blas_dger)(int *, int *, __pyx_t_5
 static void (*__pyx_f_5scipy_6linalg_11cython_blas_dscal)(int *, __pyx_t_5scipy_6linalg_11cython_blas_d *, __pyx_t_5scipy_6linalg_11cython_blas_d *, int *); /*proto*/
 static void (*__pyx_f_5scipy_6linalg_11cython_blas_dsymv)(char *, int *, __pyx_t_5scipy_6linalg_11cython_blas_d *, __pyx_t_5scipy_6linalg_11cython_blas_d *, int *, __pyx_t_5scipy_6linalg_11cython_blas_d *, int *, __pyx_t_5scipy_6linalg_11cython_blas_d *, __pyx_t_5scipy_6linalg_11cython_blas_d *, int *); /*proto*/
 
-/* Module declarations from 'bild.cython.MSRouse_logL' */
+/* Module declarations from 'bild.bin.MSRouse_logL' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
-static __pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t __pyx_v_4bild_6cython_12MSRouse_logL_LOG_2PI;
+static __pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t __pyx_v_4bild_3bin_12MSRouse_logL_LOG_2PI;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
 static PyObject *indirect = 0;
@@ -2409,7 +2409,7 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
+static void __pyx_f_4bild_3bin_12MSRouse_logL_Kalman_update(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 static CYTHON_INLINE PyObject *__Pyx_carray_to_py_Py_ssize_t(Py_ssize_t *, Py_ssize_t); /*proto*/
 static CYTHON_INLINE PyObject *__Pyx_carray_to_tuple_Py_ssize_t(Py_ssize_t *, Py_ssize_t); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
@@ -2445,13 +2445,13 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t = { "FLOAT_t", NULL, sizeof(__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t), { 0 }, 0, 'R', 0, 0 };
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t = { "SIZE_t", NULL, sizeof(__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t), 0 };
-#define __Pyx_MODULE_NAME "bild.cython.MSRouse_logL"
-extern int __pyx_module_is_main_bild__cython__MSRouse_logL;
-int __pyx_module_is_main_bild__cython__MSRouse_logL = 0;
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t = { "FLOAT_t", NULL, sizeof(__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t), { 0 }, 0, 'R', 0, 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t = { "SIZE_t", NULL, sizeof(__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t), 0 };
+#define __Pyx_MODULE_NAME "bild.bin.MSRouse_logL"
+extern int __pyx_module_is_main_bild__bin__MSRouse_logL;
+int __pyx_module_is_main_bild__bin__MSRouse_logL = 0;
 
-/* Implementation of 'bild.cython.MSRouse_logL' */
+/* Implementation of 'bild.bin.MSRouse_logL' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_enumerate;
 static PyObject *__pyx_builtin_ImportError;
@@ -2595,16 +2595,16 @@ static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
+static const char __pyx_k_bild_bin_MSRouse_logL[] = "bild.bin.MSRouse_logL";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
 static const char __pyx_k_py_localization_error[] = "py_localization_error";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
-static const char __pyx_k_bild_cython_MSRouse_logL[] = "bild.cython.MSRouse_logL";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
+static const char __pyx_k_bild_src_MSRouse_logL_pyx[] = "bild/src/MSRouse_logL.pyx";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
-static const char __pyx_k_bild_cython_MSRouse_logL_pyx[] = "bild/cython/MSRouse_logL.pyx";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
@@ -2671,8 +2671,8 @@ static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_astype;
 static PyObject *__pyx_n_s_axis;
 static PyObject *__pyx_n_s_base;
-static PyObject *__pyx_n_s_bild_cython_MSRouse_logL;
-static PyObject *__pyx_kp_s_bild_cython_MSRouse_logL_pyx;
+static PyObject *__pyx_n_s_bild_bin_MSRouse_logL;
+static PyObject *__pyx_kp_s_bild_src_MSRouse_logL_pyx;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_check_dynamics;
@@ -2785,7 +2785,7 @@ static PyObject *__pyx_n_s_valid_times;
 static PyObject *__pyx_n_s_w;
 static PyObject *__pyx_n_s_zero;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_model, PyObject *__pyx_v_profile, PyObject *__pyx_v_traj); /* proto */
+static PyObject *__pyx_pf_4bild_3bin_12MSRouse_logL_logL(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_model, PyObject *__pyx_v_profile, PyObject *__pyx_v_traj); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2871,7 +2871,7 @@ static PyObject *__pyx_codeobj__23;
 static PyObject *__pyx_codeobj__30;
 /* Late includes */
 
-/* "bild/cython/MSRouse_logL.pyx":19
+/* "bild/src/MSRouse_logL.pyx":19
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * cdef void Kalman_update(FLOAT_t[::1]       w,             # <<<<<<<<<<<<<<
@@ -2879,8 +2879,8 @@ static PyObject *__pyx_codeobj__30;
  *                         FLOAT_t[:, ::1]    M,
  */
 
-static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslice __pyx_v_w, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_M, __Pyx_memviewslice __pyx_v_C, __Pyx_memviewslice __pyx_v_s2, __Pyx_memviewslice __pyx_v_Cind, __Pyx_memviewslice __pyx_v_logL, __Pyx_memviewslice __pyx_v_xmm, __Pyx_memviewslice __pyx_v_K, __Pyx_memviewslice __pyx_v_Sinv, __Pyx_memviewslice __pyx_v_Cw) {
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_d;
+static void __pyx_f_4bild_3bin_12MSRouse_logL_Kalman_update(__Pyx_memviewslice __pyx_v_w, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_M, __Pyx_memviewslice __pyx_v_C, __Pyx_memviewslice __pyx_v_s2, __Pyx_memviewslice __pyx_v_Cind, __Pyx_memviewslice __pyx_v_logL, __Pyx_memviewslice __pyx_v_xmm, __Pyx_memviewslice __pyx_v_K, __Pyx_memviewslice __pyx_v_Sinv, __Pyx_memviewslice __pyx_v_Cw) {
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_d;
   int __pyx_v_inc;
   int __pyx_v_N;
   int __pyx_v_D;
@@ -2891,7 +2891,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_t_3;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_t_3;
   size_t __pyx_t_4;
   Py_ssize_t __pyx_t_5;
   Py_ssize_t __pyx_t_6;
@@ -2905,7 +2905,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   size_t __pyx_t_14;
   __Pyx_RefNannySetupContext("Kalman_update", 0);
 
-  /* "bild/cython/MSRouse_logL.pyx":50
+  /* "bild/src/MSRouse_logL.pyx":50
  *     """
  *     cdef SIZE_t d
  *     cdef int inc=1, N=M.shape[0], D=M.shape[1], Dstar=C.shape[0]             # <<<<<<<<<<<<<<
@@ -2917,7 +2917,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   __pyx_v_D = (__pyx_v_M.shape[1]);
   __pyx_v_Dstar = (__pyx_v_C.shape[0]);
 
-  /* "bild/cython/MSRouse_logL.pyx":51
+  /* "bild/src/MSRouse_logL.pyx":51
  *     cdef SIZE_t d
  *     cdef int inc=1, N=M.shape[0], D=M.shape[1], Dstar=C.shape[0]
  *     cdef double one=1., _one=-1., zero=0.             # <<<<<<<<<<<<<<
@@ -2928,7 +2928,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   __pyx_v__one = -1.;
   __pyx_v_zero = 0.;
 
-  /* "bild/cython/MSRouse_logL.pyx":53
+  /* "bild/src/MSRouse_logL.pyx":53
  *     cdef double one=1., _one=-1., zero=0.
  * 
  *     for d in range(Dstar):             # <<<<<<<<<<<<<<
@@ -2940,7 +2940,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_d = __pyx_t_3;
 
-    /* "bild/cython/MSRouse_logL.pyx":56
+    /* "bild/src/MSRouse_logL.pyx":56
  *         # Cw = C @ w
  *         dsymv("u", &N, &one,
  *               &C[d, 0, 0], &N,             # <<<<<<<<<<<<<<
@@ -2951,7 +2951,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_5 = 0;
     __pyx_t_6 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":57
+    /* "bild/src/MSRouse_logL.pyx":57
  *         dsymv("u", &N, &one,
  *               &C[d, 0, 0], &N,
  *               &w[0], &inc,             # <<<<<<<<<<<<<<
@@ -2960,7 +2960,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  */
     __pyx_t_7 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":58
+    /* "bild/src/MSRouse_logL.pyx":58
  *               &C[d, 0, 0], &N,
  *               &w[0], &inc,
  *               &zero, &Cw[d, 0], &inc,             # <<<<<<<<<<<<<<
@@ -2970,16 +2970,16 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_8 = __pyx_v_d;
     __pyx_t_9 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":55
+    /* "bild/src/MSRouse_logL.pyx":55
  *     for d in range(Dstar):
  *         # Cw = C @ w
  *         dsymv("u", &N, &one,             # <<<<<<<<<<<<<<
  *               &C[d, 0, 0], &N,
  *               &w[0], &inc,
  */
-    __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_4 * __pyx_v_C.strides[0]) ) + __pyx_t_5 * __pyx_v_C.strides[1]) )) + __pyx_t_6)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_7)) )))), (&__pyx_v_inc), (&__pyx_v_zero), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc));
+    __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_4 * __pyx_v_C.strides[0]) ) + __pyx_t_5 * __pyx_v_C.strides[1]) )) + __pyx_t_6)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_7)) )))), (&__pyx_v_inc), (&__pyx_v_zero), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc));
 
-    /* "bild/cython/MSRouse_logL.pyx":63
+    /* "bild/src/MSRouse_logL.pyx":63
  *         # S = Cw @ w + s2
  *         # we use Sinv = 1/S, since we have to multiply by 1/S next
  *         Sinv[d] = 1/( s2[d] + ddot(&N, &Cw[d, 0], &inc, &w[0], &inc) )             # <<<<<<<<<<<<<<
@@ -2991,9 +2991,9 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_9 = 0;
     __pyx_t_7 = 0;
     __pyx_t_10 = __pyx_v_d;
-    *((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_10)) )) = (1.0 / ((*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_s2.data) + __pyx_t_8)) ))) + __pyx_f_5scipy_6linalg_11cython_blas_ddot((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_4 * __pyx_v_Cw.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_7)) )))), (&__pyx_v_inc))));
+    *((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_10)) )) = (1.0 / ((*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_s2.data) + __pyx_t_8)) ))) + __pyx_f_5scipy_6linalg_11cython_blas_ddot((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_4 * __pyx_v_Cw.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_7)) )))), (&__pyx_v_inc))));
 
-    /* "bild/cython/MSRouse_logL.pyx":66
+    /* "bild/src/MSRouse_logL.pyx":66
  * 
  *         # K = Cw / S[:, None]
  *         dscal(&N, &zero, &K[d, 0], &inc) # initialize K[d] to zeros             # <<<<<<<<<<<<<<
@@ -3002,9 +3002,9 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  */
     __pyx_t_4 = __pyx_v_d;
     __pyx_t_7 = 0;
-    __pyx_f_5scipy_6linalg_11cython_blas_dscal((&__pyx_v_N), (&__pyx_v_zero), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_4 * __pyx_v_K.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc));
+    __pyx_f_5scipy_6linalg_11cython_blas_dscal((&__pyx_v_N), (&__pyx_v_zero), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_4 * __pyx_v_K.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc));
 
-    /* "bild/cython/MSRouse_logL.pyx":67
+    /* "bild/src/MSRouse_logL.pyx":67
  *         # K = Cw / S[:, None]
  *         dscal(&N, &zero, &K[d, 0], &inc) # initialize K[d] to zeros
  *         daxpy(&N, &Sinv[d], &Cw[d, 0], &inc, &K[d, 0], &inc)             # <<<<<<<<<<<<<<
@@ -3016,9 +3016,9 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_7 = 0;
     __pyx_t_10 = __pyx_v_d;
     __pyx_t_9 = 0;
-    __pyx_f_5scipy_6linalg_11cython_blas_daxpy((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_4)) )))), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc));
+    __pyx_f_5scipy_6linalg_11cython_blas_daxpy((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_4)) )))), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc));
 
-    /* "bild/cython/MSRouse_logL.pyx":72
+    /* "bild/src/MSRouse_logL.pyx":72
  *         # C is symmetric, thus C-order = F-order
  *         dger(&N, &N, &_one,
  *              &K[d, 0], &inc,             # <<<<<<<<<<<<<<
@@ -3028,7 +3028,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_10 = __pyx_v_d;
     __pyx_t_9 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":73
+    /* "bild/src/MSRouse_logL.pyx":73
  *         dger(&N, &N, &_one,
  *              &K[d, 0], &inc,
  *              &Cw[d, 0], &inc,             # <<<<<<<<<<<<<<
@@ -3038,7 +3038,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_8 = __pyx_v_d;
     __pyx_t_7 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":74
+    /* "bild/src/MSRouse_logL.pyx":74
  *              &K[d, 0], &inc,
  *              &Cw[d, 0], &inc,
  *              &C[d, 0, 0], &N,             # <<<<<<<<<<<<<<
@@ -3049,17 +3049,17 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_6 = 0;
     __pyx_t_5 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":71
+    /* "bild/src/MSRouse_logL.pyx":71
  *         # C -= K[:, :, None]*Cw[:, None, :]
  *         # C is symmetric, thus C-order = F-order
  *         dger(&N, &N, &_one,             # <<<<<<<<<<<<<<
  *              &K[d, 0], &inc,
  *              &Cw[d, 0], &inc,
  */
-    __pyx_f_5scipy_6linalg_11cython_blas_dger((&__pyx_v_N), (&__pyx_v_N), (&__pyx_v__one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_4 * __pyx_v_C.strides[0]) ) + __pyx_t_6 * __pyx_v_C.strides[1]) )) + __pyx_t_5)) )))), (&__pyx_v_N));
+    __pyx_f_5scipy_6linalg_11cython_blas_dger((&__pyx_v_N), (&__pyx_v_N), (&__pyx_v__one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_9)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_Cw.data + __pyx_t_8 * __pyx_v_Cw.strides[0]) )) + __pyx_t_7)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_4 * __pyx_v_C.strides[0]) ) + __pyx_t_6 * __pyx_v_C.strides[1]) )) + __pyx_t_5)) )))), (&__pyx_v_N));
   }
 
-  /* "bild/cython/MSRouse_logL.pyx":77
+  /* "bild/src/MSRouse_logL.pyx":77
  *              )
  * 
  *     for d in range(D):             # <<<<<<<<<<<<<<
@@ -3071,7 +3071,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_d = __pyx_t_3;
 
-    /* "bild/cython/MSRouse_logL.pyx":79
+    /* "bild/src/MSRouse_logL.pyx":79
  *     for d in range(D):
  *         # xmm = x - w @ M
  *         xmm[d] = x[d] - ddot(&N, &w[0], &inc, &M[0, d], &D)             # <<<<<<<<<<<<<<
@@ -3083,9 +3083,9 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_6 = 0;
     __pyx_t_8 = __pyx_v_d;
     __pyx_t_10 = __pyx_v_d;
-    *((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_10)) )) = ((*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_x.data) + __pyx_t_4)) ))) - __pyx_f_5scipy_6linalg_11cython_blas_ddot((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_5)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_6 * __pyx_v_M.strides[0]) )) + __pyx_t_8)) )))), (&__pyx_v_D)));
+    *((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_10)) )) = ((*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_x.data) + __pyx_t_4)) ))) - __pyx_f_5scipy_6linalg_11cython_blas_ddot((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_w.data) + __pyx_t_5)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_6 * __pyx_v_M.strides[0]) )) + __pyx_t_8)) )))), (&__pyx_v_D)));
 
-    /* "bild/cython/MSRouse_logL.pyx":82
+    /* "bild/src/MSRouse_logL.pyx":82
  * 
  *         # M += K[Cind].T * xmm[None, :]
  *         daxpy(&N, &xmm[d],             # <<<<<<<<<<<<<<
@@ -3094,7 +3094,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  */
     __pyx_t_8 = __pyx_v_d;
 
-    /* "bild/cython/MSRouse_logL.pyx":83
+    /* "bild/src/MSRouse_logL.pyx":83
  *         # M += K[Cind].T * xmm[None, :]
  *         daxpy(&N, &xmm[d],
  *               &K[Cind[d], 0], &inc,             # <<<<<<<<<<<<<<
@@ -3102,10 +3102,10 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  *               )
  */
     __pyx_t_4 = __pyx_v_d;
-    __pyx_t_10 = (*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_4)) )));
+    __pyx_t_10 = (*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_4)) )));
     __pyx_t_6 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":84
+    /* "bild/src/MSRouse_logL.pyx":84
  *         daxpy(&N, &xmm[d],
  *               &K[Cind[d], 0], &inc,
  *               &M[0, d], &D,             # <<<<<<<<<<<<<<
@@ -3115,16 +3115,16 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_5 = 0;
     __pyx_t_11 = __pyx_v_d;
 
-    /* "bild/cython/MSRouse_logL.pyx":82
+    /* "bild/src/MSRouse_logL.pyx":82
  * 
  *         # M += K[Cind].T * xmm[None, :]
  *         daxpy(&N, &xmm[d],             # <<<<<<<<<<<<<<
  *               &K[Cind[d], 0], &inc,
  *               &M[0, d], &D,
  */
-    __pyx_f_5scipy_6linalg_11cython_blas_daxpy((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_8)) )))), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_6)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_5 * __pyx_v_M.strides[0]) )) + __pyx_t_11)) )))), (&__pyx_v_D));
+    __pyx_f_5scipy_6linalg_11cython_blas_daxpy((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_8)) )))), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_K.data + __pyx_t_10 * __pyx_v_K.strides[0]) )) + __pyx_t_6)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_5 * __pyx_v_M.strides[0]) )) + __pyx_t_11)) )))), (&__pyx_v_D));
 
-    /* "bild/cython/MSRouse_logL.pyx":88
+    /* "bild/src/MSRouse_logL.pyx":88
  * 
  *         # Gaussian likelihood
  *         logL[d] = -0.5*( xmm[d]*xmm[d] * Sinv[Cind[d]] - log(Sinv[Cind[d]]) + LOG_2PI )             # <<<<<<<<<<<<<<
@@ -3134,14 +3134,14 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
     __pyx_t_11 = __pyx_v_d;
     __pyx_t_4 = __pyx_v_d;
     __pyx_t_10 = __pyx_v_d;
-    __pyx_t_8 = (*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_10)) )));
+    __pyx_t_8 = (*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_10)) )));
     __pyx_t_12 = __pyx_v_d;
-    __pyx_t_13 = (*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_12)) )));
+    __pyx_t_13 = (*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_Cind.data) + __pyx_t_12)) )));
     __pyx_t_14 = __pyx_v_d;
-    *((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_logL.data) + __pyx_t_14)) )) = (-0.5 * (((((*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_11)) ))) * (*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_4)) )))) * (*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_8)) )))) - log((*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_13)) ))))) + __pyx_v_4bild_6cython_12MSRouse_logL_LOG_2PI));
+    *((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_logL.data) + __pyx_t_14)) )) = (-0.5 * (((((*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_11)) ))) * (*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_xmm.data) + __pyx_t_4)) )))) * (*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_8)) )))) - log((*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_Sinv.data) + __pyx_t_13)) ))))) + __pyx_v_4bild_3bin_12MSRouse_logL_LOG_2PI));
   }
 
-  /* "bild/cython/MSRouse_logL.pyx":90
+  /* "bild/src/MSRouse_logL.pyx":90
  *         logL[d] = -0.5*( xmm[d]*xmm[d] * Sinv[Cind[d]] - log(Sinv[Cind[d]]) + LOG_2PI )
  * 
  *     return             # <<<<<<<<<<<<<<
@@ -3150,7 +3150,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  */
   goto __pyx_L0;
 
-  /* "bild/cython/MSRouse_logL.pyx":19
+  /* "bild/src/MSRouse_logL.pyx":19
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * cdef void Kalman_update(FLOAT_t[::1]       w,             # <<<<<<<<<<<<<<
@@ -3163,7 +3163,7 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bild/cython/MSRouse_logL.pyx":95
+/* "bild/src/MSRouse_logL.pyx":95
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * def logL(object model,   # bild.models.MultiStateModel             # <<<<<<<<<<<<<<
@@ -3172,9 +3172,9 @@ static void __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__Pyx_memviewslic
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4bild_6cython_12MSRouse_logL_1logL(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_4bild_6cython_12MSRouse_logL_1logL = {"logL", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4bild_6cython_12MSRouse_logL_1logL, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_4bild_6cython_12MSRouse_logL_1logL(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_4bild_3bin_12MSRouse_logL_1logL(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_4bild_3bin_12MSRouse_logL_1logL = {"logL", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_4bild_3bin_12MSRouse_logL_1logL, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4bild_3bin_12MSRouse_logL_1logL(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_model = 0;
   PyObject *__pyx_v_profile = 0;
   PyObject *__pyx_v_traj = 0;
@@ -3236,19 +3236,19 @@ static PyObject *__pyx_pw_4bild_6cython_12MSRouse_logL_1logL(PyObject *__pyx_sel
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("logL", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 95, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("bild.cython.MSRouse_logL.logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("bild.bin.MSRouse_logL.logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_4bild_6cython_12MSRouse_logL_logL(__pyx_self, __pyx_v_model, __pyx_v_profile, __pyx_v_traj);
+  __pyx_r = __pyx_pf_4bild_3bin_12MSRouse_logL_logL(__pyx_self, __pyx_v_model, __pyx_v_profile, __pyx_v_traj);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_model, PyObject *__pyx_v_profile, PyObject *__pyx_v_traj) {
-  __pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t __pyx_v_logL_total;
+static PyObject *__pyx_pf_4bild_3bin_12MSRouse_logL_logL(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_model, PyObject *__pyx_v_profile, PyObject *__pyx_v_traj) {
+  __pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t __pyx_v_logL_total;
   __Pyx_memviewslice __pyx_v_C = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_Bs = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_Gs = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -3261,11 +3261,11 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   __Pyx_memviewslice __pyx_v_BCn0 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_s2 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_w = { 0, 0, { 0 }, { 0 }, { 0 } };
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_i_write;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_t;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_state;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_n0;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_v_d;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_i_write;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_t;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_state;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_n0;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_v_d;
   __Pyx_memviewslice __pyx_v_Cind = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_states = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_valid_times = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -3311,9 +3311,9 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   size_t __pyx_t_18;
   __Pyx_memviewslice __pyx_t_19 = { 0, 0, { 0 }, { 0 }, { 0 } };
   Py_ssize_t __pyx_t_20;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_t_21;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_t_21;
   int __pyx_t_22;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_t_23;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_t_23;
   Py_ssize_t __pyx_t_24;
   size_t __pyx_t_25;
   Py_ssize_t __pyx_t_26;
@@ -3322,14 +3322,14 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   Py_ssize_t __pyx_t_29;
   Py_ssize_t __pyx_t_30;
   Py_ssize_t __pyx_t_31;
-  __pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t __pyx_t_32;
+  __pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t __pyx_t_32;
   int __pyx_t_33;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("logL", 0);
 
-  /* "bild/cython/MSRouse_logL.pyx":131
+  /* "bild/src/MSRouse_logL.pyx":131
  * 
  *     # localization errors
  *     py_localization_error = model._get_noise(traj)             # <<<<<<<<<<<<<<
@@ -3356,7 +3356,7 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   __pyx_v_py_localization_error = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":132
+  /* "bild/src/MSRouse_logL.pyx":132
  *     # localization errors
  *     py_localization_error = model._get_noise(traj)
  *     py_unique_errors, py_Cind = np.unique(py_localization_error, return_inverse=True)             # <<<<<<<<<<<<<<
@@ -3432,7 +3432,7 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   __pyx_v_py_Cind = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":133
+  /* "bild/src/MSRouse_logL.pyx":133
  *     py_localization_error = model._get_noise(traj)
  *     py_unique_errors, py_Cind = np.unique(py_localization_error, return_inverse=True)
  *     s2 = py_unique_errors**2             # <<<<<<<<<<<<<<
@@ -3441,13 +3441,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
  */
   __pyx_t_4 = PyNumber_Power(__pyx_v_py_unique_errors, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_s2 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":134
+  /* "bild/src/MSRouse_logL.pyx":134
  *     py_unique_errors, py_Cind = np.unique(py_localization_error, return_inverse=True)
  *     s2 = py_unique_errors**2
  *     Cind = py_Cind.astype(np.uint)             # <<<<<<<<<<<<<<
@@ -3477,13 +3477,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Cind = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":137
+  /* "bild/src/MSRouse_logL.pyx":137
  * 
  *     # individual Rouse models and propagation dynamics
  *     w = model.measurement             # <<<<<<<<<<<<<<
@@ -3492,13 +3492,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
  */
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_model, __pyx_n_s_measurement); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_w = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":139
+  /* "bild/src/MSRouse_logL.pyx":139
  *     w = model.measurement
  * 
  *     for py_state, py_m in enumerate(model.models):             # <<<<<<<<<<<<<<
@@ -3559,7 +3559,7 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
     __pyx_t_4 = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":140
+    /* "bild/src/MSRouse_logL.pyx":140
  * 
  *     for py_state, py_m in enumerate(model.models):
  *         py_m.check_dynamics()             # <<<<<<<<<<<<<<
@@ -3585,7 +3585,7 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":139
+    /* "bild/src/MSRouse_logL.pyx":139
  *     w = model.measurement
  * 
  *     for py_state, py_m in enumerate(model.models):             # <<<<<<<<<<<<<<
@@ -3596,7 +3596,7 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":142
+  /* "bild/src/MSRouse_logL.pyx":142
  *         py_m.check_dynamics()
  * 
  *     Bs   = np.array([m._dynamics['B']   for m in model.models])             # <<<<<<<<<<<<<<
@@ -3687,13 +3687,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Bs = __pyx_t_12;
   __pyx_t_12.memview = NULL;
   __pyx_t_12.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":143
+  /* "bild/src/MSRouse_logL.pyx":143
  * 
  *     Bs   = np.array([m._dynamics['B']   for m in model.models])
  *     Gs   = np.array([m._dynamics['G']   for m in model.models])             # <<<<<<<<<<<<<<
@@ -3784,13 +3784,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Gs = __pyx_t_12;
   __pyx_t_12.memview = NULL;
   __pyx_t_12.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":144
+  /* "bild/src/MSRouse_logL.pyx":144
  *     Bs   = np.array([m._dynamics['B']   for m in model.models])
  *     Gs   = np.array([m._dynamics['G']   for m in model.models])
  *     Sigs = np.array([m._dynamics['Sig'] for m in model.models])             # <<<<<<<<<<<<<<
@@ -3881,13 +3881,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 144, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Sigs = __pyx_t_12;
   __pyx_t_12.memview = NULL;
   __pyx_t_12.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":147
+  /* "bild/src/MSRouse_logL.pyx":147
  * 
  *     # initial condition (steady state)
  *     py_M, py_C_single = model.models[profile[0]].steady_state()             # <<<<<<<<<<<<<<
@@ -3971,19 +3971,19 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
   __pyx_v_py_C_single = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":149
+  /* "bild/src/MSRouse_logL.pyx":149
  *     py_M, py_C_single = model.models[profile[0]].steady_state()
  * 
  *     M = py_M             # <<<<<<<<<<<<<<
  *     C = np.tile(py_C_single, (len(py_unique_errors), 1, 1))
  * 
  */
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_v_py_M, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_v_py_M, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 149, __pyx_L1_error)
   __pyx_v_M = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":150
+  /* "bild/src/MSRouse_logL.pyx":150
  * 
  *     M = py_M
  *     C = np.tile(py_C_single, (len(py_unique_errors), 1, 1))             # <<<<<<<<<<<<<<
@@ -4056,13 +4056,13 @@ static PyObject *__pyx_pf_4bild_6cython_12MSRouse_logL_logL(CYTHON_UNUSED PyObje
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_C = __pyx_t_12;
   __pyx_t_12.memview = NULL;
   __pyx_t_12.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":152
+  /* "bild/src/MSRouse_logL.pyx":152
  *     C = np.tile(py_C_single, (len(py_unique_errors), 1, 1))
  * 
  *     assert tuple(M.shape) == tuple(Gs[0].shape)             # <<<<<<<<<<<<<<
@@ -4113,7 +4113,7 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   }
   #endif
 
-  /* "bild/cython/MSRouse_logL.pyx":153
+  /* "bild/src/MSRouse_logL.pyx":153
  * 
  *     assert tuple(M.shape) == tuple(Gs[0].shape)
  *     assert tuple(C[0].shape) == tuple(Sigs[0].shape)             # <<<<<<<<<<<<<<
@@ -4184,7 +4184,7 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   }
   #endif
 
-  /* "bild/cython/MSRouse_logL.pyx":155
+  /* "bild/src/MSRouse_logL.pyx":155
  *     assert tuple(C[0].shape) == tuple(Sigs[0].shape)
  * 
  *     Kalman_Cw = np.empty((C.shape[0], C.shape[1]), dtype=float)             # <<<<<<<<<<<<<<
@@ -4221,37 +4221,37 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 155, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Kalman_Cw = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":156
+  /* "bild/src/MSRouse_logL.pyx":156
  * 
  *     Kalman_Cw = np.empty((C.shape[0], C.shape[1]), dtype=float)
  *     Kalman_K = Kalman_Cw.copy()             # <<<<<<<<<<<<<<
  *     Kalman_Sinv = s2.copy()
  *     Kalman_xmm = traj[0].copy()
  */
-  __pyx_t_13 = __pyx_memoryview_copy_slice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t_c(__pyx_v_Kalman_Cw); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __pyx_t_13 = __pyx_memoryview_copy_slice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t_c(__pyx_v_Kalman_Cw); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 156, __pyx_L1_error)
   __pyx_v_Kalman_K = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":157
+  /* "bild/src/MSRouse_logL.pyx":157
  *     Kalman_Cw = np.empty((C.shape[0], C.shape[1]), dtype=float)
  *     Kalman_K = Kalman_Cw.copy()
  *     Kalman_Sinv = s2.copy()             # <<<<<<<<<<<<<<
  *     Kalman_xmm = traj[0].copy()
  * 
  */
-  __pyx_t_6 = __pyx_memoryview_copy_slice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t_c(__pyx_v_s2); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_copy_slice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t_c(__pyx_v_s2); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 157, __pyx_L1_error)
   __pyx_v_Kalman_Sinv = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":158
+  /* "bild/src/MSRouse_logL.pyx":158
  *     Kalman_K = Kalman_Cw.copy()
  *     Kalman_Sinv = s2.copy()
  *     Kalman_xmm = traj[0].copy()             # <<<<<<<<<<<<<<
@@ -4278,13 +4278,13 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 158, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_Kalman_xmm = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":161
+  /* "bild/src/MSRouse_logL.pyx":161
  * 
  *     # Get trajectory and profile data to C
  *     trajdat = traj[:]             # <<<<<<<<<<<<<<
@@ -4293,13 +4293,13 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
  */
   __pyx_t_4 = __Pyx_PyObject_GetSlice(__pyx_v_traj, 0, 0, NULL, NULL, &__pyx_slice_, 0, 0, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_trajdat = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":162
+  /* "bild/src/MSRouse_logL.pyx":162
  *     # Get trajectory and profile data to C
  *     trajdat = traj[:]
  *     states = profile[:].astype(np.uint)             # <<<<<<<<<<<<<<
@@ -4332,13 +4332,13 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 162, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_states = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":165
+  /* "bild/src/MSRouse_logL.pyx":165
  * 
  *     # Find the times for which we have data
  *     valid_times = np.nonzero(~np.any(np.isnan(traj[:]), axis=1))[0].astype(np.uint)             # <<<<<<<<<<<<<<
@@ -4437,13 +4437,13 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_valid_times = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":168
+  /* "bild/src/MSRouse_logL.pyx":168
  * 
  *     # Initialize output
  *     logL_total = 0.             # <<<<<<<<<<<<<<
@@ -4452,7 +4452,7 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
  */
   __pyx_v_logL_total = 0.;
 
-  /* "bild/cython/MSRouse_logL.pyx":169
+  /* "bild/src/MSRouse_logL.pyx":169
  *     # Initialize output
  *     logL_total = 0.
  *     logL = np.empty((valid_times.shape[0], model.d), dtype=float)             # <<<<<<<<<<<<<<
@@ -4489,13 +4489,13 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 169, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_4, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_logL = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":170
+  /* "bild/src/MSRouse_logL.pyx":170
  *     logL_total = 0.
  *     logL = np.empty((valid_times.shape[0], model.d), dtype=float)
  *     i_write = 0             # <<<<<<<<<<<<<<
@@ -4504,7 +4504,7 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
  */
   __pyx_v_i_write = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":173
+  /* "bild/src/MSRouse_logL.pyx":173
  * 
  *     # Get likelihood from first data point in steady state
  *     if valid_times[i_write] == 0:             # <<<<<<<<<<<<<<
@@ -4512,10 +4512,10 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
  *                       logL[i_write], Kalman_xmm, Kalman_K, Kalman_Sinv, Kalman_Cw,
  */
   __pyx_t_18 = __pyx_v_i_write;
-  __pyx_t_15 = (((*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_valid_times.data) + __pyx_t_18)) ))) == 0) != 0);
+  __pyx_t_15 = (((*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_valid_times.data) + __pyx_t_18)) ))) == 0) != 0);
   if (__pyx_t_15) {
 
-    /* "bild/cython/MSRouse_logL.pyx":174
+    /* "bild/src/MSRouse_logL.pyx":174
  *     # Get likelihood from first data point in steady state
  *     if valid_times[i_write] == 0:
  *         Kalman_update(w, np.zeros(traj.d, dtype=float), M, C, s2, Cind,             # <<<<<<<<<<<<<<
@@ -4542,10 +4542,10 @@ __pyx_t_4 = __Pyx_carray_to_py_Py_ssize_t(__pyx_t_13.shape, 8); if (unlikely(!__
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 174, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "bild/cython/MSRouse_logL.pyx":175
+    /* "bild/src/MSRouse_logL.pyx":175
  *     if valid_times[i_write] == 0:
  *         Kalman_update(w, np.zeros(traj.d, dtype=float), M, C, s2, Cind,
  *                       logL[i_write], Kalman_xmm, Kalman_K, Kalman_Sinv, Kalman_Cw,             # <<<<<<<<<<<<<<
@@ -4565,9 +4565,9 @@ __pyx_t_19.shape[0] = __pyx_v_logL.shape[1];
 __pyx_t_19.strides[0] = __pyx_v_logL.strides[1];
     __pyx_t_19.suboffsets[0] = -1;
 
-__pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v_M, __pyx_v_C, __pyx_v_s2, __pyx_v_Cind, __pyx_t_19, __pyx_v_Kalman_xmm, __pyx_v_Kalman_K, __pyx_v_Kalman_Sinv, __pyx_v_Kalman_Cw);
+__pyx_f_4bild_3bin_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v_M, __pyx_v_C, __pyx_v_s2, __pyx_v_Cind, __pyx_t_19, __pyx_v_Kalman_xmm, __pyx_v_Kalman_K, __pyx_v_Kalman_Sinv, __pyx_v_Kalman_Cw);
 
-    /* "bild/cython/MSRouse_logL.pyx":174
+    /* "bild/src/MSRouse_logL.pyx":174
  *     # Get likelihood from first data point in steady state
  *     if valid_times[i_write] == 0:
  *         Kalman_update(w, np.zeros(traj.d, dtype=float), M, C, s2, Cind,             # <<<<<<<<<<<<<<
@@ -4581,7 +4581,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
     __pyx_t_19.memview = NULL;
     __pyx_t_19.data = NULL;
 
-    /* "bild/cython/MSRouse_logL.pyx":178
+    /* "bild/src/MSRouse_logL.pyx":178
  *                       )
  * 
  *         i_write += 1             # <<<<<<<<<<<<<<
@@ -4590,7 +4590,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  */
     __pyx_v_i_write = (__pyx_v_i_write + 1);
 
-    /* "bild/cython/MSRouse_logL.pyx":173
+    /* "bild/src/MSRouse_logL.pyx":173
  * 
  *     # Get likelihood from first data point in steady state
  *     if valid_times[i_write] == 0:             # <<<<<<<<<<<<<<
@@ -4599,7 +4599,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  */
   }
 
-  /* "bild/cython/MSRouse_logL.pyx":181
+  /* "bild/src/MSRouse_logL.pyx":181
  * 
  *     # sizes and factors for BLAS
  *     cdef int inc=1, N=M.shape[0], D=M.shape[1], Dstar=C.shape[0]             # <<<<<<<<<<<<<<
@@ -4611,7 +4611,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   __pyx_v_D = (__pyx_v_M.shape[1]);
   __pyx_v_Dstar = (__pyx_v_C.shape[0]);
 
-  /* "bild/cython/MSRouse_logL.pyx":182
+  /* "bild/src/MSRouse_logL.pyx":182
  *     # sizes and factors for BLAS
  *     cdef int inc=1, N=M.shape[0], D=M.shape[1], Dstar=C.shape[0]
  *     cdef double one=1., zero=0.             # <<<<<<<<<<<<<<
@@ -4621,7 +4621,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   __pyx_v_one = 1.;
   __pyx_v_zero = 0.;
 
-  /* "bild/cython/MSRouse_logL.pyx":185
+  /* "bild/src/MSRouse_logL.pyx":185
  * 
  *     # Initialize temp variables for matrix multiplications
  *     M_post = np.empty((N, D), dtype=float)             # <<<<<<<<<<<<<<
@@ -4658,13 +4658,13 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_M_post = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":186
+  /* "bild/src/MSRouse_logL.pyx":186
  *     # Initialize temp variables for matrix multiplications
  *     M_post = np.empty((N, D), dtype=float)
  *     C_post = np.empty((N, N), dtype=float)             # <<<<<<<<<<<<<<
@@ -4701,13 +4701,13 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_13.memview)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_C_post = __pyx_t_13;
   __pyx_t_13.memview = NULL;
   __pyx_t_13.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":187
+  /* "bild/src/MSRouse_logL.pyx":187
  *     M_post = np.empty((N, D), dtype=float)
  *     C_post = np.empty((N, N), dtype=float)
  *     BCn0   = np.empty((N,),   dtype=float)             # <<<<<<<<<<<<<<
@@ -4739,13 +4739,13 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_19 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(__pyx_t_10, PyBUF_WRITABLE); if (unlikely(!__pyx_t_19.memview)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(__pyx_t_10, PyBUF_WRITABLE); if (unlikely(!__pyx_t_19.memview)) __PYX_ERR(0, 187, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_v_BCn0 = __pyx_t_19;
   __pyx_t_19.memview = NULL;
   __pyx_t_19.data = NULL;
 
-  /* "bild/cython/MSRouse_logL.pyx":191
+  /* "bild/src/MSRouse_logL.pyx":191
  *     ### Kalman filtering loop ###
  *     # Runtime critical, should be pure C
  *     for t in range(1, states.shape[0]):             # <<<<<<<<<<<<<<
@@ -4757,7 +4757,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
   for (__pyx_t_21 = 1; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
     __pyx_v_t = __pyx_t_21;
 
-    /* "bild/cython/MSRouse_logL.pyx":192
+    /* "bild/src/MSRouse_logL.pyx":192
  *     # Runtime critical, should be pure C
  *     for t in range(1, states.shape[0]):
  *         state = states[t]             # <<<<<<<<<<<<<<
@@ -4765,9 +4765,9 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  *         for d in range(D):
  */
     __pyx_t_18 = __pyx_v_t;
-    __pyx_v_state = (*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_states.data) + __pyx_t_18)) )));
+    __pyx_v_state = (*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_states.data) + __pyx_t_18)) )));
 
-    /* "bild/cython/MSRouse_logL.pyx":194
+    /* "bild/src/MSRouse_logL.pyx":194
  *         state = states[t]
  * 
  *         for d in range(D):             # <<<<<<<<<<<<<<
@@ -4779,7 +4779,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
     for (__pyx_t_23 = 0; __pyx_t_23 < __pyx_t_22; __pyx_t_23+=1) {
       __pyx_v_d = __pyx_t_23;
 
-      /* "bild/cython/MSRouse_logL.pyx":197
+      /* "bild/src/MSRouse_logL.pyx":197
  *             # M <-- B @ M + G
  *             # B is symmetric, thus C-order = F-order
  *             dcopy(&N, &Gs[state, 0, d], &D, &M_post[0, d], &D)             # <<<<<<<<<<<<<<
@@ -4791,9 +4791,9 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
       __pyx_t_25 = __pyx_v_d;
       __pyx_t_26 = 0;
       __pyx_t_27 = __pyx_v_d;
-      __pyx_f_5scipy_6linalg_11cython_blas_dcopy((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Gs.data + __pyx_t_18 * __pyx_v_Gs.strides[0]) ) + __pyx_t_24 * __pyx_v_Gs.strides[1]) )) + __pyx_t_25)) )))), (&__pyx_v_D), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M_post.data + __pyx_t_26 * __pyx_v_M_post.strides[0]) )) + __pyx_t_27)) )))), (&__pyx_v_D));
+      __pyx_f_5scipy_6linalg_11cython_blas_dcopy((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Gs.data + __pyx_t_18 * __pyx_v_Gs.strides[0]) ) + __pyx_t_24 * __pyx_v_Gs.strides[1]) )) + __pyx_t_25)) )))), (&__pyx_v_D), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M_post.data + __pyx_t_26 * __pyx_v_M_post.strides[0]) )) + __pyx_t_27)) )))), (&__pyx_v_D));
 
-      /* "bild/cython/MSRouse_logL.pyx":199
+      /* "bild/src/MSRouse_logL.pyx":199
  *             dcopy(&N, &Gs[state, 0, d], &D, &M_post[0, d], &D)
  *             dsymv("u", &N, &one,
  *                   &Bs[state, 0, 0], &N,             # <<<<<<<<<<<<<<
@@ -4804,7 +4804,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
       __pyx_t_26 = 0;
       __pyx_t_24 = 0;
 
-      /* "bild/cython/MSRouse_logL.pyx":200
+      /* "bild/src/MSRouse_logL.pyx":200
  *             dsymv("u", &N, &one,
  *                   &Bs[state, 0, 0], &N,
  *                   &M[0, d], &D,             # <<<<<<<<<<<<<<
@@ -4814,7 +4814,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
       __pyx_t_28 = 0;
       __pyx_t_25 = __pyx_v_d;
 
-      /* "bild/cython/MSRouse_logL.pyx":201
+      /* "bild/src/MSRouse_logL.pyx":201
  *                   &Bs[state, 0, 0], &N,
  *                   &M[0, d], &D,
  *                   &one, &M_post[0, d], &D,             # <<<<<<<<<<<<<<
@@ -4824,17 +4824,17 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
       __pyx_t_29 = 0;
       __pyx_t_18 = __pyx_v_d;
 
-      /* "bild/cython/MSRouse_logL.pyx":198
+      /* "bild/src/MSRouse_logL.pyx":198
  *             # B is symmetric, thus C-order = F-order
  *             dcopy(&N, &Gs[state, 0, d], &D, &M_post[0, d], &D)
  *             dsymv("u", &N, &one,             # <<<<<<<<<<<<<<
  *                   &Bs[state, 0, 0], &N,
  *                   &M[0, d], &D,
  */
-      __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_27 * __pyx_v_Bs.strides[0]) ) + __pyx_t_26 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_28 * __pyx_v_M.strides[0]) )) + __pyx_t_25)) )))), (&__pyx_v_D), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M_post.data + __pyx_t_29 * __pyx_v_M_post.strides[0]) )) + __pyx_t_18)) )))), (&__pyx_v_D));
+      __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_27 * __pyx_v_Bs.strides[0]) ) + __pyx_t_26 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M.data + __pyx_t_28 * __pyx_v_M.strides[0]) )) + __pyx_t_25)) )))), (&__pyx_v_D), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_M_post.data + __pyx_t_29 * __pyx_v_M_post.strides[0]) )) + __pyx_t_18)) )))), (&__pyx_v_D));
     }
 
-    /* "bild/cython/MSRouse_logL.pyx":204
+    /* "bild/src/MSRouse_logL.pyx":204
  *                   )
  * 
  *         M[...] = M_post             # <<<<<<<<<<<<<<
@@ -4843,7 +4843,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  */
     if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_M_post, __pyx_v_M, 2, 2, 0) < 0)) __PYX_ERR(0, 204, __pyx_L1_error)
 
-    /* "bild/cython/MSRouse_logL.pyx":208
+    /* "bild/src/MSRouse_logL.pyx":208
  *         # C <-- B @ C @ B + Sig
  *         # calculate as: Sig + (B @ C) @ B
  *         for d in range(Dstar):             # <<<<<<<<<<<<<<
@@ -4855,7 +4855,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
     for (__pyx_t_23 = 0; __pyx_t_23 < __pyx_t_22; __pyx_t_23+=1) {
       __pyx_v_d = __pyx_t_23;
 
-      /* "bild/cython/MSRouse_logL.pyx":209
+      /* "bild/src/MSRouse_logL.pyx":209
  *         # calculate as: Sig + (B @ C) @ B
  *         for d in range(Dstar):
  *             for n0 in range(C.shape[1]):             # <<<<<<<<<<<<<<
@@ -4867,7 +4867,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
       for (__pyx_t_32 = 0; __pyx_t_32 < __pyx_t_31; __pyx_t_32+=1) {
         __pyx_v_n0 = __pyx_t_32;
 
-        /* "bild/cython/MSRouse_logL.pyx":211
+        /* "bild/src/MSRouse_logL.pyx":211
  *             for n0 in range(C.shape[1]):
  *                 # C_post = Sig
  *                 dcopy(&N, &Sigs[state, n0, 0], &inc, &C_post[n0, 0], &inc)             # <<<<<<<<<<<<<<
@@ -4879,9 +4879,9 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
         __pyx_t_29 = 0;
         __pyx_t_27 = __pyx_v_n0;
         __pyx_t_28 = 0;
-        __pyx_f_5scipy_6linalg_11cython_blas_dcopy((&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Sigs.data + __pyx_t_18 * __pyx_v_Sigs.strides[0]) ) + __pyx_t_25 * __pyx_v_Sigs.strides[1]) )) + __pyx_t_29)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_C_post.data + __pyx_t_27 * __pyx_v_C_post.strides[0]) )) + __pyx_t_28)) )))), (&__pyx_v_inc));
+        __pyx_f_5scipy_6linalg_11cython_blas_dcopy((&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Sigs.data + __pyx_t_18 * __pyx_v_Sigs.strides[0]) ) + __pyx_t_25 * __pyx_v_Sigs.strides[1]) )) + __pyx_t_29)) )))), (&__pyx_v_inc), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_C_post.data + __pyx_t_27 * __pyx_v_C_post.strides[0]) )) + __pyx_t_28)) )))), (&__pyx_v_inc));
 
-        /* "bild/cython/MSRouse_logL.pyx":216
+        /* "bild/src/MSRouse_logL.pyx":216
  *                 # C is symmetric, thus C-order = F-order
  *                 dsymv("u", &N, &one,
  *                       &C[d, 0, 0], &N,             # <<<<<<<<<<<<<<
@@ -4892,7 +4892,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
         __pyx_t_28 = 0;
         __pyx_t_29 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":217
+        /* "bild/src/MSRouse_logL.pyx":217
  *                 dsymv("u", &N, &one,
  *                       &C[d, 0, 0], &N,
  *                       &Bs[state, n0, 0], &inc,             # <<<<<<<<<<<<<<
@@ -4903,7 +4903,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
         __pyx_t_18 = __pyx_v_n0;
         __pyx_t_24 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":218
+        /* "bild/src/MSRouse_logL.pyx":218
  *                       &C[d, 0, 0], &N,
  *                       &Bs[state, n0, 0], &inc,
  *                       &zero, &BCn0[0], &inc,             # <<<<<<<<<<<<<<
@@ -4912,16 +4912,16 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  */
         __pyx_t_26 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":215
+        /* "bild/src/MSRouse_logL.pyx":215
  *                 # BCn0[:] = B[n0, :] @ C[d, :, :]
  *                 # C is symmetric, thus C-order = F-order
  *                 dsymv("u", &N, &one,             # <<<<<<<<<<<<<<
  *                       &C[d, 0, 0], &N,
  *                       &Bs[state, n0, 0], &inc,
  */
-        __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_27 * __pyx_v_C.strides[0]) ) + __pyx_t_28 * __pyx_v_C.strides[1]) )) + __pyx_t_29)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_25 * __pyx_v_Bs.strides[0]) ) + __pyx_t_18 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_inc), (&__pyx_v_zero), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_BCn0.data) + __pyx_t_26)) )))), (&__pyx_v_inc));
+        __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_C.data + __pyx_t_27 * __pyx_v_C.strides[0]) ) + __pyx_t_28 * __pyx_v_C.strides[1]) )) + __pyx_t_29)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_25 * __pyx_v_Bs.strides[0]) ) + __pyx_t_18 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_inc), (&__pyx_v_zero), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_BCn0.data) + __pyx_t_26)) )))), (&__pyx_v_inc));
 
-        /* "bild/cython/MSRouse_logL.pyx":224
+        /* "bild/src/MSRouse_logL.pyx":224
  *                 # B is symmetric, thus C-order = F-order
  *                 dsymv("u", &N, &one,
  *                       &Bs[state, 0, 0], &N,             # <<<<<<<<<<<<<<
@@ -4932,7 +4932,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
         __pyx_t_26 = 0;
         __pyx_t_24 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":225
+        /* "bild/src/MSRouse_logL.pyx":225
  *                 dsymv("u", &N, &one,
  *                       &Bs[state, 0, 0], &N,
  *                       &BCn0[0], &inc,             # <<<<<<<<<<<<<<
@@ -4941,7 +4941,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
  */
         __pyx_t_29 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":226
+        /* "bild/src/MSRouse_logL.pyx":226
  *                       &Bs[state, 0, 0], &N,
  *                       &BCn0[0], &inc,
  *                       &one, &C_post[n0, 0], &inc,             # <<<<<<<<<<<<<<
@@ -4951,17 +4951,17 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_6, __pyx_v
         __pyx_t_25 = __pyx_v_n0;
         __pyx_t_28 = 0;
 
-        /* "bild/cython/MSRouse_logL.pyx":223
+        /* "bild/src/MSRouse_logL.pyx":223
  *                 # C_post[n0, :] += BCn0[:] @ Bs[state, :, :]
  *                 # B is symmetric, thus C-order = F-order
  *                 dsymv("u", &N, &one,             # <<<<<<<<<<<<<<
  *                       &Bs[state, 0, 0], &N,
  *                       &BCn0[0], &inc,
  */
-        __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_18 * __pyx_v_Bs.strides[0]) ) + __pyx_t_26 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) __pyx_v_BCn0.data) + __pyx_t_29)) )))), (&__pyx_v_inc), (&__pyx_v_one), (&(*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_C_post.data + __pyx_t_25 * __pyx_v_C_post.strides[0]) )) + __pyx_t_28)) )))), (&__pyx_v_inc));
+        __pyx_f_5scipy_6linalg_11cython_blas_dsymv(((char *)"u"), (&__pyx_v_N), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=2 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_Bs.data + __pyx_t_18 * __pyx_v_Bs.strides[0]) ) + __pyx_t_26 * __pyx_v_Bs.strides[1]) )) + __pyx_t_24)) )))), (&__pyx_v_N), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) __pyx_v_BCn0.data) + __pyx_t_29)) )))), (&__pyx_v_inc), (&__pyx_v_one), (&(*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_C_post.data + __pyx_t_25 * __pyx_v_C_post.strides[0]) )) + __pyx_t_28)) )))), (&__pyx_v_inc));
       }
 
-      /* "bild/cython/MSRouse_logL.pyx":229
+      /* "bild/src/MSRouse_logL.pyx":229
  *                       )
  * 
  *             C[d, ...] = C_post             # <<<<<<<<<<<<<<
@@ -4991,7 +4991,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_C_post, __pyx_t_13, 2, 2, 0)
       __pyx_t_13.data = NULL;
     }
 
-    /* "bild/cython/MSRouse_logL.pyx":232
+    /* "bild/src/MSRouse_logL.pyx":232
  * 
  *         # Kalman update
  *         if i_write < valid_times.shape[0] and t == valid_times[i_write]:             # <<<<<<<<<<<<<<
@@ -5005,12 +5005,12 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_C_post, __pyx_t_13, 2, 2, 0)
       goto __pyx_L37_bool_binop_done;
     }
     __pyx_t_25 = __pyx_v_i_write;
-    __pyx_t_33 = ((__pyx_v_t == (*((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t *) __pyx_v_valid_times.data) + __pyx_t_25)) )))) != 0);
+    __pyx_t_33 = ((__pyx_v_t == (*((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) ( /* dim=0 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t *) __pyx_v_valid_times.data) + __pyx_t_25)) )))) != 0);
     __pyx_t_15 = __pyx_t_33;
     __pyx_L37_bool_binop_done:;
     if (__pyx_t_15) {
 
-      /* "bild/cython/MSRouse_logL.pyx":233
+      /* "bild/src/MSRouse_logL.pyx":233
  *         # Kalman update
  *         if i_write < valid_times.shape[0] and t == valid_times[i_write]:
  *             Kalman_update(w, trajdat[t], M, C, s2, Cind,             # <<<<<<<<<<<<<<
@@ -5032,7 +5032,7 @@ __pyx_t_19.strides[0] = __pyx_v_trajdat.strides[1];
 
 __pyx_t_6.data = __pyx_v_logL.data;
 
-      /* "bild/cython/MSRouse_logL.pyx":234
+      /* "bild/src/MSRouse_logL.pyx":234
  *         if i_write < valid_times.shape[0] and t == valid_times[i_write]:
  *             Kalman_update(w, trajdat[t], M, C, s2, Cind,
  *                           logL[i_write], Kalman_xmm, Kalman_K, Kalman_Sinv, Kalman_Cw,             # <<<<<<<<<<<<<<
@@ -5051,9 +5051,9 @@ __pyx_t_6.shape[0] = __pyx_v_logL.shape[1];
 __pyx_t_6.strides[0] = __pyx_v_logL.strides[1];
     __pyx_t_6.suboffsets[0] = -1;
 
-__pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_v_M, __pyx_v_C, __pyx_v_s2, __pyx_v_Cind, __pyx_t_6, __pyx_v_Kalman_xmm, __pyx_v_Kalman_K, __pyx_v_Kalman_Sinv, __pyx_v_Kalman_Cw);
+__pyx_f_4bild_3bin_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_v_M, __pyx_v_C, __pyx_v_s2, __pyx_v_Cind, __pyx_t_6, __pyx_v_Kalman_xmm, __pyx_v_Kalman_K, __pyx_v_Kalman_Sinv, __pyx_v_Kalman_Cw);
 
-      /* "bild/cython/MSRouse_logL.pyx":233
+      /* "bild/src/MSRouse_logL.pyx":233
  *         # Kalman update
  *         if i_write < valid_times.shape[0] and t == valid_times[i_write]:
  *             Kalman_update(w, trajdat[t], M, C, s2, Cind,             # <<<<<<<<<<<<<<
@@ -5067,7 +5067,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
       __pyx_t_6.memview = NULL;
       __pyx_t_6.data = NULL;
 
-      /* "bild/cython/MSRouse_logL.pyx":236
+      /* "bild/src/MSRouse_logL.pyx":236
  *                           logL[i_write], Kalman_xmm, Kalman_K, Kalman_Sinv, Kalman_Cw,
  *                           )
  *             i_write += 1             # <<<<<<<<<<<<<<
@@ -5076,7 +5076,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
  */
       __pyx_v_i_write = (__pyx_v_i_write + 1);
 
-      /* "bild/cython/MSRouse_logL.pyx":232
+      /* "bild/src/MSRouse_logL.pyx":232
  * 
  *         # Kalman update
  *         if i_write < valid_times.shape[0] and t == valid_times[i_write]:             # <<<<<<<<<<<<<<
@@ -5086,7 +5086,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
     }
   }
 
-  /* "bild/cython/MSRouse_logL.pyx":239
+  /* "bild/src/MSRouse_logL.pyx":239
  * 
  *     # Sum everything and return
  *     logL_total = 0.             # <<<<<<<<<<<<<<
@@ -5095,7 +5095,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
  */
   __pyx_v_logL_total = 0.;
 
-  /* "bild/cython/MSRouse_logL.pyx":240
+  /* "bild/src/MSRouse_logL.pyx":240
  *     # Sum everything and return
  *     logL_total = 0.
  *     for d in range(logL.shape[0]):             # <<<<<<<<<<<<<<
@@ -5107,7 +5107,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
   for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
     __pyx_v_d = __pyx_t_21;
 
-    /* "bild/cython/MSRouse_logL.pyx":241
+    /* "bild/src/MSRouse_logL.pyx":241
  *     logL_total = 0.
  *     for d in range(logL.shape[0]):
  *         for t in range(logL.shape[1]):             # <<<<<<<<<<<<<<
@@ -5119,7 +5119,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
     for (__pyx_t_23 = 0; __pyx_t_23 < __pyx_t_31; __pyx_t_23+=1) {
       __pyx_v_t = __pyx_t_23;
 
-      /* "bild/cython/MSRouse_logL.pyx":242
+      /* "bild/src/MSRouse_logL.pyx":242
  *     for d in range(logL.shape[0]):
  *         for t in range(logL.shape[1]):
  *             logL_total += logL[d, t]             # <<<<<<<<<<<<<<
@@ -5128,11 +5128,11 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
  */
       __pyx_t_25 = __pyx_v_d;
       __pyx_t_18 = __pyx_v_t;
-      __pyx_v_logL_total = (__pyx_v_logL_total + (*((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_logL.data + __pyx_t_25 * __pyx_v_logL.strides[0]) )) + __pyx_t_18)) ))));
+      __pyx_v_logL_total = (__pyx_v_logL_total + (*((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=1 */ ((char *) (((__pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t *) ( /* dim=0 */ (__pyx_v_logL.data + __pyx_t_25 * __pyx_v_logL.strides[0]) )) + __pyx_t_18)) ))));
     }
   }
 
-  /* "bild/cython/MSRouse_logL.pyx":244
+  /* "bild/src/MSRouse_logL.pyx":244
  *             logL_total += logL[d, t]
  * 
  *     return logL_total             # <<<<<<<<<<<<<<
@@ -5144,7 +5144,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
   __pyx_t_10 = 0;
   goto __pyx_L0;
 
-  /* "bild/cython/MSRouse_logL.pyx":95
+  /* "bild/src/MSRouse_logL.pyx":95
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * def logL(object model,   # bild.models.MultiStateModel             # <<<<<<<<<<<<<<
@@ -5167,7 +5167,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
   __PYX_XDEC_MEMVIEW(&__pyx_t_19, 1);
-  __Pyx_AddTraceback("bild.cython.MSRouse_logL.logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("bild.bin.MSRouse_logL.logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_C, 1);
@@ -5204,7 +5204,7 @@ __pyx_f_4bild_6cython_12MSRouse_logL_Kalman_update(__pyx_v_w, __pyx_t_19, __pyx_
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":735
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":735
  * ctypedef npy_cdouble     complex_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -5221,7 +5221,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew1", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":736
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":736
  * 
  * cdef inline object PyArray_MultiIterNew1(a):
  *     return PyArray_MultiIterNew(1, <void*>a)             # <<<<<<<<<<<<<<
@@ -5235,7 +5235,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":735
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":735
  * ctypedef npy_cdouble     complex_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -5254,7 +5254,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":738
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":738
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -5271,7 +5271,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew2", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":739
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":739
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)             # <<<<<<<<<<<<<<
@@ -5285,7 +5285,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":738
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":738
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -5304,7 +5304,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":741
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":741
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -5321,7 +5321,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew3", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":742
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":742
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)             # <<<<<<<<<<<<<<
@@ -5335,7 +5335,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":741
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":741
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -5354,7 +5354,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":744
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":744
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -5371,7 +5371,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew4", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":745
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":745
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)             # <<<<<<<<<<<<<<
@@ -5385,7 +5385,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":744
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":744
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -5404,7 +5404,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":747
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":747
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -5421,7 +5421,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew5", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":748
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":748
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)             # <<<<<<<<<<<<<<
@@ -5435,7 +5435,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":747
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":747
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -5454,7 +5454,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":750
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":750
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -5468,7 +5468,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("PyDataType_SHAPE", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":751
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":751
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -5478,7 +5478,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   __pyx_t_1 = (PyDataType_HASSUBARRAY(__pyx_v_d) != 0);
   if (__pyx_t_1) {
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":752
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":752
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):
  *         return <tuple>d.subarray.shape             # <<<<<<<<<<<<<<
@@ -5490,7 +5490,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
     __pyx_r = ((PyObject*)__pyx_v_d->subarray->shape);
     goto __pyx_L0;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":751
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":751
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -5499,7 +5499,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
  */
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":754
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":754
  *         return <tuple>d.subarray.shape
  *     else:
  *         return ()             # <<<<<<<<<<<<<<
@@ -5513,7 +5513,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
     goto __pyx_L0;
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":750
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":750
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -5528,7 +5528,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":929
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":929
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
@@ -5540,7 +5540,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_array_base", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":930
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":930
  * 
  * cdef inline void set_array_base(ndarray arr, object base):
  *     Py_INCREF(base) # important to do this before stealing the reference below!             # <<<<<<<<<<<<<<
@@ -5549,7 +5549,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  */
   Py_INCREF(__pyx_v_base);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":931
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":931
  * cdef inline void set_array_base(ndarray arr, object base):
  *     Py_INCREF(base) # important to do this before stealing the reference below!
  *     PyArray_SetBaseObject(arr, base)             # <<<<<<<<<<<<<<
@@ -5558,7 +5558,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
  */
   (void)(PyArray_SetBaseObject(__pyx_v_arr, __pyx_v_base));
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":929
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":929
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base):             # <<<<<<<<<<<<<<
@@ -5570,7 +5570,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   __Pyx_RefNannyFinishContext();
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":933
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":933
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -5585,7 +5585,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("get_array_base", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":934
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":934
  * 
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)             # <<<<<<<<<<<<<<
@@ -5594,7 +5594,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
  */
   __pyx_v_base = PyArray_BASE(__pyx_v_arr);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":935
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":935
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -5604,7 +5604,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   __pyx_t_1 = ((__pyx_v_base == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":936
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":936
  *     base = PyArray_BASE(arr)
  *     if base is NULL:
  *         return None             # <<<<<<<<<<<<<<
@@ -5615,7 +5615,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":935
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":935
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -5624,7 +5624,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
  */
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":937
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":937
  *     if base is NULL:
  *         return None
  *     return <object>base             # <<<<<<<<<<<<<<
@@ -5636,7 +5636,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   __pyx_r = ((PyObject *)__pyx_v_base);
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":933
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":933
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -5651,7 +5651,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":941
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":941
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
@@ -5675,7 +5675,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_array", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":942
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":942
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5691,7 +5691,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":943
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":943
  * cdef inline int import_array() except -1:
  *     try:
  *         __pyx_import_array()             # <<<<<<<<<<<<<<
@@ -5700,7 +5700,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
  */
       __pyx_t_4 = _import_array(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 943, __pyx_L3_error)
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":942
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":942
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5714,7 +5714,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":944
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":944
  *     try:
  *         __pyx_import_array()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -5729,7 +5729,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":945
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":945
  *         __pyx_import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
@@ -5745,7 +5745,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":942
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":942
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5760,7 +5760,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __pyx_L8_try_end:;
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":941
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":941
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
@@ -5783,7 +5783,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":947
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":947
  *         raise ImportError("numpy.core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -5807,7 +5807,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_umath", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":948
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":948
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5823,7 +5823,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":949
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":949
  * cdef inline int import_umath() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
@@ -5832,7 +5832,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
  */
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 949, __pyx_L3_error)
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":948
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":948
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5846,7 +5846,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":950
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":950
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -5861,7 +5861,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":951
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":951
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
@@ -5877,7 +5877,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":948
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":948
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5892,7 +5892,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __pyx_L8_try_end:;
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":947
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":947
  *         raise ImportError("numpy.core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -5915,7 +5915,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":953
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":953
  *         raise ImportError("numpy.core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -5939,7 +5939,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_ufunc", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":954
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":954
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5955,7 +5955,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":955
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":955
  * cdef inline int import_ufunc() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
@@ -5964,7 +5964,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
  */
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(1, 955, __pyx_L3_error)
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":954
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":954
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -5978,7 +5978,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":956
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":956
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -5993,7 +5993,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":957
+      /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":957
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
@@ -6009,7 +6009,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":954
+    /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":954
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -6024,7 +6024,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __pyx_L8_try_end:;
   }
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":953
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":953
  *         raise ImportError("numpy.core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -6047,7 +6047,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":967
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":967
  * 
  * 
  * cdef inline bint is_timedelta64_object(object obj):             # <<<<<<<<<<<<<<
@@ -6060,7 +6060,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_timedelta64_object", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":979
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":979
  *     bool
  *     """
  *     return PyObject_TypeCheck(obj, &PyTimedeltaArrType_Type)             # <<<<<<<<<<<<<<
@@ -6070,7 +6070,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
   __pyx_r = PyObject_TypeCheck(__pyx_v_obj, (&PyTimedeltaArrType_Type));
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":967
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":967
  * 
  * 
  * cdef inline bint is_timedelta64_object(object obj):             # <<<<<<<<<<<<<<
@@ -6084,7 +6084,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":982
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":982
  * 
  * 
  * cdef inline bint is_datetime64_object(object obj):             # <<<<<<<<<<<<<<
@@ -6097,7 +6097,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_datetime64_object", 0);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":994
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":994
  *     bool
  *     """
  *     return PyObject_TypeCheck(obj, &PyDatetimeArrType_Type)             # <<<<<<<<<<<<<<
@@ -6107,7 +6107,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
   __pyx_r = PyObject_TypeCheck(__pyx_v_obj, (&PyDatetimeArrType_Type));
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":982
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":982
  * 
  * 
  * cdef inline bint is_datetime64_object(object obj):             # <<<<<<<<<<<<<<
@@ -6121,7 +6121,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":997
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":997
  * 
  * 
  * cdef inline npy_datetime get_datetime64_value(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -6132,7 +6132,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
 static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *__pyx_v_obj) {
   npy_datetime __pyx_r;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1004
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1004
  *     also needed.  That can be found using `get_datetime64_unit`.
  *     """
  *     return (<PyDatetimeScalarObject*>obj).obval             # <<<<<<<<<<<<<<
@@ -6142,7 +6142,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
   __pyx_r = ((PyDatetimeScalarObject *)__pyx_v_obj)->obval;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":997
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":997
  * 
  * 
  * cdef inline npy_datetime get_datetime64_value(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -6155,7 +6155,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1007
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1007
  * 
  * 
  * cdef inline npy_timedelta get_timedelta64_value(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -6166,7 +6166,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
 static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject *__pyx_v_obj) {
   npy_timedelta __pyx_r;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1011
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1011
  *     returns the int64 value underlying scalar numpy timedelta64 object
  *     """
  *     return (<PyTimedeltaScalarObject*>obj).obval             # <<<<<<<<<<<<<<
@@ -6176,7 +6176,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
   __pyx_r = ((PyTimedeltaScalarObject *)__pyx_v_obj)->obval;
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1007
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1007
  * 
  * 
  * cdef inline npy_timedelta get_timedelta64_value(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -6189,7 +6189,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
   return __pyx_r;
 }
 
-/* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1014
+/* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1014
  * 
  * 
  * cdef inline NPY_DATETIMEUNIT get_datetime64_unit(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -6200,7 +6200,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
 static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObject *__pyx_v_obj) {
   NPY_DATETIMEUNIT __pyx_r;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1018
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1018
  *     returns the unit part of the dtype for a numpy datetime64 object.
  *     """
  *     return <NPY_DATETIMEUNIT>(<PyDatetimeScalarObject*>obj).obmeta.base             # <<<<<<<<<<<<<<
@@ -6208,7 +6208,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   __pyx_r = ((NPY_DATETIMEUNIT)((PyDatetimeScalarObject *)__pyx_v_obj)->obmeta.base);
   goto __pyx_L0;
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":1014
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":1014
  * 
  * 
  * cdef inline NPY_DATETIMEUNIT get_datetime64_unit(object obj) nogil:             # <<<<<<<<<<<<<<
@@ -19603,7 +19603,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bild.cython.MSRouse_logL.array", /*tp_name*/
+  "bild.bin.MSRouse_logL.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -19725,7 +19725,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bild.cython.MSRouse_logL.Enum", /*tp_name*/
+  "bild.bin.MSRouse_logL.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -19989,7 +19989,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bild.cython.MSRouse_logL.memoryview", /*tp_name*/
+  "bild.bin.MSRouse_logL.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -20130,7 +20130,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bild.cython.MSRouse_logL._memoryviewslice", /*tp_name*/
+  "bild.bin.MSRouse_logL._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -20303,8 +20303,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_astype, __pyx_k_astype, sizeof(__pyx_k_astype), 0, 0, 1, 1},
   {&__pyx_n_s_axis, __pyx_k_axis, sizeof(__pyx_k_axis), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
-  {&__pyx_n_s_bild_cython_MSRouse_logL, __pyx_k_bild_cython_MSRouse_logL, sizeof(__pyx_k_bild_cython_MSRouse_logL), 0, 0, 1, 1},
-  {&__pyx_kp_s_bild_cython_MSRouse_logL_pyx, __pyx_k_bild_cython_MSRouse_logL_pyx, sizeof(__pyx_k_bild_cython_MSRouse_logL_pyx), 0, 0, 1, 0},
+  {&__pyx_n_s_bild_bin_MSRouse_logL, __pyx_k_bild_bin_MSRouse_logL, sizeof(__pyx_k_bild_bin_MSRouse_logL), 0, 0, 1, 1},
+  {&__pyx_kp_s_bild_src_MSRouse_logL_pyx, __pyx_k_bild_src_MSRouse_logL_pyx, sizeof(__pyx_k_bild_src_MSRouse_logL_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
   {&__pyx_n_s_check_dynamics, __pyx_k_check_dynamics, sizeof(__pyx_k_check_dynamics), 0, 0, 1, 1},
@@ -20438,7 +20438,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "bild/cython/MSRouse_logL.pyx":161
+  /* "bild/src/MSRouse_logL.pyx":161
  * 
  *     # Get trajectory and profile data to C
  *     trajdat = traj[:]             # <<<<<<<<<<<<<<
@@ -20449,7 +20449,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_slice_);
   __Pyx_GIVEREF(__pyx_slice_);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":945
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":945
  *         __pyx_import_array()
  *     except Exception:
  *         raise ImportError("numpy.core.multiarray failed to import")             # <<<<<<<<<<<<<<
@@ -20460,7 +20460,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* ".eggs/numpy-1.21.6-py3.7-linux-x86_64.egg/numpy/__init__.pxd":951
+  /* "../../../../tmp/pip-build-env-7ec4p5cq/overlay/lib/python3.7/site-packages/numpy/__init__.pxd":951
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy.core.umath failed to import")             # <<<<<<<<<<<<<<
@@ -20655,7 +20655,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "bild/cython/MSRouse_logL.pyx":95
+  /* "bild/src/MSRouse_logL.pyx":95
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * def logL(object model,   # bild.models.MultiStateModel             # <<<<<<<<<<<<<<
@@ -20665,7 +20665,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__22 = PyTuple_Pack(47, __pyx_n_s_model, __pyx_n_s_profile, __pyx_n_s_traj, __pyx_n_s_logL_total, __pyx_n_s_C, __pyx_n_s_Bs, __pyx_n_s_Gs, __pyx_n_s_Sigs, __pyx_n_s_C_post, __pyx_n_s_M, __pyx_n_s_M_post, __pyx_n_s_logL, __pyx_n_s_trajdat, __pyx_n_s_BCn0, __pyx_n_s_s2, __pyx_n_s_w, __pyx_n_s_i_write, __pyx_n_s_t, __pyx_n_s_state, __pyx_n_s_n0, __pyx_n_s_n1, __pyx_n_s_n2, __pyx_n_s_n3, __pyx_n_s_d, __pyx_n_s_Cind, __pyx_n_s_states, __pyx_n_s_valid_times, __pyx_n_s_Kalman_Cw, __pyx_n_s_Kalman_K, __pyx_n_s_Kalman_Sinv, __pyx_n_s_Kalman_xmm, __pyx_n_s_py_localization_error, __pyx_n_s_py_unique_errors, __pyx_n_s_py_Cind, __pyx_n_s_py_state, __pyx_n_s_py_m, __pyx_n_s_py_M, __pyx_n_s_py_C_single, __pyx_n_s_inc, __pyx_n_s_N, __pyx_n_s_D, __pyx_n_s_Dstar, __pyx_n_s_one, __pyx_n_s_zero, __pyx_n_s_m, __pyx_n_s_m, __pyx_n_s_m); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 47, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_bild_cython_MSRouse_logL_pyx, __pyx_n_s_logL, 95, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 47, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_bild_src_MSRouse_logL_pyx, __pyx_n_s_logL, 95, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 95, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -21046,7 +21046,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_MSRouse_logL(PyObject *__pyx_pyini
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  __pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t __pyx_t_5;
+  __pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t __pyx_t_5;
   static PyThread_type_lock __pyx_t_6[8];
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -21125,14 +21125,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_bild__cython__MSRouse_logL) {
+  if (__pyx_module_is_main_bild__bin__MSRouse_logL) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "bild.cython.MSRouse_logL")) {
-      if (unlikely(PyDict_SetItemString(modules, "bild.cython.MSRouse_logL", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "bild.bin.MSRouse_logL")) {
+      if (unlikely(PyDict_SetItemString(modules, "bild.bin.MSRouse_logL", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -21153,7 +21153,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bild/cython/MSRouse_logL.pyx":1
+  /* "bild/src/MSRouse_logL.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * np.import_array()
@@ -21163,7 +21163,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":3
+  /* "bild/src/MSRouse_logL.pyx":3
  * import numpy as np
  * cimport numpy as np
  * np.import_array()             # <<<<<<<<<<<<<<
@@ -21172,7 +21172,7 @@ if (!__Pyx_RefNanny) {
  */
   __pyx_t_2 = __pyx_f_5numpy_import_array(); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 3, __pyx_L1_error)
 
-  /* "bild/cython/MSRouse_logL.pyx":14
+  /* "bild/src/MSRouse_logL.pyx":14
  * ctypedef unsigned long SIZE_t
  * 
  * cdef FLOAT_t LOG_2PI = np.log(2*np.pi)             # <<<<<<<<<<<<<<
@@ -21198,21 +21198,21 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_v_4bild_6cython_12MSRouse_logL_LOG_2PI = __pyx_t_5;
+  __pyx_v_4bild_3bin_12MSRouse_logL_LOG_2PI = __pyx_t_5;
 
-  /* "bild/cython/MSRouse_logL.pyx":95
+  /* "bild/src/MSRouse_logL.pyx":95
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * def logL(object model,   # bild.models.MultiStateModel             # <<<<<<<<<<<<<<
  *          object profile, # bild.util.Loopingprofile
  *          object traj,    # noctiluca.Trajectory
  */
-  __pyx_t_4 = PyCFunction_NewEx(&__pyx_mdef_4bild_6cython_12MSRouse_logL_1logL, NULL, __pyx_n_s_bild_cython_MSRouse_logL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_4 = PyCFunction_NewEx(&__pyx_mdef_4bild_3bin_12MSRouse_logL_1logL, NULL, __pyx_n_s_bild_bin_MSRouse_logL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_logL, __pyx_t_4) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "bild/cython/MSRouse_logL.pyx":1
+  /* "bild/src/MSRouse_logL.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * np.import_array()
@@ -21384,11 +21384,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_4);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init bild.cython.MSRouse_logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init bild.bin.MSRouse_logL", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init bild.cython.MSRouse_logL");
+    PyErr_SetString(PyExc_ImportError, "init bild.bin.MSRouse_logL");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -24651,7 +24651,7 @@ no_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24662,7 +24662,7 @@ no_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -24674,7 +24674,7 @@ __pyx_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24685,7 +24685,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_SIZE_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_SIZE_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -24697,7 +24697,7 @@ __pyx_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24708,7 +24708,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 3,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -24720,7 +24720,7 @@ __pyx_fail:
 }
 
 /* ObjectToMemviewSlice */
-  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
+  static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_d_dc_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t(PyObject *obj, int writable_flag) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_FOLLOW), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_CONTIG) };
@@ -24731,7 +24731,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, __Pyx_IS_C_CONTIG,
                                                  (PyBUF_C_CONTIGUOUS | PyBUF_FORMAT) | writable_flag, 2,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_6cython_12MSRouse_logL_FLOAT_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_4bild_3bin_12MSRouse_logL_FLOAT_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
