@@ -15,6 +15,7 @@ import scipy.stats
 import rouse
 from noctiluca import Trajectory
 from .util import Loopingprofile
+from .cython_imports import MSRouse_logL
 
 class MultiStateModel(metaclass=abc.ABCMeta):
     """
@@ -257,6 +258,21 @@ class MultiStateRouse(MultiStateModel):
         else:
             raise ValueError("No localization error specified (use MultiStateModel.localization_error or Trajectory.localization_error)")
 
+    def logL(self, profile, traj):
+        """
+        Rouse likelihood, evaluated by Kalman filter
+
+        Parameters
+        ----------
+        profile : Loopingprofile
+        traj : noctiluca.Trajectory
+
+        Returns
+        -------
+        float
+        """
+        return MSRouse_logL(self, profile, traj)
+
     def initial_loopingprofile(self, traj):
         """
         Give an initial guess for a looping profile
@@ -271,8 +287,6 @@ class MultiStateRouse(MultiStateModel):
         Loopingprofile
         """
         return self.toFactorized().initial_loopingprofile(traj)
-
-############################ INSERT LOGL ##################
 
     def trajectory_from_loopingprofile(self, profile,
                                        localization_error=None,

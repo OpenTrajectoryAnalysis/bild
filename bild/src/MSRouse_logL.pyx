@@ -16,17 +16,17 @@ cdef FLOAT_t LOG_2PI = np.log(2*np.pi)
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef void Kalman_update(FLOAT_t[::1]       w,
-                        FLOAT_t[::1]       x,
-                        FLOAT_t[:, ::1]    M,
-                        FLOAT_t[:, :, ::1] C,
-                        FLOAT_t[::1]       s2,
-                        SIZE_t[::1]        Cind,
-                        FLOAT_t[::1]       logL,
-                        FLOAT_t[::1]       xmm,
-                        FLOAT_t[:, ::1]    K,
-                        FLOAT_t[::1]       Sinv,
-                        FLOAT_t[:, ::1]    Cw,
+cdef void Kalman_update(FLOAT_t[::1]       w,    # const
+                        FLOAT_t[::1]       x,    # const
+                        FLOAT_t[:, ::1]    M,      # output
+                        FLOAT_t[:, :, ::1] C,      # output
+                        FLOAT_t[::1]       s2,   # const
+                        SIZE_t[::1]        Cind, # const
+                        FLOAT_t[::1]       logL,   # output
+                        FLOAT_t[::1]       xmm,      # dummy
+                        FLOAT_t[:, ::1]    K,        # dummy
+                        FLOAT_t[::1]       Sinv,     # dummy
+                        FLOAT_t[:, ::1]    Cw,       # dummy
                         ):
     """
     Kalman update step
@@ -35,8 +35,8 @@ cdef void Kalman_update(FLOAT_t[::1]       w,
     ----------
     w :    (N,)       float
     x :    (d,)       float
-    M :    (N, d)     float
-    C :    (d*, N, N) float
+    M :    (N, d)     float (will change in-place)
+    C :    (d*, N, N) float (will change in-place)
     s2 :   (d*,)      float
     Cind : (d,)       uint
     logL : (d,)       float : where to write the output values
@@ -92,10 +92,23 @@ cdef void Kalman_update(FLOAT_t[::1]       w,
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-def logL(object model,   # bild.models.MultiStateModel
-         object profile, # bild.util.Loopingprofile
-         object traj,    # noctiluca.Trajectory
-         ):
+def MSRouse_logL(object model,   # bild.models.MultiStateModel
+                 object profile, # bild.util.Loopingprofile
+                 object traj,    # noctiluca.Trajectory
+                 ):
+    """
+    Rouse likelihood, evaluated by Kalman filter
+
+    Parameters
+    ----------
+    model : models.MultiStateRouse
+    profile : Loopingprofile
+    traj : noctiluca.Trajectory
+
+    Returns
+    -------
+    float
+    """
     ### Declarations ###
     cdef FLOAT_t            logL_total  # final output value
     cdef FLOAT_t[:, :, ::1] C           # prior covariances for Kalman
@@ -136,7 +149,7 @@ def logL(object model,   # bild.models.MultiStateModel
     # individual Rouse models and propagation dynamics
     w = model.measurement
 
-    for py_state, py_m in enumerate(model.models):
+    for py_m in model.models:
         py_m.check_dynamics()
 
     Bs   = np.array([m._dynamics['B']   for m in model.models])
@@ -146,7 +159,7 @@ def logL(object model,   # bild.models.MultiStateModel
     # initial condition (steady state)
     py_M, py_C_single = model.models[profile[0]].steady_state()
 
-    M = py_M
+    M = py_M.copy() # M will be changed in-place!
     C = np.tile(py_C_single, (len(py_unique_errors), 1, 1))
 
     assert tuple(M.shape) == tuple(Gs[0].shape)
@@ -171,10 +184,9 @@ def logL(object model,   # bild.models.MultiStateModel
 
     # Get likelihood from first data point in steady state
     if valid_times[i_write] == 0:
-        Kalman_update(w, np.zeros(traj.d, dtype=float), M, C, s2, Cind,
+        Kalman_update(w, trajdat[0], M, C, s2, Cind,
                       logL[i_write], Kalman_xmm, Kalman_K, Kalman_Sinv, Kalman_Cw,
                       )
-
         i_write += 1
 
     # sizes and factors for BLAS
