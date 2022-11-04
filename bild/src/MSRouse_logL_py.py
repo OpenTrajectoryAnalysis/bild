@@ -51,7 +51,7 @@ def Kalman_update(w, x, M, C, s2, Cind):
 
     return M, C, logL
 
-def logL(model, profile, traj):
+def MSRouse_logL(model, profile, traj):
     """
     Rouse likelihood, evaluated by Kalman filter
 
@@ -76,11 +76,12 @@ def logL(model, profile, traj):
     unique_errors, Cind = np.unique(localization_error, return_inverse=True)
     s2 = unique_errors*unique_errors
 
+    w = model.measurement
+
     for mod in model.models:
         mod.check_dynamics()
 
-    mod = mod.models[profile[0]]
-    M, C_single = mod.steady_state()
+    M, C_single = model.models[profile[0]].steady_state()
     C = np.tile(C_single, (len(unique_errors), 1, 1))
 
     valid_times = np.nonzero(~np.any(np.isnan(traj[:]), axis=1))[0]
@@ -96,7 +97,7 @@ def logL(model, profile, traj):
     i_write = 0
     next_vt = get_vt(i_write)
     if 0 == next_vt:
-        M, C, L_log[i_write] = Kalman_update(model.measurement, np.zeros(traj.d), M, C, s2, Cind)
+        M, C, L_log[i_write] = Kalman_update(w, traj[0], M, C, s2, Cind)
         i_write += 1
         next_vt = get_vt(i_write)
 
@@ -110,7 +111,7 @@ def logL(model, profile, traj):
 
         # Update
         if t == next_vt:
-            M, C, L_log[i_write] = Kalman_update(model.measurement, traj[t], M, C, s2, Cind)
+            M, C, L_log[i_write] = Kalman_update(w, traj[t], M, C, s2, Cind)
             i_write += 1
             next_vt = get_vt(i_write)
 

@@ -165,6 +165,13 @@ class TestModels(myTestCase):
                                                     )
         self.assertEqual(traj.count_valid_frames(), 8)
 
+    def test_Rouse_py(self):
+        from bild.src.MSRouse_logL_py import MSRouse_logL
+        model = bild.models.MultiStateRouse(20, 1, 5, d=1)
+        logL = model.logL(self.profile, self.traj) # cythonized
+        logL_py = MSRouse_logL(model, self.profile, self.traj)
+        self.assertEqual(logL, logL_py)
+
     def test_Factorized(self):
         model = bild.models.FactorizedModel([
             scipy.stats.maxwell(scale=1),

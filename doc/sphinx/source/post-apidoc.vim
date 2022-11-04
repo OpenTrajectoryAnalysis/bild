@@ -45,6 +45,7 @@ for fname in glob("bild*.rst", 0, 1)
 endfor
 
 edit! bild.rst
+
 call setline(1, "API reference") " replace the title; we know what the module is called
 call setline(2, "=============")
 call append(3, [".. contents::",
@@ -54,6 +55,11 @@ call append(3, [".. contents::",
 	       \"   :members:",
 	       \"",
 	       \])
+
+call search('cython', "w")
+let s:numlines = search("^bild", "n") - line(".")
+exec "delete _ " . s:numlines
+
 write!
 
 quit

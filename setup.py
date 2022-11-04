@@ -5,13 +5,18 @@ from setuptools import dist, Extension, setup
 import numpy
 
 CYTHONIZE = os.getenv('CYTHONIZE') == "1"
-ext = '.pyx' if CYTHONIZE else '.c'
-extensions = [
-    Extension(
-        "bild.bin.MSRouse_logL", ["bild/src/MSRouse_logL"+ext],
-        define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')],
-    ),
-]
+PYTHON_ONLY = os.getenv('PYTHON_ONLY') == "1"
+
+if PYTHON_ONLY:
+    extensions = []
+else:
+    ext = '.pyx' if CYTHONIZE else '.c'
+    extensions = [
+        Extension(
+            "bild.bin.MSRouse_logL", ["bild/src/MSRouse_logL"+ext],
+            define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')],
+        ),
+    ]
 
 if CYTHONIZE:
     # Get dependencies of the cython build
@@ -31,7 +36,7 @@ if CYTHONIZE:
                 )
 
     # Remove hash strings from comments in the .c to prevent the file from
-    # changing on every build
+    # changing on every build (which freaks out git)
     import re
     for ext in extensions:
         for cfile in ext.sources:
