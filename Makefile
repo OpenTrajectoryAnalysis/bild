@@ -14,7 +14,12 @@ CYTHONYELLOWDIR = doc/cython_yellow
 
 .PHONY : recompile yellow build pre-docs docs tests all clean mydocs mytests myall myclean
 
-all : docs tests
+setup :
+	mkdir -p $(COVERAGEREPDIR) $(DISTDIR) $(CYTHONBINDIR) $(CYTHONYELLOWDIR)
+	nbstripout --install
+	vim "+g/-m nbstripout/norm A --drop-empty-cells" +wq .git/config
+
+all : docs tests build
 
 bild/src/*.c : bild/src/*.pyx
 	-@cd $(CYTHONSRCDIR) && rm *.c
