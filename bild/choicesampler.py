@@ -103,7 +103,7 @@ class ChoiceSampler:
         This is called in the constructor; it is its own function mainly for
         code cleanliness; it allows individual instances to be reinitialized.
         """
-        self._scaled_rvs = np.sqrt(self.shat[None, ...]) * np.random.normal(loc=0, scale=1, size=(self.samplesize, self.kmax))
+        self._scaled_rvs = np.sqrt(self.shat[None, ...]) * np.random.normal(size=(self.samplesize, self.kmax))
         
         self.bestk = self.evaluate() # point estimate
         self.best_is_k = self.bestk[:, None] == np.arange(self.kmax)[None, :] # (samp, k)

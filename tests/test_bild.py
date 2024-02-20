@@ -217,6 +217,8 @@ class TestCore(myTestCase):
             self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
             logpost = res.log_marginal_posterior(dE=2)
             self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+            logpost = res.log_marginal_posterior(dE='average')
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
 
     def test_sample_long_lookahead(self):
         for _ in range(5):

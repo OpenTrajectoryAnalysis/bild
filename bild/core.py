@@ -55,25 +55,32 @@ def sample(traj, model,
     dE : float, optional
         the evidence margin ΔE to apply in finding the actual point estimate.
         Note that this can also be set post-hoc when evaluating the results;
-        c.f. `SamplingResults.best_profile()`.
+        c.f. `SamplingResults.best_profile()`, which however might lead to less
+        accurate results.
 
     Other Parameters
     ----------------
     init_runs : int
         minimum number of AMIS runs for a new value of ``k``.
-    significant_separation_sem_fold : float
-        `FixedkSampler.tstat`
+    certainty_in_k : float
+        the level of certainty (in the number of switches k) that we need to
+        reach before we stop sampling.
     k_lookahead : int
-        how far we look ahead for global maxima. As long as there is a current
-        candidate for global optimum at ``k >= k_max - k_lookahead`` (where
-        ``k_max`` is the largest ``k`` sampled so far), sample larger ``k``
-        instead of refining the ones we have. The default value of 2 comes from
-        the fact that for binary profiles the evidence follows an odd-even
-        pattern, so it is necessary to look ahead by 2 additional switches.
+        how far we look ahead for global maxima. If any of the positions at ``k
+        >= k_max - k_lookahead`` have a noticeable influence on the final
+        choice of ``k``, we explore higher k before sampling the existing ones
+        more. The specific condition for "noticable" is that the information
+        gain from all the existing samples in this region is more than the
+        expected information gain from one additional sample anywhere. The
+        default value of 2 comes from the fact that for binary profiles the
+        evidence follows an odd-even pattern, so it is necessary to look ahead
+        by 2 additional switches.
     k_max : int
         the maximum number of switches to sample to
     sampler_kw : dict
         keyword arguments for the `amis.FixedkSampler`.
+    choice_kw : dict
+        keyword arguments for `choicesampler.ChoiceSampler`.
     show_progress : bool
         whether to show a progress bar
 
@@ -83,10 +90,15 @@ def sample(traj, model,
 
     Notes
     -----
-    This function takes a value for the evidence margin ΔE; in practice it is
-    often more useful to set ΔE = 0 when running the sampling, and then
-    studying the results under changing ΔE afterwards, using
-    ``SamplingResults.best_profile(dE=...)``.
+    There are two possibilities for applying the evidence margin ΔE: while
+    sampling, or post hoc through ``SamplingResults.best_profile(dE=...)``. The
+    benefit of specifying the evidence margin during the sampling is that we
+    can take it into account for the sample selection, i.e. the positions
+    relevant to this setting of ΔE will be sampled sufficiently. When setting
+    ΔE post hoc, one always runs the risk of pushing the actual result of the
+    inference into a regime where the sampling machinery decided that we do not
+    need to know a lot of detail. This effect should of course small for small
+    ΔE.
 
     Post-processing functionality is provided in the `postproc` module, but
     usually the profile found by sampling alone is already pretty good.
@@ -229,8 +241,8 @@ class SamplingResults():
         evidence margin applied during the sampling
     samplers : list of FixedkSampler
         the samplers run for this inference run
-    k_updates : np.ndarray, optional
-        an array containing the order in which the samplers were updated
+    log : dict
+        records from the sampling. Mostly useful for inspection / debugging.
     k : np.ndarray
         list of evaluated ``k`` values
     evidence : np.ndarray
@@ -328,15 +340,17 @@ class SamplingResults():
 
         Parameters
         ----------
-        dE : float >= 0 or None
-            the evidence margin to apply. If ``None`` (default): instead of
+        dE : float >= 0, None, or 'average'
+            the evidence margin to apply. If set ``'average'`` (default): instead of
             picking the best ``k``, average over ``k``, weighted by evidence.
+            Defaults to ``None``, which means "use the internal value
+            ``self.dE".
 
         Returns
         -------
         (n, T) np.ndarray, dtype=float
         """
-        if dE is None:
+        if dE == 'average':
             with np.errstate(under='ignore'):
                 logpost = logsumexp([sampler.log_marginal_posterior() + logev
                                      for sampler, logev in zip(self.samplers, self.evidence)
@@ -344,5 +358,7 @@ class SamplingResults():
                                     axis=0,
                                     )
                 return logpost - logsumexp(logpost, axis=0)
-        else:
-            return self.samplers[self.best_k(dE)].log_marginal_posterior()
+        elif dE is None:
+            dE = self.dE
+
+        return self.samplers[self.best_k(dE)].log_marginal_posterior()
