@@ -9,6 +9,7 @@ from scipy.special import logsumexp
 from noctiluca import make_Trajectory
 
 from .amis import FixedkSampler
+from .choicesampler import ChoiceSampler
             
 """
 exec 'norm jj^d}O' | let @a="\n'" | exec 'g/^\(def\|class\)/exec ''norm w"Ayw'' | let @a=@a."'',\n''"' | exec 'norm i__all__ = ["ap}kcc]kV?__all__?+>k'
@@ -108,17 +109,36 @@ def sample(traj, model,
         'I_la' : [], # importance over the lookahead region
     }
 
+    memory = { # we need some persistent variables for the sampling loop
+        'fresh sample' : False,
+    }
+
     # Steps / conditions of the iterative scheme
     def add_sample(k):
         # If sampler is exhausted, this will just do nothing
-        if samplers[k].step()
+        if samplers[k].step():
             bar.update()
             for key in log:
                 log[key].append(None)
             log['k'][-1] = k
+            memory['fresh sample'] = True
 
     def determine_next_step():
         k_new = len(samplers) # k for an eventual new sampler
+
+        if not memory['fresh sample']:
+            if len(log['k']) == 0:
+                return k_new
+            else: # pragma: no cover
+                return log['k'][-1]
+
+        # p(k) should always be evaluated, because this is the stop criterion
+        logE  = np.array([sampler.evidences[-1][0]                              for sampler in samplers])
+        dlogE = np.array([sampler.evidences[-1][1]                              for sampler in samplers])
+        N     = np.array([np.inf if sampler.exhausted else len(sampler.samples) for sampler in samplers])
+
+        cs = ChoiceSampler(logE, dlogE**2, N, dE, **choice_kw)
+        pk = cs.n0 / cs.samplesize
 
         # k_new == k_lookahead is the edge case where exactly all the samplers
         # are in the lookahead region; in this case, the information gain from
@@ -136,18 +156,9 @@ def sample(traj, model,
 
         if k_new < k_lookahead+1 and k_new <= k_max:
             k_next = k_new
-            pk = None
             KLD = None
             I_la = np.inf
-
         else:
-            logE  = np.array([sampler.evidences[-1][0]                              for sampler in samplers])
-            dlogE = np.array([sampler.evidences[-1][1]                              for sampler in samplers])
-            N     = np.array([np.inf if sampler.exhausted else len(sampler.samples) for sampler in samplers])
-
-            cs = ChoiceSampler(logE, dlogE**2, N, dE, **choice_kw)
-            pk = cs.n0 / cs.samplesize
-
             # Information gain from more samples
             KLD = cs.KLD_moreSamples()
             k_KLD = np.argmax(KLD)
@@ -165,6 +176,7 @@ def sample(traj, model,
         log['pk'  ][-1] = pk
         log['KLD' ][-1] = KLD
         log['I_la'][-1] = I_la
+        memory['fresh sample'] = False
         return k_next
 
     def add_sampler(k):
@@ -182,7 +194,7 @@ def sample(traj, model,
     run_condition = True
     while run_condition:
         if k_next < len(samplers):
-            add_sample(k)
+            add_sample(k_next)
         elif k_next == len(samplers):
             add_sampler(k_next)
         else: # pragma: no cover
@@ -197,11 +209,11 @@ def sample(traj, model,
             run_condition = True
         else:
             run_condition  = np.max(log['pk'][-1]) < certainty_in_k
-            run_condution &= not all_exhausted(samplers)
+            run_condition &= not all_exhausted(samplers)
         
     bar.close()
     
-    return SamplingResults(traj, model, samplers, log)
+    return SamplingResults(traj, model, dE, samplers, log)
 
 class SamplingResults():
     """
@@ -232,16 +244,30 @@ class SamplingResults():
         self.dE = dE
         self.samplers = samplers
 
-        def logentry_as_array(entry):
-            shape = np.asarray(entry[np.nonzero([x is not None for x in entry])[0][0]]).shape
-            nans = np.empty(shape=shape)
-            nans[:] = np.nan
-            return np.array([nans if x is None else x for x in entry])
+        def list_to_2D_array_nanpatching(list_2d):
+            def len_nonesafe(obj):
+                if obj is None:
+                    return 1
+                else:
+                    return len(obj)
+
+            dim0 = len(list_2d)
+            max_dim1 = max(map(len_nonesafe, list_2d))
+
+            arr = np.empty(shape=(dim0, max_dim1))*np.nan
+            for i, item in enumerate(list_2d):
+                if item is not None:
+                    arr[i, :len(item)] = item
+
+            return arr
 
         self.log = {}
+        keys_1d = {'k', 'I_la'}
         if log is not None:
-            for key in log:
-                self.log[key] = logentry_as_array(log[key])
+            for key in log.keys() & keys_1d:
+                self.log[key] = np.array(log[key])
+            for key in log.keys() - keys_1d:
+                self.log[key] = list_to_2D_array_nanpatching(log[key])
 
     @property
     def k(self):
@@ -313,7 +339,8 @@ class SamplingResults():
         if dE is None:
             with np.errstate(under='ignore'):
                 logpost = logsumexp([sampler.log_marginal_posterior() + logev
-                                     for sampler, logev in zip(self.samplers, self.evidence)],
+                                     for sampler, logev in zip(self.samplers, self.evidence)
+                                     if sampler.evidences[-1][0] > -np.inf], # sanity in case k > len(traj)
                                     axis=0,
                                     )
                 return logpost - logsumexp(logpost, axis=0)

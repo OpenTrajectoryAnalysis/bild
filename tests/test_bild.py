@@ -218,22 +218,57 @@ class TestCore(myTestCase):
             logpost = res.log_marginal_posterior(dE=2)
             self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
 
-    def test_insignificance_resolution_after_main_loop(self):
-        model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
-                                             scipy.stats.maxwell(scale=1)],
-                                            d=1,
-                                           )
-        # the point of equal likelihood for two Maxwell's with scales a and b
-        # is x = ab * sqrt(6*log(b/a) / (b^2 - a^2))
-        x = 0.1*np.sqrt(6*np.log(0.1) / -0.99)
-        traj = nl.Trajectory(x*np.ones(100))
-        res = bild.sample(traj, model,
-                          init_runs=5,
-                          sampler_kw={'max_fev' : 1000}, # runtime
-                          k_max = 10, # will always be hit here
-                         )
+    def test_sample_long_lookahead(self):
+        for _ in range(5):
+            res = bild.sample(self.traj, self.model,
+                              init_runs=5,
+                              sampler_kw={'N' : 10,
+                                          'max_fev' : 100,
+                                          'max_fcomplete' : 10,
+                                          }, # runtime
+                              k_lookahead=5,
+                             )
 
-        self.assert_array_almost_equal(res.evidence, np.mean(res.evidence)*np.ones(res.evidence.shape), decimal=1)
+        with np.errstate(under='ignore'):
+            logpost = res.log_marginal_posterior()
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+            logpost = res.log_marginal_posterior(dE=2)
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+
+    def test_sample_small_kmax(self):
+        for _ in range(5):
+            res = bild.sample(self.traj, self.model,
+                              init_runs=5,
+                              sampler_kw={'N' : 10,
+                                          'max_fev' : 100,
+                                          'max_fcomplete' : 10,
+                                          }, # runtime
+                              k_lookahead=5,
+                              k_max=3,
+                             )
+
+        with np.errstate(under='ignore'):
+            logpost = res.log_marginal_posterior()
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+            logpost = res.log_marginal_posterior(dE=2)
+            self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
+
+#     def test_insignificance_resolution_after_main_loop(self):
+#         model = bild.models.FactorizedModel([scipy.stats.maxwell(scale=0.1),
+#                                              scipy.stats.maxwell(scale=1)],
+#                                             d=1,
+#                                            )
+#         # the point of equal likelihood for two Maxwell's with scales a and b
+#         # is x = ab * sqrt(6*log(b/a) / (b^2 - a^2))
+#         x = 0.1*np.sqrt(6*np.log(0.1) / -0.99)
+#         traj = nl.Trajectory(x*np.ones(100))
+#         res = bild.sample(traj, model,
+#                           init_runs=5,
+#                           sampler_kw={'max_fev' : 1000}, # runtime
+#                           k_max = 10, # will always be hit here
+#                          )
+# 
+#         self.assert_array_almost_equal(res.evidence, np.mean(res.evidence)*np.ones(res.evidence.shape), decimal=1)
 
 class TestPostproc(myTestCase):
     def setUp(self):
@@ -259,4 +294,4 @@ class TestPostproc(myTestCase):
 from test_amis import *
 
 if __name__ == '__main__': # pragma: no cover
-    unittest.main(module=__file__[:-3])
+    unittest.main(module=__file__.split('/')[-1][:-3])

@@ -566,6 +566,8 @@ class FixedkSampler:
         upper limit on likelihood evaluations. If this limit is reached, the
         sampler will go to an "exhausted" state, where it does not allow
         further evaluations.
+    max_fcomplete : int, optional
+        threshold up to which exhaustive sampling is considered worthwhile
 
     Attributes
     ----------
@@ -576,6 +578,8 @@ class FixedkSampler:
     brakes : (concentration, polarization)
         see Parameters
     max_fev : int
+        see Parameters
+    max_fcomplete : int
         see Parameters
     exhausted : bool
         the state of the sampler. See `step`.
@@ -621,12 +625,14 @@ class FixedkSampler:
                  concentration_brake=1e-2,
                  polarization_brake=1e-3,
                  max_fev = 20000,
+                 max_fcomplete = 1000,
                 ):
         self.k = k
         self.N = N
         self.brakes = (concentration_brake, polarization_brake)
         
         self.max_fev = max_fev
+        self.max_fcomplete = max_fcomplete
         self.exhausted = False
         
         self.traj = traj
@@ -728,27 +734,22 @@ class FixedkSampler:
         return np.array([self.model.logL(self.st2profile(s, theta), self.traj)
                          for s, theta in zip(ss, thetas)])
 
-    def fix_exhaustive(self, Nmax=1000):
+    def fix_exhaustive(self):
         """
         Evaluate by exhaustive sampling of the parameter space
-
-        Parameters
-        ----------
-        Nmax : int, optional
-            threshold up to which exhaustive sampling is considered worthwhile
 
         Raises
         ------
         FixedkSampler.ExhaustionImpractical
             if parameter space is too big to warrant exhaustive sampling; i.e.
-            there would be more than `!Nmax` profiles to evaluate.
+            there would be more than `!max_fcomplete` profiles to evaluate.
 
         Notes
         -----
         Since in this case the evidence is exact, its standard error should be
         zero. To avoid numerical issues, we set ``dlogev = 1e-10``.
         """
-        Nmax = min(Nmax, self.max_fev)
+        Nmax = min(self.max_fcomplete, self.max_fev)
 
         Nsamples = self.cfc.N_total(self.k)
         for i in range(self.k):
