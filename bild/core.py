@@ -344,7 +344,7 @@ class SamplingResults():
             the evidence margin to apply. If set ``'average'`` (default): instead of
             picking the best ``k``, average over ``k``, weighted by evidence.
             Defaults to ``None``, which means "use the internal value
-            ``self.dE".
+            ``self.dE``.
 
         Returns
         -------

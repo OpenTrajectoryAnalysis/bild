@@ -16,6 +16,14 @@ bild.amis
    :undoc-members:
    :show-inheritance:
 
+bild.choicesampler
+------------------
+
+.. automodule:: bild.choicesampler
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 bild.core
 ---------
 
@@ -55,5 +63,4 @@ bild.util
    :members:
    :undoc-members:
    :show-inheritance:
-
 
