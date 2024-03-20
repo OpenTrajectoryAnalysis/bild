@@ -204,28 +204,33 @@ def sample(traj, model,
     # Main loop
     k_next = 0
     run_condition = True
-    while run_condition:
-        if k_next < len(samplers):
-            add_sample(k_next)
-        elif k_next == len(samplers):
-            add_sampler(k_next)
-        else: # pragma: no cover
-            raise RuntimeError("Trying to sample outside of existing range; this is a bug")
+    try:
+        while run_condition:
+            if k_next < len(samplers):
+                add_sample(k_next)
+            elif k_next == len(samplers):
+                add_sampler(k_next)
+            else: # pragma: no cover
+                raise RuntimeError("Trying to sample outside of existing range; this is a bug")
 
-        k_next = determine_next_step()
+            k_next = determine_next_step()
 
-        # Stopping condition
-        # Given by certainty, unless we determined that we need higher k, which
-        # takes precedence.
-        if k_next == len(samplers):
-            run_condition = True
-        else:
-            run_condition  = np.max(log['pk'][-1]) < certainty_in_k
-            run_condition &= not all_exhausted(samplers)
+            # Stopping condition
+            # Given by certainty, unless we determined that we need higher k, which
+            # takes precedence.
+            if k_next == len(samplers):
+                run_condition = True
+            else:
+                run_condition  = np.max(log['pk'][-1]) < certainty_in_k
+                run_condition &= not all_exhausted(samplers)
         
-    bar.close()
+        bar.close()
+
+    except KeyboardInterrupt:
+        pass
+    finally:
     
-    return SamplingResults(traj, model, dE, samplers, log)
+        return SamplingResults(traj, model, dE, samplers, log)
 
 class SamplingResults():
     """
