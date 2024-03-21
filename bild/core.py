@@ -198,13 +198,11 @@ def sample(traj, model,
         for _ in range(init_runs):
             add_sample(k)
 
-    def all_exhausted(samplers):
-        return all(sampler.exhausted for sampler in samplers)
-    
     # Main loop
     k_next = 0
     run_condition = True
     try:
+
         while run_condition:
             if k_next < len(samplers):
                 add_sample(k_next)
@@ -222,12 +220,17 @@ def sample(traj, model,
                 run_condition = True
             else:
                 run_condition  = np.max(log['pk'][-1]) < certainty_in_k
-                run_condition &= not all_exhausted(samplers)
+
+                # Check that the proposed new sample actually gives information
+                # This fails if all the *relevant* samplers are exhausted.
+                if log['KLD'][-1] is not None:
+                    run_condition &= log['KLD'][-1][k_next] > 0
         
         bar.close()
 
-    except KeyboardInterrupt:
-        pass
+    # Allow clean abortion of execution, when done by hand
+    except KeyboardInterrupt: # pragma: no cover
+        pass 
     finally:
     
         return SamplingResults(traj, model, dE, samplers, log)
