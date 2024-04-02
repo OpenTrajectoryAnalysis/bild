@@ -357,7 +357,7 @@ class MultiStateRouse(MultiStateModel):
         FactorizedModel
         """
         distributions = []
-        noise2_per_d = np.sum(self.localization_error**2)/self.d if self.localization_error else 0
+        noise2_per_d = np.sum(self.localization_error**2)/self.d if self.localization_error is not None else 0
         for mod in self.models:
             _, C = mod.steady_state()
             s2 = self.measurement @ C @ self.measurement + noise2_per_d
