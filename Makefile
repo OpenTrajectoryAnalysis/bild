@@ -4,7 +4,7 @@ SPHINXSOURCE = $(SPHINXDIR)/source
 SPHINXBUILD = $(SPHINXDIR)/source/_build
 TESTDIR = tests
 TESTFILE = test_bild.py
-COVERAGEREPFLAGS = --omit=*/noctiluca/*,*/rouse/*
+COVERAGEREPFLAGS = --omit=*/noctiluca/*,*/rouse/*,*/bayesmsd/*
 COVERAGEREPDIR = $(TESTDIR)/coverage
 DISTDIR = dist
 MODULE = bild

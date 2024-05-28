@@ -11,11 +11,15 @@ from tqdm.auto import tqdm
 
 import numpy as np
 import scipy.stats
+from scipy import linalg
 
 import rouse
 from noctiluca import Trajectory
 from .util import Loopingprofile
 from .cython_imports import MSRouse_logL
+
+from bayesmsd.gp import msd2C_fun
+import bayesmsd.deco
 
 class MultiStateModel(metaclass=abc.ABCMeta):
     """
@@ -528,3 +532,197 @@ class FactorizedModel(MultiStateModel):
                           localization_error=localization_error,
                           loopingprofile=profile,
                          )
+
+class GenericGaussianModel(MultiStateModel):
+    """
+    Pure states are Gaussian processes, correlations between them are minimal
+
+    This is a quite agnostic / general model. We simply assume that we know the
+    covariance structure (i.e. MSD) of the "pure" states; the full covariance
+    matrix for a trajectory that switches between these states is then
+    constructed iteratively by requiring trajectory continuity. For increment
+    ("level 1") stationary processes, this simply implies a block-diagonal
+    covariance matrix; for (level 0) stationary processes, this does in fact
+    introduce some correlation structure across state switches, because we
+    condition on the last measurement in the previous interval. Either way, the
+    correlations between intervals belonging to different states are either
+    ignored or just take into account continuity; this is an approximation.
+    Interestingly, for e.g. the Rouse model, this turns out to be a pretty good
+    approximation.
+
+    The benefit of this model is that we do not have to make any assumptions
+    about the physics in the data. The only thing we need is the MSD in the
+    pure states, which can often be obtained from control experiments.
+
+    Parameters
+    ----------
+    state_spec : (nStates, d, 3) array-like, dtype=(callable, float, {0, 1})
+        specifies the Gaussian processes in the `nStates` different pure states. Each
+        spec consists of `(msd, m, ss_order)`, where `msd` is a callable MSD function
+        (should use `bayesmsd.deco.MSDfun` decorator), `m` is the mean (float; often
+        just `0.`), and `ss_order = 0, 1` indicates the steady state order of the
+        given state. See `bayesmsd` documentation for more details.
+
+    Notes
+    -----
+    We assume trajectory continuity. This means that we always condition the
+    likelihood on the last data point of the previous interval, by a
+    Kalman-like update. This means that in fact, there are transients from the switch; 
+
+    This class has a few class methods ``MSD_function_...`` that produce
+    callable MSD functions, which might be useful for `state_spec`.
+    """
+    # Implementation note: this is currently in its first iteration;
+    # eventually, the likelihood calculation should probably move to cython
+    def __init__(self, state_spec):
+        self.state_spec = np.asarray(state_spec)
+        assert len(self.state_spec.shape) == 3
+
+        self.init_transitions(self.state_spec.shape[0])
+
+    @staticmethod
+    def MSD_function_powerlaw(G=1., a=1., noise2=0., motion_blur_f=0.):
+        @bayesmsd.deco.MSDfun
+        @bayesmsd.deco.imaging(noise2=noise2, f=motion_blur_f, alpha0=a)
+        def msd(dt, G=G, a=a):
+            return G*dt**a
+
+        return msd
+
+    @staticmethod
+    def MSD_function_twoLocusRouse(G=1., J=1., noise2=0., motion_blur_f=0.):
+        @bayesmsd.deco.MSDfun
+        @bayesmsd.deco.imaging(noise2=noise2, f=motion_blur_f, alpha0=0.5)
+        def msd(dt, G=G, J=J):
+            return rouse.twoLocusMSD(dt, G, J)
+
+        return msd
+
+    @property
+    def d(self):
+        return self.state_spec.shape[1]
+
+    def initial_loopingprofile(self, traj): # pragma: no cover
+        raise NotImplementedError # is this actually still necessary?
+
+    def logL(self, profile, traj):
+        """
+        Log-likelihood function
+
+        Parameters
+        ----------
+        profile : Loopingprofile
+        traj : noctiluca.Trajectory
+
+        Returns
+        -------
+        float
+        """
+        ivs = profile.intervals()
+
+        # end-point of last interval is given as None, which is useless in this case
+        ivs[-1] = (ivs[-1][0], len(profile), ivs[-1][2])
+
+        logL = 0
+        for i, (t0, t1, n) in enumerate(ivs):
+            if i == 0:
+                t_start = 0
+            else:
+                t_start = t0-1 # trajectory continuity: condition on end of previous iv
+
+            for dim in range(self.d):
+                trace = traj[t_start:t1][:, dim]
+                ti = np.nonzero(~np.isnan(trace))[0]
+                trace = trace[ti]
+
+                msd_fun, m, ss_order = self.state_spec[n, dim]
+                C = msd2C_fun(msd_fun, ti, ss_order)
+
+                if ss_order == 0:
+                    x = trace - m
+
+                    if i > 0:
+                        # Need to condition the likelihood on the last known data point
+                        mu = trace[0] * C[1:, 0]/C[0, 0]
+                        x = x[1:] - mu
+                        C = C - C[:, [0]]*C[[0], :]/C[0, 0]
+                        C = C[1:, 1:]
+                elif ss_order == 1:
+                    x = np.diff(trace) - m
+                else: # pragma: no cover
+                    raise ValueError(f"ss_order should be in {0, 1}; was {ss_order}")
+
+                # actual likelihood calculation
+                _, logdet = np.linalg.slogdet(C)
+                xCx = x @ np.linalg.solve(C, x)
+
+                logL += -0.5*( xCx + logdet + len(C)*np.log(2*np.pi) )
+
+        return logL
+
+    def trajectory_from_loopingprofile(self, profile, missing_frames=None):
+        """
+        Generative model
+
+        Parameters
+        ----------
+        profile : Loopingprofile
+            the profile from whose associated ensemble to sample
+        missing_frames : None, float in [0, 1), int, or np.ndarray
+            see `MultiStateModel.trajectory_from_loopingprofile`
+
+        Returns
+        -------
+        noctiluca.Trajectory
+        """
+        missing_frames = super().trajectory_from_loopingprofile(profile, preproc='missing_frames', missing_frames=missing_frames)
+
+        ivs = profile.intervals()
+
+        # end-point of last interval is given as None, which is useless in this case
+        ivs[-1] = (ivs[-1][0], len(profile), ivs[-1][2])
+
+        snippets = []
+        for i, (t0, t1, n) in enumerate(ivs):
+            if i == 0:
+                t_start = 0
+            else:
+                t_start = t0-1 # trajectory continuity: condition on end of previous iv
+
+            snippets.append([])
+            for dim in range(self.d):
+                ti = np.arange(t_start, t1)
+                msd_fun, m, ss_order = self.state_spec[n, dim]
+                continuing_previous_snippet = ss_order == 0 and i > 0
+
+                C = msd2C_fun(msd_fun, ti, ss_order)
+
+                if continuing_previous_snippet:
+                    # we condition on the last point of the previous snippet
+                    # This means we run a Kalman update on the covariance matrix
+                    # and then restrict to the new sample points only
+                    # Note that this also introduces a non-stationary mean!
+                    mu = (snippets[i-1][dim][-1]-m) * C[1:, 0]/C[0, 0]
+                    C = C - C[:, [0]]*C[[0], :]/C[0, 0] # -= vs. - ?
+                    C = C[1:, 1:]
+
+                # sample
+                L = linalg.cholesky(C, lower=True)
+                x = L @ np.random.normal(size=len(L)) + m
+
+                if continuing_previous_snippet:
+                    x += mu
+
+                # assemble
+                if ss_order == 0:
+                    snippets[i].append(x)
+                elif ss_order == 1:
+                    if i == 0:
+                        snippets[i].append(np.insert(np.cumsum(x), 0, 0))
+                    else:
+                        x0 = snippets[i-1][dim][-1]
+                        snippets[i].append(x0 + np.cumsum(x))
+
+        data = np.concatenate([np.array(snip).T for snip in snippets])
+        data[missing_frames] = np.nan
+        return Trajectory(data, loopingprofile=profile)

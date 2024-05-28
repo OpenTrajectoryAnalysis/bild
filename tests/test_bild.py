@@ -194,6 +194,33 @@ class TestModels(myTestCase):
         traj = model.trajectory_from_loopingprofile(bild.Loopingprofile([0, 0, 0, 1, 1, 1]))
         self.assertEqual(len(traj), 6)
 
+    def test_GGP(self):
+        model = bild.models.GenericGaussianModel([
+            [(bild.models.GenericGaussianModel.MSD_function_powerlaw(G=1., a=0.5), 0., 1)],
+            [(bild.models.GenericGaussianModel.MSD_function_powerlaw(G=1., a=1.0), 0., 1)],
+            ])
+
+        self.assertEqual(model.nStates, 2)
+
+        logL = model.logL(self.profile, self.traj)
+        self.assertTrue(logL > -100 and logL < 0)
+
+        traj = model.trajectory_from_loopingprofile(bild.Loopingprofile([0, 0, 0, 1, 1, 1]))
+        self.assertEqual(len(traj), 6)
+
+        model = bild.models.GenericGaussianModel([
+            [(bild.models.GenericGaussianModel.MSD_function_twoLocusRouse(G=1., J=5.), 0., 0)],
+            [(bild.models.GenericGaussianModel.MSD_function_twoLocusRouse(G=1., J=1.), 0., 0)],
+            ])
+
+        self.assertEqual(model.nStates, 2)
+
+        logL = model.logL(self.profile, self.traj)
+        self.assertTrue(logL > -100 and logL < 0)
+
+        traj = model.trajectory_from_loopingprofile(bild.Loopingprofile([0, 0, 0, 1, 1, 1]))
+        self.assertEqual(len(traj), 6)
+
 class TestCore(myTestCase):
     def setUp(self):
         self.traj = nl.Trajectory([0.1, 0.05, 6, 3, 4, 0.01, 5, 7])
