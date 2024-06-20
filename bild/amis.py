@@ -731,8 +731,12 @@ class FixedkSampler:
         """
         # Note: don't parallelize likelihood here, it's not worth the overhead
         # (need to copy at least self.traj and self.model to workers)
-        return np.array([self.model.logL(self.st2profile(s, theta), self.traj)
-                         for s, theta in zip(ss, thetas)])
+        if hasattr(self.model, 'logL_st'):
+            return np.array([self.model.logL_st(s, theta, self.traj)
+                             for s, theta in zip(ss, thetas)])
+        else:
+            return np.array([self.model.logL(self.st2profile(s, theta), self.traj)
+                             for s, theta in zip(ss, thetas)])
 
     def fix_exhaustive(self):
         """
