@@ -1,0 +1,14 @@
+doc/sphinx/build
+doc/sphinx/source/_build
+doc/sphinx/source/examples
+doc/sphinx/source/examples.rst
+doc/cython_yellow
+tests/env
+tests/coverage
+tests/installation
+tests/profiling.stats
+dist/
+build/
+build.env/
+*.egg-info
+*.so

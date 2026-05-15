@@ -15,10 +15,12 @@ import unittest
 from unittest.mock import patch
 
 import noctiluca as nl
-from context import bild
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import bild
 amis = bild.amis
 
-"""
+r"""
 exec "norm jjd}O" | let @a="\n'" | exec "g/^class Test/norm w\"Ayt(:let @a=@a.\"',\\n'\"" | norm i__all__ = ["ap}kcc]kV?__all__j>>
 """
 __all__ = [
@@ -242,4 +244,4 @@ class TestFixedkSampler(myTestCase):
             self.assert_array_almost_equal(logsumexp(logpost, axis=0), np.zeros(logpost.shape[1]))
 
 if __name__ == '__main__': # pragma: no cover
-    unittest.main(module=__file__[:-3])
+    unittest.main(module='tests.'+__file__[:-3])

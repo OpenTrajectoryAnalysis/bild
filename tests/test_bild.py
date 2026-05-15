@@ -15,9 +15,11 @@ import unittest
 from unittest.mock import patch
 
 import noctiluca as nl
-from context import bild
 
-"""
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import bild
+
+r"""
 exec "norm jjd}O" | let @a="\n'" | exec "g/^class Test/norm w\"Ayt(:let @a=@a.\"',\\n'\"" | norm i__all__ = ["ap}kcc]kV?__all__j>>
 """
 __all__ = [
@@ -320,7 +322,8 @@ class TestPostproc(myTestCase):
         bad_profile = bild.Loopingprofile([1, 1, 1, 1, 1, 1, 1, 1])
         _ = bild.postproc.optimize_boundary(bad_profile, self.traj, self.model, max_iteration=1) # nothing should run, there are no boundaries here
 
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 from test_amis import *
 
 if __name__ == '__main__': # pragma: no cover
-    unittest.main(module=__file__.split('/')[-1][:-3])
+    unittest.main(module='tests.'+__file__.split('/')[-1][:-3])

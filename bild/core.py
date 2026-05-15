@@ -11,7 +11,7 @@ from noctiluca import make_Trajectory
 from .amis import FixedkSampler
 from .choicesampler import ChoiceSampler
             
-"""
+r"""
 exec 'norm jj^d}O' | let @a="\n'" | exec 'g/^\(def\|class\)/exec ''norm w"Ayw'' | let @a=@a."'',\n''"' | exec 'norm i__all__ = ["ap}kcc]kV?__all__?+>k'
 """
 __all__ = [
@@ -232,8 +232,8 @@ def sample(traj, model,
     except KeyboardInterrupt: # pragma: no cover
         pass 
     finally:
-    
-        return SamplingResults(traj, model, dE, samplers, log)
+        res = SamplingResults(traj, model, dE, samplers, log)
+    return res
 
 class SamplingResults():
     """
