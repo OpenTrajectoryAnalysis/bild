@@ -1,27 +1,27 @@
 [build-system]
-requires = ["setuptools", "wheel", "numpy>=1.20,<2"]
+requires = ["setuptools", "wheel", "numpy>=2"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "bild"
-version = "0.0.5"
+version = "0.1.0"
 authors = [
-  { name="Simon Grosse-Holz", email="sgh256@mit.edu" }
+  { name="Simon Grosse-Holz", email="s.grosse.holz@alum.mit.edu" }
 ]
 description = "Bayesian Inference of Looping Dynamics"
 readme = "README.md"
-license = { file="LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 dependencies = [
     "noctiluca >=0",
     "rouse >=0",
     "bayesmsd >=0.1",
-    "numpy >=1.20,<2",
+    "numpy >=2",
     "scipy >=1.7",
     "tqdm >=4",
     "matplotlib >=3.4",
